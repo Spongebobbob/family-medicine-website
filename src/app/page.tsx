@@ -21,7 +21,8 @@ const labLinks = [
   { label: "ALT", href: "/tools/fib-4/" },
   { label: "eGFR", href: "/tools/egfr/" },
   { label: "尿酸", href: "/articles/hyperuricemia/" },
-  ...["HbA1c", "TSH"].map(label => ({ label, href: `/search/?q=${encodeURIComponent(label)}` })),
+  { label: "HbA1c", href: "/search/?q=HbA1c" },
+  { label: "TSH", href: "/articles/tsh/" },
 ];
 
 export default function Home() {

@@ -1,0 +1,113 @@
+{
+  "id": "tsh-feedback",
+  "type": "mechanism",
+  "title": "甲狀腺荷爾蒙負回饋",
+  "alt": "下視丘 TRH 刺激腦下垂體分泌 TSH，再刺激甲狀腺製造 T4、T3；荷爾蒙升高會抑制上游。中樞疾病時這個規則可能失效。",
+  "sources": [
+    "tsh-ref1",
+    "tsh-ref2"
+  ],
+  "note": "概念示意，棕色 T 形終點表示抑制；不表示分泌量或時間尺度。不能單憑此圖診斷中樞性疾病。",
+  "width": 900,
+  "height": 610,
+  "nodes": [
+    {
+      "id": "hypothalamus",
+      "title": "下視丘",
+      "lines": [
+        "分泌 TRH"
+      ],
+      "x": 40,
+      "y": 30,
+      "width": 420,
+      "height": 110
+    },
+    {
+      "id": "pituitary",
+      "title": "腦下垂體",
+      "lines": [
+        "分泌 TSH"
+      ],
+      "x": 40,
+      "y": 220,
+      "width": 420,
+      "height": 110
+    },
+    {
+      "id": "thyroid",
+      "title": "甲狀腺",
+      "lines": [
+        "製造 T4、T3"
+      ],
+      "x": 40,
+      "y": 410,
+      "width": 420,
+      "height": 110
+    },
+    {
+      "id": "feedback",
+      "title": "荷爾蒙升高",
+      "lines": [
+        "抑制上游訊號",
+        "形成負回饋"
+      ],
+      "x": 580,
+      "y": 220,
+      "width": 290,
+      "height": 134
+    }
+  ],
+  "edges": [
+    {
+      "from": "hypothalamus",
+      "to": "pituitary"
+    },
+    {
+      "from": "pituitary",
+      "to": "thyroid"
+    },
+    {
+      "from": "thyroid",
+      "fromSide": "right",
+      "to": "feedback",
+      "toSide": "bottom",
+      "via": [
+        {
+          "x": 725,
+          "y": 465
+        }
+      ]
+    },
+    {
+      "from": "feedback",
+      "fromSide": "top",
+      "to": "hypothalamus",
+      "toSide": "right",
+      "effect": "inhibition",
+      "via": [
+        {
+          "x": 725,
+          "y": 85
+        }
+      ],
+      "label": "抑制",
+      "labelPosition": {
+        "x": 550,
+        "y": 70
+      }
+    },
+    {
+      "from": "feedback",
+      "fromSide": "left",
+      "to": "pituitary",
+      "toSide": "right",
+      "effect": "inhibition",
+      "via": [],
+      "label": "抑制",
+      "labelPosition": {
+        "x": 500,
+        "y": 250
+      }
+    }
+  ]
+}

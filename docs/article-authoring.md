@@ -22,7 +22,9 @@
 - 每張圖放在 `content/figures/<id>.json`，於文章 frontmatter `figures` 列出 ID，正文用 `![替代文字](/article-figures/<id>)` 引用。這是受控元件標記，並非靜態圖片路徑。
 - 所有圖必填 id、type、title、alt、sources（本篇文獻 ID）、note。沒有來源或替代文字會使 build 失敗。
 - 統計圖 `type: bar` 使用 Recharts。另填 unit、population、series 與 data；每列 data 使用 label 與 values，values 的 key 必須對應 series.key。必須保留調查年代、疾病定義、母群體及限制，不混合不同定義或母群體的數列。元件自動提供可讀資料表與圖說，不依賴 tooltip 取得數據。
+- 含效應值及 95% CI 的資料使用 `type: forest`。指定 measure（HR 或 SMD）、nullValue（HR 必須為 1、SMD 必須為 0）、population、axisLabel、rows；各列含 label、estimate、lower、upper，以及可選的分析人數 n。Recharts 森林圖提供橫向誤差線，並保留可讀資料表；負 SMD 不得被長條圖的非負驗證規則裁掉。不自行計算缺漏的區間或把總樣本數填到每列。
 - 機轉圖 `type: mechanism`、流程圖 `type: decision` 使用同一個原生 SVG 元件。另填 width、height、nodes、edges；節點包含 id、title、lines、x、y、width、height，連線包含 from、to 及可選 label。每行文字須控制長度，節點高度必須容納所有行。條件分流要有清楚的分支，不把互斥條件畫成每人必經的直線流程。
+- 負回饋等非向下連線可指定 fromSide、toSide（top/bottom/left/right）、via（轉折座標）及 labelPosition；effect: inhibition 用棕色 T 形終點及文字標明抑制。未指定的連線維持原本的向下箭頭，既有文章無須變更。
 - SVG 有 title、desc、鍵盤可捲動區域、100–200% 縮放及完整文字／連線版本。統計圖及 SVG 都會顯示來源文獻錨點；手機可橫向捲動圖內區域，不應撐寬整頁。
 - 加新資料只新增 Markdown／JSON，無須寫 JSX。新增新型態圖表時，擴充 `src/lib/article-figures.ts` 驗證器及 `src/components/articles/` 元件。
 
@@ -33,6 +35,14 @@
 保留 2018 台灣共識、ACR 2020、NICE NG219、KDIGO 2024 等文獻的年份及適用範圍，沒有宣稱已完成系統性文獻更新。KDIGO 正在進行的更新草案不當作正式建議。本文並未完成醫師審閱、逐藥台灣仿單核對或個別治療適用性確認；不能改標為 reviewed。
 
 ## 驗證與上架
+
+### TSH 匯入紀錄
+
+使用者提供 `fmdoc-tsh.zip`，匯入為 `content/articles/tsh.md`。TSH 是檢驗指標，文章主要適用非懷孕成人，沒有將單次紅字當作診斷或自動用藥條件。正文整理為 1–14 節，模板接續 15–17 節；首次引用次序重新編號。
+
+台灣老年健檢比例核對 Lai 等人的 2011 年論文摘要（北醫研究典藏），並非今日全國盛行率。HR 數據核對 Rodondi 2010 年研究的冠心病事件、年齡性別調整結果，不能誤作死亡結果。SMD 與各結果的分析人數核對 Feller 2018 年 JAMA 原文；2192 為全部試驗總人數，不是每個結果的人數。沒有混用觀察性關聯與治療試驗。
+
+ATA 2026 妊娠指引的題名、年份與 DOI 已核對 PubMed；本文不加入未提供的孕期數值門檻。台灣妊娠專文保留為二手轉述，PDF 檔名日期不當作已核實的出版日期。提供稿的第 14 項健保會議 PDF 未取得可核對內容，沒有列為臨床依據；一般 TSH 判讀引用 NICE／ATA。治療目標依 NICE NG145 1.4.1 補充，避免為填章節而發明數值。仍須醫師審閱及確認台灣實務適用性。
 
 執行 `pnpm typecheck`、`pnpm test`、`pnpm build`、`pnpm test:export`。以 `pnpm preview` 查看靜態輸出，檢查手機與桌面的目錄、表格、數據圖、SVG 分支、縮放、FAQ、文獻錨點和首頁搜尋。
 

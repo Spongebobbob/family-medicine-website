@@ -1,0 +1,34 @@
+{
+  "id": "tsh-chd-risk",
+  "type": "forest",
+  "title": "TSH 分層與冠心病事件：觀察性研究",
+  "alt": "相較甲狀腺功能正常者，TSH 4.5–6.9、7.0–9.9、10–19.9 mIU/L 的冠心病事件 HR 分別為 1.00、1.17、1.89，各列保留原研究 95% 信賴區間。這不是治療試驗。",
+  "sources": [
+    "tsh-ref11"
+  ],
+  "note": "Rodondi 等人 2010 年個人資料統合分析的年齡與性別調整結果；此為冠心病事件，不是冠心病死亡。關聯不等於因果，也不能當作降 TSH 治療可減少事件的證據。",
+  "population": "亞臨床低下者與甲狀腺功能正常者比較；依 TSH（mIU/L）分層",
+  "measure": "HR",
+  "nullValue": 1,
+  "axisLabel": "HR（風險比；線性刻度）",
+  "rows": [
+    {
+      "label": "4.5–6.9",
+      "estimate": 1,
+      "lower": 0.86,
+      "upper": 1.18
+    },
+    {
+      "label": "7.0–9.9",
+      "estimate": 1.17,
+      "lower": 0.96,
+      "upper": 1.43
+    },
+    {
+      "label": "10–19.9",
+      "estimate": 1.89,
+      "lower": 1.28,
+      "upper": 2.8
+    }
+  ]
+}

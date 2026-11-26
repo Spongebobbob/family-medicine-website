@@ -16,13 +16,43 @@ export type DiagramNode = {
   id: string; title: string; lines: string[];
   x: number; y: number; width: number; height: number;
 };
+export type ForestFigure = FigureBase & {
+  type: "forest";
+  measure: "HR" | "SMD";
+  nullValue: number;
+  population: string;
+  axisLabel: string;
+  rows: { label: string; estimate: number; lower: number; upper: number; n?: number }[];
+};
+export type DiagramEdge = {
+  from: string; to: string; label?: string;
+  fromSide?: "top" | "bottom" | "left" | "right";
+  toSide?: "top" | "bottom" | "left" | "right";
+  effect?: "inhibition";
+  via?: { x: number; y: number }[];
+  labelPosition?: { x: number; y: number };
+};
 export type DiagramFigure = FigureBase & {
   type: "mechanism" | "decision";
   width: number; height: number;
   nodes: DiagramNode[];
-  edges: { from: string; to: string; label?: string }[];
+  edges: DiagramEdge[];
 };
-export type ArticleFigure = StatisticalFigure | DiagramFigure;
+export type ArticleFigure = StatisticalFigure | ForestFigure | DiagramFigure;
+
+export function forestAxis(figure: ForestFigure) {
+  const min = Math.min(figure.nullValue, ...figure.rows.map(row => row.lower));
+  const max = Math.max(figure.nullValue, ...figure.rows.map(row => row.upper));
+  const padding = Math.max((max - min) * .08, .01);
+  const roughStep = (max - min + 2 * padding) / 5;
+  const magnitude = 10 ** Math.floor(Math.log10(roughStep));
+  const step = [1, 2, 2.5, 5, 10].find(value => value >= roughStep / magnitude)! * magnitude;
+  const lower = Math.floor((min - padding) / step) * step;
+  const upper = Math.ceil((max + padding) / step) * step;
+  const start = figure.measure === "HR" ? Math.max(0, lower) : lower;
+  const ticks = Array.from({length: Math.round((upper - start) / step) + 1}, (_, index) => Number((start + index * step).toPrecision(12)));
+  return { domain: [ticks[0], ticks.at(-1)!], ticks };
+}
 
 // Validate authored data at build time. No arbitrary SVG, executable MDX or external data fetches.
 export function validateFigure(input: unknown, id: string, referenceIds: string[]): ArticleFigure {
@@ -50,6 +80,11 @@ export function validateFigure(input: unknown, id: string, referenceIds: string[
       }
       if (Object.keys(row.values).some(key => !keys.includes(key))) fail("存在未定義的數列");
     }
+  } else if (input.type === "forest") {
+    if (!["HR", "SMD"].includes(String(input.measure)) || input.nullValue !== (input.measure === "HR" ? 1 : 0) || !text(input.population) || !text(input.axisLabel) || !Array.isArray(input.rows) || !input.rows.length) return fail("森林圖須指定指標、無效值、母群體與資料");
+    for (const row of input.rows) {
+      if (!object(row) || !text(row.label) || typeof row.estimate !== "number" || typeof row.lower !== "number" || typeof row.upper !== "number" || ![row.estimate, row.lower, row.upper].every(Number.isFinite) || row.lower > row.estimate || row.estimate > row.upper || (input.measure === "HR" && row.lower <= 0) || (row.n !== undefined && (typeof row.n !== "number" || !Number.isInteger(row.n) || row.n <= 0))) fail("森林圖估計值、95% CI 或樣本數無效");
+    }
   } else if (input.type === "mechanism" || input.type === "decision") {
     if (!positive(input.width) || !positive(input.height) || !Array.isArray(input.nodes) || !input.nodes.length || !Array.isArray(input.edges)) return fail("圖面或節點缺漏");
     const ids: string[] = [];
@@ -59,7 +94,14 @@ export function validateFigure(input: unknown, id: string, referenceIds: string[
       if (node.lines.length > 4 || node.height < 58 + node.lines.length * 24) fail("節點空間不足以顯示文字");
       ids.push(node.id);
     }
-    for (const edge of input.edges) if (!object(edge) || !ids.includes(String(edge.from)) || !ids.includes(String(edge.to)) || edge.from === edge.to || (edge.label !== undefined && !text(edge.label))) fail("連線指向無效節點");
+    const point = (value: unknown) => object(value) && typeof value.x === "number" && typeof value.y === "number" && Number.isFinite(value.x) && Number.isFinite(value.y) && value.x >= 0 && value.y >= 0 && value.x <= (input.width as number) && value.y <= (input.height as number);
+    for (const edge of input.edges) {
+      if (!object(edge) || !ids.includes(String(edge.from)) || !ids.includes(String(edge.to)) || edge.from === edge.to || (edge.label !== undefined && !text(edge.label))) return fail("連線指向無效節點");
+      for (const key of ["fromSide", "toSide"]) if (edge[key] !== undefined && !["top", "bottom", "left", "right"].includes(String(edge[key]))) fail("連線接點無效");
+      if (edge.effect !== undefined && edge.effect !== "inhibition") fail("不支援的連線效果");
+      if (edge.via !== undefined && (!Array.isArray(edge.via) || edge.via.some(p => !point(p)))) fail("連線路徑超出圖面");
+      if (edge.labelPosition !== undefined && !point(edge.labelPosition)) fail("連線文字超出圖面");
+    }
   } else fail("不支援的圖表類型");
   return input as unknown as ArticleFigure;
 }

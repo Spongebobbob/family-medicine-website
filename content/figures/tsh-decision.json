@@ -1,0 +1,139 @@
+{
+  "id": "tsh-decision",
+  "type": "decision",
+  "title": "非懷孕成人 TSH 異常的初步判讀",
+  "alt": "先確認症狀、病史與干擾。TSH 高時驗 FT4；TSH 低時驗 FT4、FT3，再依荷爾蒙高低區分生化分類。FT4 低且 TSH 不適當正常或低時，需另評估中樞疾病等原因。",
+  "sources": [
+    "tsh-ref1",
+    "tsh-ref2",
+    "tsh-ref7"
+  ],
+  "note": "初步生化分流，不是自動診斷或用藥決策。圖中正常指適用檢驗參考區間；須確認持續性與干擾。妊娠、兒童、急性重病、嚴重症狀或不一致結果應另行評估。",
+  "width": 1000,
+  "height": 800,
+  "nodes": [
+    {
+      "id": "start",
+      "title": "TSH 異常",
+      "lines": [
+        "先確認病史、症狀及干擾"
+      ],
+      "x": 290,
+      "y": 20,
+      "width": 420,
+      "height": 110
+    },
+    {
+      "id": "high",
+      "title": "TSH 升高",
+      "lines": [
+        "檢驗 FT4"
+      ],
+      "x": 25,
+      "y": 220,
+      "width": 440,
+      "height": 110
+    },
+    {
+      "id": "low",
+      "title": "TSH 降低",
+      "lines": [
+        "檢驗 FT4、FT3"
+      ],
+      "x": 535,
+      "y": 220,
+      "width": 440,
+      "height": 110
+    },
+    {
+      "id": "overt-hypo",
+      "title": "FT4 低",
+      "lines": [
+        "顯性原發性低下"
+      ],
+      "x": 20,
+      "y": 430,
+      "width": 215,
+      "height": 110
+    },
+    {
+      "id": "sub-hypo",
+      "title": "FT4 正常",
+      "lines": [
+        "亞臨床低下"
+      ],
+      "x": 260,
+      "y": 430,
+      "width": 215,
+      "height": 110
+    },
+    {
+      "id": "thyrotoxicosis",
+      "title": "FT4 或 FT3 高",
+      "lines": [
+        "甲狀腺毒症",
+        "仍須確認病因"
+      ],
+      "x": 525,
+      "y": 430,
+      "width": 215,
+      "height": 134
+    },
+    {
+      "id": "sub-hyper",
+      "title": "FT4、FT3 正常",
+      "lines": [
+        "可能亞臨床亢進",
+        "或暫時性抑制"
+      ],
+      "x": 765,
+      "y": 430,
+      "width": 215,
+      "height": 134
+    },
+    {
+      "id": "exceptions",
+      "title": "其他組合或特殊情況",
+      "lines": [
+        "FT4 低而 TSH 低或不適當正常：考慮中樞性低下等",
+        "正常或高 TSH 合併 FT4 高：評估干擾、時序或其他原因"
+      ],
+      "x": 100,
+      "y": 650,
+      "width": 800,
+      "height": 134
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "high",
+      "label": "高"
+    },
+    {
+      "from": "start",
+      "to": "low",
+      "label": "低"
+    },
+    {
+      "from": "high",
+      "to": "overt-hypo",
+      "label": "低"
+    },
+    {
+      "from": "high",
+      "to": "sub-hypo",
+      "label": "正常"
+    },
+    {
+      "from": "low",
+      "to": "thyrotoxicosis",
+      "label": "任一高"
+    },
+    {
+      "from": "low",
+      "to": "sub-hyper",
+      "label": "皆正常"
+    }
+  ]
+}
