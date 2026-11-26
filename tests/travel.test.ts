@@ -10,7 +10,7 @@ import { AltitudeForm } from "../src/components/tools/altitude-form";
 import { TravelHealthForm } from "../src/components/tools/travel-health-form";
 import { TravelPlanProvider } from "../src/components/tools/travel-plan-provider";
 const today="2026-11-26";
-const healthy:TravelHealth={age:30,weight:65,pregnant:"no",breastfeedingSmallInfant:"no",renal:"normal",crcl:100,psychiatric:"no",seizures:"no",conduction:"no",psoriasis:"no",drugAllergy:"no",interactions:"no",g6pd:"normal",immune:"normal",thymus:"no",vaccineAllergy:"no",breastfeeding:"no"};
+const healthy:TravelHealth={age:30,weight:65,spleen:"no",complexConditions:"no",longTermVfr:"no",pregnant:"no",breastfeedingSmallInfant:"no",renal:"normal",crcl:100,psychiatric:"no",seizures:"no",conduction:"no",psoriasis:"no",drugAllergy:"no",interactions:"no",g6pd:"normal",immune:"normal",thymus:"no",vaccineAllergy:"no",breastfeeding:"no"};
 const stop=(country="TH",region="border",patch:Partial<TravelStop>={}):TravelStop=>({...newTravelStop(),country,region,start:"2027-01-10",end:"2027-01-20",setting:"forest",fromRisk:"no",transit:"none",...patch});
 const plan=(s:TravelStop=stop(),patch:Partial<TravelPlan>={}):TravelPlan=>({stops:[s],animalContact:"no",remoteCare:"no",frequentTravel:"no",outdoorNights:"no",...patch});
 const records:TravelRecords={vaccines:{},yfDate:"",icvp:"unknown"};
@@ -31,39 +31,38 @@ test("each country and regional rule has source, scope, version and verification
   assert.equal(destinations.length,6);const ids=new Set<string>();for(const c of destinations){assert.equal(c.checked,today);assert.ok(c.version&&c.scope&&c.source.startsWith("https://"));assert.ok(!ids.has(c.id));ids.add(c.id);assert.equal(new Set(c.regions.map(r=>r.id)).size,c.regions.length);for(const r of c.regions)assert.ok(r.name&&r.note);}
   for(const e of Object.values(travelEvidence))assert.ok(e.version&&e.checked===today&&e.scope&&e.url.startsWith("https://"));
 });
-test("verified subnational malaria areas preserve city, forest, resistance and altitude distinctions",()=>{
-  for(const [s,expected] of [[stop("TH","cities",{setting:"urban"}),"mosquito"],[stop("TH","cities",{setting:"forest"}),"unknown"],[stop("TH","border"),"medication"],[stop("VN","cities",{setting:"urban"}),"none"],[stop("VN","deltas"),"mosquito"],[stop("KE","nairobi",{setting:"urban"}),"mosquito"],[stop("KE","safari",{minAltitude:2499.9}),"medication"],[stop("KE","safari",{minAltitude:2500}),"none"],[stop("KE","safari",{minAltitude:null}),"unknown"],[stop("BR","cities",{setting:"urban"}),"none"],[stop("BR","amazon"),"medication"],[stop("JP","all"),"none"],[stop("HT","all"),"medication"]] as const)assert.equal(assessMalariaStop(s,today).status,expected);
-  assert.deepEqual(assessMalariaStop(stop("VN","resistant"),today).drugs,["ap","doxy"]);
-  assert.ok(assessMalariaStop(stop("VN","rural"),today).drugs.includes("meflo"));
+test("NaTHNaC replaces the six-country CDC-led risk classification",()=>{
+ for(const [country,region,patch,expected] of [["TH","cities",{setting:"urban"},"none"],["TH","border",{},"low"],["VN","rural",{},"low"],["KE","nairobi",{setting:"urban"},"very_low"],["KE","highlands",{minAltitude:2500.01},"very_low"],["BR","amazon",{},"low"],["HT","all",{},"unknown"],["JP","all",{},"unknown"]] as const) assert.equal(assessMalariaStop(stop(country,region,patch),today).status,expected);
+ assert.equal(malaria(plan(stop("TH","border"))).needsMedication,false);
+ assert.equal(malaria(plan(stop("HT","all"))).needsMedication,true);
 });
-test("unverified countries, region mismatches and unknown settings cannot become no-risk recommendations",()=>{
-  for(const s of [stop("OTHER","unverified"),stop("TH","missing"),stop("KE","other"),stop("TH","cities",{setting:"unknown"})])assert.equal(assessMalariaStop(s,today).status,"unknown");
-  const r=malaria(plan(stop("OTHER","unverified")));assert.equal(r.unknown,true);assert.ok(r.drugs.every(d=>d.status!=="discuss"&&d.schedule===null));
-  const mixed=malaria(plan(stop(),{stops:[stop(),stop("OTHER","unverified",{start:"2027-01-21",end:"2027-01-23"})]}));assert.equal(mixed.needsMedication,true);assert.ok(mixed.drugs.every(d=>d.status!=="discuss"&&d.schedule===null));
+test("unknown routes do not produce a whole-trip no-medication conclusion",()=>{
+ const r=malaria(plan(stop("OTHER","unverified")));assert.equal(r.unknown,true);assert.ok(r.drugs.every(d=>d.status!=="discuss"&&d.schedule===null));
+ const mixed=malaria(plan(stop("HT","all"),{stops:[stop("HT","all"),stop("OTHER","unverified",{start:"2027-01-21",end:"2027-01-23"})]}));assert.equal(mixed.needsMedication,true);assert.equal(mixed.unknown,true);assert.ok(mixed.drugs.every(d=>d.schedule===null));
 });
-test("dry season and a short stay never silently remove verified prophylaxis requirements",()=>{
-  for(const month of [1,5,10,12])assert.equal(assessMalariaStop(stop("TH","border",{start:`2027-${String(month).padStart(2,"0")}-01`,end:`2027-${String(month).padStart(2,"0")}-01`}),today).status,"medication");
+test("dry season and a short stay do not silently remove year-round prophylaxis",()=>{
+ for(const month of [1,5,10,12])assert.equal(assessMalariaStop(stop("angola","all",{start:"2027-"+String(month).padStart(2,"0")+"-01",end:"2027-"+String(month).padStart(2,"0")+"-01"}),today).prophylaxis,"recommended");
 });
-test("drug selection uses the intersection of all verified high-risk segments",()=>{
-  const r=malaria(plan(stop("HT","all"),{stops:[stop("HT","all"),stop("TH","border",{start:"2027-01-21",end:"2027-01-25"})]}));
-  assert.equal(r.drugs.find(d=>d.id==="ap")!.status,"discuss");assert.equal(r.drugs.find(d=>d.id==="meflo")!.status,"excluded");assert.equal(r.drugs.find(d=>d.id==="chloro")!.status,"excluded");
-  const haiti=malaria(plan(stop("HT","all")));assert.equal(haiti.drugs.find(d=>d.id==="chloro")!.status,"discuss");
+test("drug candidates intersect every UK segment requiring prophylaxis",()=>{
+ const r=malaria(plan(stop("HT","all"),{stops:[stop("HT","all"),stop("KH","western-border",{start:"2027-01-21",end:"2027-01-25"})]}),{...healthy,spleen:"yes"});
+ assert.equal(r.drugs.find(d=>d.id==="ap")!.status,"discuss");assert.equal(r.drugs.find(d=>d.id==="meflo")!.status,"excluded");assert.equal(r.drugs.find(d=>d.id==="chloro")!.status,"excluded");
+ assert.equal(malaria(plan(stop("HT","all"))).drugs.find(d=>d.id==="chloro")!.status,"discuss");
 });
 test("AP, Doxycycline, Mefloquine and Chloroquine compute correct prophylaxis dates",()=>{
   assert.deepEqual(malariaSchedule("ap","2027-01-01","2027-01-10"),{latestStart:"2026-12-31",earliestStart:"2026-12-30",continueThrough:"2027-01-17",frequency:"每日",afterDays:7});
   assert.equal(malariaSchedule("doxy","2027-01-01","2027-01-10")!.continueThrough,"2027-02-07");
-  assert.equal(malariaSchedule("meflo","2027-01-01","2027-01-10")!.latestStart,"2026-12-18");assert.equal(malariaSchedule("meflo","2027-01-01","2027-01-10")!.earliestStart,null);
-  assert.equal(malariaSchedule("chloro","2027-01-01","2027-01-10")!.earliestStart,"2026-12-18");assert.equal(malariaSchedule("chloro","2027-01-01","2027-01-10")!.latestStart,"2026-12-25");
+  assert.equal(malariaSchedule("meflo","2027-01-01","2027-01-10")!.latestStart,"2026-12-18");assert.equal(malariaSchedule("meflo","2027-01-01","2027-01-10")!.earliestStart,"2026-12-11");
+  assert.equal(malariaSchedule("chloro","2027-01-01","2027-01-10")!.earliestStart,"2026-12-25");assert.equal(malariaSchedule("chloro","2027-01-01","2027-01-10")!.latestStart,"2026-12-25");
   assert.equal(malariaSchedule("ap","bad","2027-01-10"),null);assert.equal(malariaSchedule("ap","2027-01-11","2027-01-10"),null);
 });
 test("AP restrictions use actual CrCl <30, weight <5 and nursing infant <5kg boundaries",()=>{
   const compare=(patch:Partial<TravelHealth>)=>compareMalariaDrug("ap",{...healthy,...patch},["ap"],false);
   assert.equal(compare({crcl:29.999,renal:"unknown"}).status,"excluded");assert.equal(compare({crcl:30}).status,"discuss");assert.equal(compare({weight:4.999}).status,"excluded");assert.equal(compare({weight:5}).status,"review");assert.equal(compare({weight:11}).status,"discuss");
-  assert.equal(compare({breastfeedingSmallInfant:"yes"}).status,"excluded");assert.equal(compare({renal:"unknown",crcl:null}).status,"review");assert.equal(compare({weight:null}).status,"review");
+  assert.equal(compare({breastfeedingSmallInfant:"yes"}).status,"review");assert.equal(compare({renal:"unknown",crcl:null}).status,"review");assert.equal(compare({weight:null}).status,"review");
 });
 test("pregnancy, child age, psychiatric, seizure and conduction conditions are independently screened",()=>{
-  for(const id of ["ap","doxy"] as DrugId[])assert.equal(compareMalariaDrug(id,{...healthy,pregnant:"yes"},[id],false).status,"excluded");
-  assert.equal(compareMalariaDrug("doxy",{...healthy,age:7.999},["doxy"],false).status,"excluded");assert.notEqual(compareMalariaDrug("doxy",{...healthy,age:8},["doxy"],false).status,"excluded");
+  assert.equal(compareMalariaDrug("ap",{...healthy,pregnant:"yes"},["ap"],false).status,"review");assert.equal(compareMalariaDrug("doxy",{...healthy,pregnant:"yes"},["doxy"],false).status,"excluded");
+  assert.equal(compareMalariaDrug("doxy",{...healthy,age:11.999},["doxy"],false).status,"excluded");assert.notEqual(compareMalariaDrug("doxy",{...healthy,age:12},["doxy"],false).status,"excluded");
   for(const key of ["psychiatric","seizures","conduction"] as const){assert.equal(compareMalariaDrug("meflo",{...healthy,[key]:"yes"},["meflo"],false).status,"excluded");assert.equal(compareMalariaDrug("meflo",{...healthy,[key]:"unknown"},["meflo"],false).status,"review");}
   assert.equal(compareMalariaDrug("chloro",{...healthy,psoriasis:"yes"},["chloro"],false).status,"review");
 });

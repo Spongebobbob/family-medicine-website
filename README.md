@@ -1,8 +1,8 @@
 # 日常・家醫 — 台灣家庭醫學衛教網站
 
-旅遊健康新增 `/tools/altitude-illness/`、`/tools/malaria-prevention/`、`/tools/travel-vaccines/`。高山症採 CDC Yellow Book 2026 條件分層及獲網站持有人確認授權的 LLS 2018 繁中題目。瘧疾／疫苗首批資料涵蓋日本、泰國、越南、肯亞、巴西、海地的明列區域；未查核地區不推測，資料快照超過 90 天會保留未知並要求重新查核。
+旅遊健康新增 `/tools/altitude-illness/`、`/tools/malaria-prevention/`、`/tools/travel-vaccines/`。高山症採 CDC Yellow Book 2026 條件分層及獲網站持有人確認授權的 LLS 2018 繁中題目。旅遊疫苗仍保留原有六國的明列區域。瘧疾主結果已改以 NaTHNaC／UKMEAG 2026 為依據，盤點全球 235 個國別／地區頁面；感染風險與用藥需求分開，未查核地區不推測，90 天後停止地區判斷。實際規則、地圖及比較來源覆蓋率見 [瘧疾資料查核報告](docs/malaria-data-audit.md)。
 
-兩項行前工具透過 `src/app/tools/layout.tsx` 的記憶體 Provider 共用行程／健康資料，切換工具請使用頁內 Next.js 連結；重新整理會清除，不寫入 URL、瀏覽器儲存或伺服器。國別資料在 `src/lib/travel-data.ts`，純規則在 `altitude.ts`、`travel-plan.ts`、`travel-malaria.ts`、`travel-vaccines.ts`。新增國家必須附來源、版本、範圍、查核日期、次國家規則與測試，不能只加入國名或延長查核日期。所有臨床內容持續 pending，沒有任何自動處方功能。
+兩項行前工具透過 `src/app/tools/layout.tsx` 的記憶體 Provider 共用行程／健康資料，切換工具請使用頁內 Next.js 連結；重新整理會清除，不寫入 URL、瀏覽器儲存或伺服器。疫苗及舊 CDC 比較資料在 `src/lib/travel-data.ts`，新版瘧疾資料在 `src/data/malaria-countries.json`、`src/lib/malaria-country-rules.ts`、`src/lib/malaria-guidance.ts`，純規則在 `altitude.ts`、`travel-plan.ts`、`travel-malaria.ts`、`travel-vaccines.ts`。新增國家必須附來源、版本、範圍、查核日期、次國家規則與測試，不能只加入國名或延長查核日期。所有臨床內容持續 pending，沒有任何自動處方功能。
 
 腎臟工具 `/tools/egfr/` 已加入選填 UACR（mg/g）、醫師確認病因（C）及 KDIGO G／A 風險矩陣。UACR 未填時保留未知；分層不代表單次檢驗即可確診 CKD，也不是個人洗腎機率。公式、18 格風險及未四捨五入的分類邊界均有測試。
 

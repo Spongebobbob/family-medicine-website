@@ -2309,3 +2309,10 @@ th {
   .sleep-diary form, .sleep-diary .calculator-actions { display: none; }
   .sleep-diary .assessment-result { box-shadow: none; }
 }
+
+/* Risk labels always include text; colour is supplementary. */
+.malaria-risk { display: inline-flex; padding: .45rem .85rem; border-radius: .5rem; font-weight: 700; font-size: 1.25rem; background: #eef1ef; color: #344c43; }
+.malaria-risk[data-risk="high"] { background: #f7e4e1; color: #843e39; }
+.malaria-risk[data-risk="low"] { background: #fbefce; color: #74551b; }
+.malaria-risk[data-risk="very_low"] { background: #edf1e4; color: #4d663c; }
+.malaria-risk[data-risk="none"] { background: #e4efe8; color: #2f5a46; }
