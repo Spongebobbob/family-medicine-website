@@ -39,7 +39,12 @@ export const malariaCountryRules: Record<string,MalariaRegion[]> = {
   "borneo-malaysia":[r("inland","沙巴內陸、砂拉越內陸森林","low",apdm),r("rest","其餘馬來西亞婆羅洲（含沙巴、砂拉越沿海）","very_low")],
   botswana:[r("north","北半部（含奧卡萬戈三角洲）","high",apdm,{months:[10,11,12,1,2,3,4,5],otherSeason:{risk:"low",prophylaxis:"conditional"}}),r("south","南半部","very_low")],
   brunei:[r("all","全境","very_low")],
-  "myanmar-burma":[r("below","低於 1000m 地區","unknown",apd,{below:1000,prophylaxis:"recommended",note:"官方表示風險難以評估，應考慮 AP／Doxycycline；並未指定 high 等級。"}),r("above","所有到訪地點均高於 1000m","low",[],{above:1000})],
+  // These choices confirm the altitude category directly; do not ask for it a second time.
+  "myanmar-burma":[
+    r("below","會到訪低於 1000m 的地區","unknown",apd,{prophylaxis:"recommended",note:"已依所選海拔分區評估，不需另填海拔。官方表示低於 1000m 地區風險難以評估，應考慮 AP／Doxycycline；並未指定 high 等級。"}),
+    r("above","所有到訪地點均高於 1000m（不含正好 1000m）","low",[],{note:"已確認所有到訪地點均高於 1000m，不需另填海拔。官方列低風險，一般旅客不例行建議預防藥，以防蚊為主；特殊族群仍需個別評估。"}),
+    r("boundary","正好 1000m／無法確認海拔分區","unknown",[],{note:"官方分列低於及高於 1000m，未明列正好 1000m 的歸類；請確認實際到訪地點或由旅遊醫學門診評估。"}),
+  ],
   "costa-rica":[r("limon","利蒙省（不含利蒙市／Puerto Limon）","low",["chloro"]),r("rest","其餘地區（包括利蒙市）","very_low")],
   "dominican-republic":[r("cities","Santiago、Santo Domingo 市區","none",[],{urbanOnly:true}),r("other","其餘地區（海地邊界暴露可能更高）","low",apdm)],
   ecuador:[r("mainland","本土低於 1500m（排除瓜亞基爾市）","low",apdm,{below:1500}),r("guayaquil","瓜亞基爾市","none",[],{urbanOnly:true}),r("galapagos","加拉巴哥群島","none")],

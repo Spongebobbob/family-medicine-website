@@ -37,6 +37,21 @@ test("South Africa screenshot itinerary reaches drug screening and medication ca
   assert.ok(!("error"in ap));assert.equal(ap.courses[0].lastDose,"2027-01-07");
 });
 
+test("Myanmar altitude choice is sufficient without a duplicate numeric altitude field",()=>{
+  const p=(region:string,minAltitude:number|null=null)=>plan([stop("myanmar-burma",region,{start:"2026-11-28",end:"2026-11-30",minAltitude})]);
+  const above=need(p("above"));
+  assert.equal(above.need,"bite");assert.equal(above.unresolved,false);assert.equal(above.canScreen,false);
+  assert.equal(above.segments[0].status,"low");assert.equal(above.segments[0].region?.above,undefined);
+  // Old numeric values no longer contradict the selected altitude category.
+  assert.equal(need(p("above",1000)).need,"bite");
+  const below=need(p("below"));assert.equal(below.need,"recommended");assert.equal(below.canScreen,true);
+  assert.deepEqual(below.allowed,["ap","doxy"]);assert.equal(below.segments[0].region?.below,undefined);
+  assert.equal(need(p("above"),{...healthy,pregnant:"yes"}).need,"individual");
+  assert.equal(need(p("above"),{...healthy,immune:"suppressed"}).need,"individual");
+  for(const region of ["boundary","unverified"]){const d=need(p(region));assert.equal(d.need,"unknown");assert.equal(d.canScreen,false);}
+  assert.match(need(p("boundary")).segments[0].reason,/正好 1000m/);
+});
+
 test("South Africa separates seasons, mapped zones and genuinely unresolved locations",()=>{
   const p=(region:string,start:string,end=start)=>plan([stop("south-africa",region,{start,end})]);
   for(const date of ["2027-05-31","2027-09-01","2027-12-31"])assert.equal(need(p("kruger",date)).need,"recommended");
