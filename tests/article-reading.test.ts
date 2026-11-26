@@ -66,4 +66,6 @@ test("hyperuricemia preserves original clinical sentences, numbers, frontmatter 
   assert.equal(html.split("ACR 2020 對單純無症狀高尿酸者").length - 1, 1);
   assert.equal(html.split("無症狀者可能多年不發病").length - 1, 1);
   assert.equal([...html.matchAll(/<figure /g)].length, 4);
+  assert.match(html, /<strong>高尿酸血症是一種生化異常，痛風則是尿酸鹽結晶引發的疾病<\/strong>。/);
+  assert.doesNotMatch(html, /\*\*高尿酸/);
 });
