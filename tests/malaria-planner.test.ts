@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { assessMalariaNeed, emptyMalariaSafety, evaluateMalariaCandidates, malariaExposureWindows, neededMalariaSafety, type MalariaSafety } from "../src/lib/malaria-planner";
+import { assessMalariaNeed, defaultMalariaSafety, emptyMalariaSafety, evaluateMalariaCandidates, malariaExposureWindows, neededMalariaSafety, type MalariaSafety } from "../src/lib/malaria-planner";
 import { planMalariaSchedule } from "../src/lib/malaria-schedule";
 import { emptyHealth, newTravelStop, dateValue, shiftTravelDate, type TravelPlan, type TravelStop, type TravelHealth } from "../src/lib/travel-plan";
 import { MalariaPlannerForm } from "../src/components/tools/malaria-planner-form";
@@ -88,12 +88,15 @@ test("invalid dates, malformed safety values and nonfinite weights fail closed",
   assert.ok("error"in evaluateMalariaCandidates(plan(),healthy,{...safe(),pregnant:"bad"} as unknown as MalariaSafety,today));
   assert.ok("error"in planMalariaSchedule("ap",[{start:"2027-01-02",end:"2027-01-01"}],today));
 });
-test("initial public form excludes vaccine routing, drug screening and weight; keeps visible fever safety",()=>{
+test("initial public form excludes vaccine routing, drug screening, weight and removed warning box",()=>{
   const html=renderToStaticMarkup(createElement(TravelPlanProvider,null,createElement(MalariaPlannerForm)));
-  assert.match(html,/disabled=""/);assert.match(html,/查看是否需要預防藥/);assert.match(html,/返國一年內發燒/);assert.doesNotMatch(html,/黃熱病|轉機|體重|精神疾病|用藥與疫苗限制/);
-  assert.equal((html.match(/class="safety-notice"/g)??[]).length,1);
+  assert.match(html,/disabled=""/);assert.match(html,/查看是否需要預防藥/);assert.doesNotMatch(html,/防蚊與發燒提醒/);assert.doesNotMatch(html,/黃熱病|轉機|體重|精神疾病|用藥與疫苗限制/);
+  assert.equal((html.match(/class="safety-notice"/g)??[]).length,0);
 });
 
 test("identified allergy excludes that drug only after remaining ingredients are professionally confirmed",()=>{
  const s={...safe(),allergy:"yes" as const,allergyDrugs:["doxy" as const],otherAllergyClear:"yes" as const};const r=evaluate(plan(),healthy,s);assert.equal(r.candidates.find(c=>c.id==="doxy")!.status,"excluded");assert.ok(r.ready.some(c=>c.id==="ap"));assert.equal(evaluate(plan(),healthy,{...s,otherAllergyClear:"unknown"}).ready.length,0);
 });
+
+
+test("public safety defaults visible questions to no while preserving recorded positives and explicit unknowns",()=>{const s=defaultMalariaSafety(plan(),healthy,today);const r=evaluate(plan(),healthy,s);for(const key of neededMalariaSafety(r,s).keys)assert.equal(s[key],"no");assert.equal(s.severeRenal,"unknown");assert.equal(defaultMalariaSafety(plan(),{...healthy,pregnant:"yes"},today).pregnant,"yes");const unknown=evaluate(plan(),healthy,{...s,pregnant:"unknown"});assert.equal(unknown.ready.length,0);});

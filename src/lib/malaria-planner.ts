@@ -119,3 +119,14 @@ export function neededMalariaSafety(evaluation:PlannerEvaluation,safety:MalariaS
   for(const key of Object.keys(malariaSafetyLabels) as SafetyKey[])if(safety[key]!=="unknown")keys.push(key);
   return {keys:[...new Set(keys)],weight:usable.includes("ap")||usable.includes("meflo")||safety.weight!==null};
 }
+
+// Public form defaults requested by the site owner; the calculation engine still
+// preserves explicit unknown answers and previously recorded positive conditions.
+export function defaultMalariaSafety(plan:TravelPlan,health:TravelHealth,asOf:string){
+  const safety=emptyMalariaSafety();safety.weight=health.weight;
+  const recorded:Partial<Record<SafetyKey,boolean>>={pregnant:health.pregnant==="yes",breastfeeding:health.breastfeeding==="yes"||health.breastfeedingSmallInfant==="yes",renal:health.renal==="severe"||(health.crcl!==null&&health.crcl<30),severeRenal:health.renal==="severe"||(health.crcl!==null&&health.crcl<30),psychiatric:health.psychiatric==="yes",seizures:health.seizures==="yes",cardiac:health.conduction==="yes",allergy:health.drugAllergy==="yes",interactions:health.interactions==="yes",psoriasis:health.psoriasis==="yes"};
+  for(const key of Object.keys(recorded) as SafetyKey[])if(recorded[key])safety[key]="yes";
+  const evaluation=evaluateMalariaCandidates(plan,health,safety,asOf);
+  if(!("error"in evaluation))for(const key of neededMalariaSafety(evaluation,safety).keys)if(safety[key]==="unknown")safety[key]="no";
+  return safety;
+}
