@@ -38,8 +38,9 @@ test("exported internal links and article section anchors resolve", () => {
     for (const match of html.matchAll(/<a\s[^>]*href="([^"]+)"/g)) {
       const href = match[1];
       if (!href.startsWith("/") && !href.startsWith("#")) continue;
-      const [pathname, hash] = href.split("#");
-      const target = pathname ? path.join(root, pathname, "index.html") : file;
+      const url = new URL(href.replaceAll("&amp;", "&"), "https://fmdoc.vercel.app");
+      const hash = url.hash.slice(1);
+      const target = href.startsWith("#") ? file : path.join(root, decodeURIComponent(url.pathname), "index.html");
       assert.ok(fs.existsSync(target), `${file}: ${href}`);
       if (hash) {
         const targetHtml = fs.readFileSync(target, "utf8");

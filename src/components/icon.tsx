@@ -1,4 +1,8 @@
 const paths: Record<string, React.ReactNode> = {
+  menu: <path d="M4 7h16M4 12h12M4 17h8" />,
+  chart: <><rect x="4" y="4" width="16" height="16" rx="3" /><path d="m6 13 4-5 4 8 4-5" /></>,
+  droplet: <><path d="M9 3S3 10 3 14a6 6 0 0 0 12 0c0-4-6-11-6-11Z" /><path d="M16 4s5 5 5 8a4 4 0 0 1-3 4M6 14a3 3 0 0 0 3 3" /></>,
+  people: <><circle cx="9" cy="7" r="3" /><circle cx="18" cy="8" r="2.5" /><path d="M2 21v-2a7 7 0 0 1 14 0v2m1-7a5 5 0 0 1 5 5v2" /></>,
   brain: (
     <>
       <path d="M9 4a3 3 0 0 0-5 3 4 4 0 0 0-1 7 4 4 0 0 0 6 5V4Zm6 0a3 3 0 0 1 5 3 4 4 0 0 1 1 7 4 4 0 0 1-6 5V4Z" />

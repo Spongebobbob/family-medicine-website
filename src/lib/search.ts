@@ -9,6 +9,13 @@ export type SearchArticle = {
   published: string;
   minutes: number;
 };
+export type SearchTool = { slug: string; name: string; shortName: string; description: string };
+export function searchTools(tools: SearchTool[], query: string) {
+  const words = query.trim().toLocaleLowerCase("zh-TW").split(/\s+/).filter(Boolean);
+  return words.length ? tools.filter(tool => words.every(word =>
+    `${tool.name} ${tool.shortName} ${tool.description}`.toLocaleLowerCase("zh-TW").includes(word)
+  )) : [];
+}
 export function searchArticles(articles: SearchArticle[], query: string) {
   const words = query
     .trim()

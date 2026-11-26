@@ -9,7 +9,8 @@ import {
   toSearchArticle,
   referencedMarkdown,
 } from "../src/lib/content";
-import { searchArticles } from "../src/lib/search";
+import { searchArticles, searchTools } from "../src/lib/search";
+import { healthTools } from "../src/lib/tool-catalog";
 import { categories } from "../src/lib/site";
 import { jsonLd } from "../src/lib/seo";
 
@@ -97,6 +98,15 @@ test("search matches body, multiple terms, whitespace and no-match states", () =
   );
   assert.equal(searchArticles(articles, "失眠")[0].slug, "sleep-basics");
   assert.equal(searchArticles(articles, "不存在的內容").length, 0);
+});
+
+test("home search finds health tools by Chinese names, English terms and multiple words", () => {
+  assert.equal(searchTools(healthTools, "  ldl  ")[0].slug, "ldl-target");
+  assert.ok(searchTools(healthTools, "失眠").some(tool => tool.slug === "isi"));
+  assert.ok(searchTools(healthTools, "eGFR 腎").some(tool => tool.slug === "egfr"));
+  assert.equal(searchTools(healthTools, "LDL 不存在的內容").length, 0);
+  assert.equal(searchTools(healthTools, "TSH").length, 0);
+  assert.equal(searchTools(healthTools, "   ").length, 0);
 });
 test("source markers link to references and JSON-LD escapes script delimiters", () => {
   assert.equal(

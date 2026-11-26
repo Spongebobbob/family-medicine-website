@@ -1,146 +1,75 @@
 import Link from "next/link";
-import { Illustration } from "@/components/illustration";
-import { ArticleCard, CategoryCard } from "@/components/cards";
+import { ArticleCard } from "@/components/cards";
 import { Icon } from "@/components/icon";
 import { getArticles } from "@/lib/content";
 import { categories, site, absolute } from "@/lib/site";
 import { pageMetadata, jsonLd } from "@/lib/seo";
-export const metadata = pageMetadata(
-  "讓健康成為日常",
-  site.description,
-  "/",
-);
+
+export const metadata = pageMetadata("讓健康成為日常", site.description, "/");
+
+const quickTools = [
+  { slug: "ldl-target", name: "LDL 目標", icon: "heart" },
+  { slug: "fib-4", name: "FIB-4", icon: "chart" },
+  { slug: "egfr", name: "腎功能", icon: "droplet" },
+  { slug: "isi", name: "失眠評估", icon: "moon" },
+  { slug: "taiwan-cancer-screening", name: "癌症篩檢", icon: "shield" },
+  { slug: "adult-health-check", name: "成人健檢", icon: "clipboard" },
+];
+const categoryNames = ["睡眠身心", "三高慢性病", "健檢解讀", "體重管理", "肌骨疼痛", "旅遊醫學", "預防醫學", "高齡健康", "用藥知識"];
+const labLinks = [
+  { label: "LDL", href: "/tools/ldl-target/" },
+  { label: "ALT", href: "/tools/fib-4/" },
+  { label: "eGFR", href: "/tools/egfr/" },
+  ...["尿酸", "HbA1c", "TSH"].map(label => ({ label, href: `/search/?q=${encodeURIComponent(label)}` })),
+];
+
 export default function Home() {
   const articles = getArticles();
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: jsonLd({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: site.name,
-            url: absolute("/"),
-            inLanguage: "zh-Hant-TW",
-          }),
-        }}
-      />
-      <section className="hero container">
-        <div className="hero-copy">
-          <span className="eyebrow">
-            <span />
-            從家庭醫學出發，陪伴每一個你
-          </span>
-          <h1>
-            把健康知識，
-            <br />
-            放回<span className="highlight">日常生活。</span>
-          </h1>
-          <p>
-            健康，不只是診間裡的事。
-            <br />
-            用好懂的文字，陪你認識身體的訊號，
-            <br />
-            為自己與家人，做出更安心的選擇。
-          </p>
-          <div className="hero-actions">
-            <Link href="/articles/" className="button">
-              探索健康衛教
-            </Link>
-            <Link href="/about/" className="text-link">
-              認識這個網站
-            </Link>
-          </div>
-          <div className="hero-footnote">
-            <Icon name="book" />
-            有依據的知識・有溫度的陪伴
-          </div>
-        </div>
-        <div className="hero-visual">
-          <span className="visual-label">每一天，留一點照顧給自己</span>
-          <Illustration />
-          <div className="visual-note">
-            <Icon name="leaf" />
-            <span>好好生活，就是健康的開始。</span>
-          </div>
-        </div>
-      </section>
-      <div className="values-strip">
-        <div className="container values-inner">
-          <span>
-            <Icon name="book" />
-            把專業說明白
-          </span>
-          <span>
-            <Icon name="shield" />
-            讓知識有依據
-          </span>
-          <span>
-            <Icon name="heart" />
-            陪伴每個生活階段
-          </span>
+  return <div className="home-page">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd({ "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: absolute("/"), inLanguage: "zh-Hant-TW" }) }} />
+    <section className="home-hero" aria-labelledby="home-title">
+      <div className="container home-content">
+        <p className="home-eyebrow">EVIDENCE-BASED FAMILY MEDICINE</p>
+        <h1 id="home-title">把健康知識，放回日常生活。</h1>
+        <p className="home-intro">從健檢報告、疾病知識到健康自我評估，陪你了解自己與家人的健康。</p>
+        <form className="home-search" role="search" action="/search/" method="get">
+          <label className="sr-only" htmlFor="home-search">搜尋健康知識與工具</label>
+          <Icon name="search" />
+          <input id="home-search" name="q" type="search" placeholder="搜尋失眠、LDL、脂肪肝…" />
+          <button type="submit" aria-label="搜尋"><Icon name="search" /></button>
+        </form>
+        <div className="home-actions">
+          <Link href="/articles/" className="button">探索健康衛教</Link>
+          <Link href="/tools/" className="button home-button-outline">健康自我評估</Link>
         </div>
       </div>
-      <section className="container section">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow">從你關心的事開始</span>
-            <h2>今天，想了解什麼？</h2>
-          </div>
-          <Link href="/categories/" className="text-link">
-            查看全部分類
-          </Link>
+    </section>
+    <div className="container home-content home-sections">
+      <section className="home-section" aria-labelledby="quick-tools-title">
+        <h2 id="quick-tools-title">快速健康工具</h2>
+        <div className="home-tools-grid">
+          {quickTools.map(tool => <Link key={tool.slug} href={`/tools/${tool.slug}/`} className="home-tool"><Icon name={tool.icon} /><span>{tool.name}</span></Link>)}
         </div>
-        <div className="category-grid">
-          {categories.map((c) => (
-            <CategoryCard key={c.slug} category={c} />
-          ))}
-        </div>
+        <Link href="/tools/" className="home-all-tools">查看全部健康工具</Link>
       </section>
-      <section className="soft-section">
-        <div className="container section">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">健康閱讀，慢慢累積</span>
-              <h2>給生活的健康筆記</h2>
-              <p>從常見的問題開始，多了解自己一點。</p>
-            </div>
-            <Link href="/articles/" className="text-link">
-              瀏覽所有文章
-            </Link>
-          </div>
-          <div className="article-grid">
-            {articles.slice(0, 3).map((a) => (
-              <ArticleCard key={a.slug} article={a} />
-            ))}
-          </div>
-          <p className="sample-note">
-            目前收錄三篇示範文章，皆待醫師審閱，僅供網站功能展示。
-          </p>
+      <section className="home-section home-labs" aria-labelledby="lab-links-title">
+        <h2 id="lab-links-title">健檢紅字看不懂？</h2>
+        <div className="home-lab-links">{labLinks.map(lab => <Link key={lab.label} href={lab.href}>{lab.label}</Link>)}</div>
+      </section>
+      <section className="home-section" aria-labelledby="home-categories-title">
+        <h2 id="home-categories-title">健康衛教專區</h2>
+        <div className="home-categories-grid">
+          {categories.map((category, index) => <Link key={category.slug} href={`/categories/${category.slug}/`} className="home-category" aria-label={category.name}>
+            <Icon name={category.slug === "travel-medicine" ? "plane" : category.slug === "older-adults" ? "people" : category.icon} />
+            <span>{categoryNames[index]}</span>
+          </Link>)}
         </div>
       </section>
-      <section className="container section">
-        <div className="tool-banner">
-          <div className="tool-emblem">
-            <Icon name="scale" />
-          </div>
-          <div>
-            <span className="eyebrow">多認識身體一點</span>
-            <h2>從認識工具，開始關心自己。</h2>
-            <p>探索睡眠、心理、代謝與肝腎健康工具，了解適用範圍與準備狀態。</p>
-            <span className="privacy-note">無須註冊・資料不會上傳或儲存</span>
-          </div>
-          <Link href="/tools/" className="button">
-            探索自我評估中心
-          </Link>
-        </div>
+      <section className="home-section home-reading" aria-labelledby="home-reading-title">
+        <div className="section-heading"><h2 id="home-reading-title">日常健康筆記</h2><Link href="/articles/" className="text-link">查看全部文章</Link></div>
+        <div className="article-grid">{articles.slice(0, 3).map(article => <ArticleCard key={article.slug} article={article} />)}</div>
+        <p className="sample-note">目前收錄三篇示範文章，皆待醫師審閱，僅供網站功能展示。</p>
       </section>
-      <section className="container closing-note">
-        <Icon name="leaf" />
-        <h2>每一份理解，都是照顧的開始。</h2>
-        <p>不急著找到所有答案，先從今天的一個小問題開始。</p>
-      </section>
-    </>
-  );
+    </div>
+  </div>;
 }

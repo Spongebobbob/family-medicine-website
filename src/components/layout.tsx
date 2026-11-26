@@ -18,16 +18,25 @@ export function Header() {
               <small>家庭醫學・健康生活</small>
             </span>
           </Link>
-          <nav aria-label="主要導覽">
+          <nav aria-label="主要導覽" className="desktop-nav">
             <Link href="/about/">醫師介紹</Link>
             <Link href="/articles/">衛教百科</Link>
             <Link href="/categories/">健康分類</Link>
             <Link href="/tools/">健康工具</Link>
           </nav>
-          <Link href="/search/" className="search-link">
+          <Link href="/search/" className="search-link" aria-label="站內搜尋">
             <Icon name="search" />
             <span>搜尋</span>
           </Link>
+          <details className="mobile-menu">
+            <summary aria-label="開啟導覽選單"><Icon name="menu" /></summary>
+            <nav aria-label="手機導覽">
+              <a href="/about/">醫師介紹</a>
+              <a href="/articles/">衛教百科</a>
+              <a href="/categories/">健康分類</a>
+              <a href="/tools/">健康工具</a>
+            </nav>
+          </details>
         </div>
       </header>
     </>
