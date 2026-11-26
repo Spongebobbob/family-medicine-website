@@ -5,6 +5,7 @@ import { unified } from "unified";
 import remarkParse from "remark-parse";
 import { categoryBySlug, site } from "./site";
 import type { SearchArticle } from "./search";
+import { validateFigure, type ArticleFigure } from "./article-figures";
 
 export type Reference = {
   id: string;
@@ -12,6 +13,9 @@ export type Reference = {
   publisher: string;
   url: string;
   accessed: string;
+  vancouver?: string;
+  doi?: string;
+  pubmed?: string;
 };
 export type Article = {
   slug: string;
@@ -29,6 +33,9 @@ export type Article = {
   keywords: string[];
   body: string;
   minutes: number;
+  kind?: "education" | "demo";
+  numberedSections?: boolean;
+  figures: ArticleFigure[];
 };
 type Ast = { type: string; depth?: number; value?: string; children?: Ast[] };
 function textOf(node: Ast): string {
@@ -55,6 +62,7 @@ export function headingsFor(markdown: string) {
       ...[...markdown.matchAll(/\[來源:([a-z0-9-]+)\]/g)].map(
         (m) => `ref-${m[1]}`,
       ),
+      ...[...markdown.matchAll(/\/article-figures\/([a-z0-9-]+)/g)].map(m => `figure-${m[1]}`),
     ],
   );
   const headings: { id: string; text: string; depth: number }[] = [];
@@ -108,6 +116,8 @@ export function parseArticle(source: string, slug: string): Article {
   )
     fail("日期");
   if (!["pending-review", "reviewed"].includes(data.status)) fail("status");
+  if (data.kind !== undefined && !["education", "demo"].includes(data.kind)) fail("kind");
+  if (data.numberedSections !== undefined && typeof data.numberedSections !== "boolean") fail("numberedSections");
   if (
     data.status === "reviewed" &&
     (!site.physician.name || data.author !== site.physician.name)
@@ -141,14 +151,30 @@ export function parseArticle(source: string, slug: string): Article {
     )
       fail("references");
     ids.add(ref.id);
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(ref.id)) fail("文獻 ID");
+    if (ref.vancouver !== undefined && (typeof ref.vancouver !== "string" || !ref.vancouver.trim())) fail("Vancouver 文獻");
+    if (data.kind === "education" && !ref.vancouver) fail("衛教文章須提供 Vancouver 文獻");
+    if (ref.doi !== undefined && (typeof ref.doi !== "string" || !/^10\.\d{4,9}\/\S+$/.test(ref.doi))) fail("DOI");
+    if (ref.pubmed !== undefined && (typeof ref.pubmed !== "string" || !/^\d+$/.test(ref.pubmed))) fail("PubMed ID");
   }
-  for (const match of content.matchAll(/\[來源:([a-z0-9-]+)\]/g))
+  const citedText = [content, ...data.summary, ...data.warnings, ...data.faq.map((q: { answer: string }) => q.answer)].join("\n");
+  for (const match of citedText.matchAll(/\[來源:([a-z0-9-]+)\]/g))
     if (!ids.has(match[1])) fail(`文獻 ${match[1]}`);
+  const figureIds: string[] = data.figures ?? [];
+  if (!Array.isArray(figureIds) || figureIds.some(id => typeof id !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) || new Set(figureIds).size !== figureIds.length) fail("figures");
+  const figures = figureIds.map(id => validateFigure(JSON.parse(fs.readFileSync(path.join(process.cwd(), "content/figures", `${id}.json`), "utf8")), id, [...ids]));
+  for (const match of content.matchAll(/!\[[^\]]*\]\(\/article-figures\/([^\s)]+)\)/g)) if (!figureIds.includes(match[1])) fail(`未登錄圖表 ${match[1]}`);
+  if (data.kind === "education") {
+    for (const match of content.matchAll(/!\[([^\]]*)\]\(([^\s)]+)\)/g)) {
+      if (!match[1].trim() || !figureIds.some(id => match[2] === `/article-figures/${id}`)) fail("衛教圖像須有替代文字、來源及已登錄圖表");
+    }
+  }
   if (!content.trim() || !headingsFor(content).length) fail("正文與標題");
   return {
     ...data,
     slug,
     body: content,
+    figures,
     minutes: Math.max(1, Math.ceil(content.length / 450)),
   } as Article;
 }
@@ -183,6 +209,9 @@ export function toSearchArticle(a: Article): SearchArticle {
     minutes: a.minutes,
   };
 }
-export function referencedMarkdown(body: string) {
-  return body.replace(/\[來源:([a-z0-9-]+)\]/g, "[〔來源〕](#ref-$1)");
+export function referencedMarkdown(body: string, references?: Reference[]) {
+  return body.replace(/\[來源:([a-z0-9-]+)\]/g, (_, id: string) => {
+    const index = references?.findIndex(ref => ref.id === id);
+    return `[${index !== undefined && index >= 0 ? `[${index + 1}]` : "〔來源〕"}](#ref-${id})`;
+  });
 }

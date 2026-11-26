@@ -1,0 +1,129 @@
+{
+  "id": "urate-decision",
+  "type": "decision",
+  "title": "健檢尿酸偏高：依條件分流評估",
+  "alt": "先確認尿酸、症狀與病史。有急性紅腫關節或其他警訊時先就醫；沒有急性警訊者，再區分是否有痛風或相關結石，分別討論治療適應症或生活調整與追蹤。",
+  "sources": [
+    "ref1",
+    "ref2",
+    "ref3",
+    "ref4"
+  ],
+  "note": "此為衛教分流摘要，分支不是每人必經的步驟。腫瘤溶解等急症不適用。不是自動診斷或開藥工具；結石需依類型與病況個別評估。",
+  "width": 800,
+  "height": 1010,
+  "nodes": [
+    {
+      "id": "start",
+      "title": "確認尿酸與病史",
+      "lines": [
+        "腎功能、藥物、關節症狀及結石"
+      ],
+      "x": 175,
+      "y": 20,
+      "width": 450,
+      "height": 110
+    },
+    {
+      "id": "acute",
+      "title": "是否有急性症狀或警訊？",
+      "lines": [
+        "紅腫熱痛、發燒、無尿等"
+      ],
+      "x": 175,
+      "y": 200,
+      "width": 450,
+      "height": 110
+    },
+    {
+      "id": "urgent",
+      "title": "儘速就醫評估",
+      "lines": [
+        "排除感染等急症",
+        "痛風發作需控制發炎"
+      ],
+      "x": 20,
+      "y": 400,
+      "width": 350,
+      "height": 134
+    },
+    {
+      "id": "history",
+      "title": "是否有痛風或相關結石？",
+      "lines": [
+        "依既往發作及疾病確認"
+      ],
+      "x": 430,
+      "y": 400,
+      "width": 350,
+      "height": 110
+    },
+    {
+      "id": "review",
+      "title": "與醫師討論治療適應症",
+      "lines": [
+        "發作次數、痛風石、影像損傷",
+        "腎功能與結石類型等"
+      ],
+      "x": 20,
+      "y": 640,
+      "width": 350,
+      "height": 134
+    },
+    {
+      "id": "lifestyle",
+      "title": "通常不常規降尿酸",
+      "lines": [
+        "生活調整、確認原因與追蹤",
+        "持續明顯異常仍需個別評估"
+      ],
+      "x": 430,
+      "y": 640,
+      "width": 350,
+      "height": 134
+    },
+    {
+      "id": "target",
+      "title": "有長期降尿酸適應症者",
+      "lines": [
+        "逐步調整至低於 6 mg/dL",
+        "嚴重痛風可考慮低於 5 mg/dL"
+      ],
+      "x": 20,
+      "y": 850,
+      "width": 350,
+      "height": 134
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "acute"
+    },
+    {
+      "from": "acute",
+      "to": "urgent",
+      "label": "有"
+    },
+    {
+      "from": "acute",
+      "to": "history",
+      "label": "無"
+    },
+    {
+      "from": "history",
+      "to": "review",
+      "label": "有"
+    },
+    {
+      "from": "history",
+      "to": "lifestyle",
+      "label": "無"
+    },
+    {
+      "from": "review",
+      "to": "target",
+      "label": "有適應症"
+    }
+  ]
+}

@@ -20,7 +20,8 @@ const labLinks = [
   { label: "LDL", href: "/tools/ldl-target/" },
   { label: "ALT", href: "/tools/fib-4/" },
   { label: "eGFR", href: "/tools/egfr/" },
-  ...["尿酸", "HbA1c", "TSH"].map(label => ({ label, href: `/search/?q=${encodeURIComponent(label)}` })),
+  { label: "尿酸", href: "/articles/hyperuricemia/" },
+  ...["HbA1c", "TSH"].map(label => ({ label, href: `/search/?q=${encodeURIComponent(label)}` })),
 ];
 
 export default function Home() {
@@ -68,7 +69,7 @@ export default function Home() {
       <section className="home-section home-reading" aria-labelledby="home-reading-title">
         <div className="section-heading"><h2 id="home-reading-title">日常健康筆記</h2><Link href="/articles/" className="text-link">查看全部文章</Link></div>
         <div className="article-grid">{articles.slice(0, 3).map(article => <ArticleCard key={article.slug} article={article} />)}</div>
-        <p className="sample-note">目前收錄三篇示範文章，皆待醫師審閱，僅供網站功能展示。</p>
+        <p className="sample-note">衛教文章仍待醫師審閱；標示為示範內容的文章僅供網站功能展示。</p>
       </section>
     </div>
   </div>;

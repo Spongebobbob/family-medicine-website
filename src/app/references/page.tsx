@@ -2,9 +2,10 @@ import Link from "next/link";
 import { Breadcrumbs, PageIntro } from "@/components/layout";
 import { getArticles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
+import { ReferenceList } from "@/components/articles/reference-list";
 export const metadata = pageMetadata(
   "參考文獻",
-  "查看示範衛教文章的資料來源與查閱日期。",
+  "查看衛教文章的參考文獻、DOI、PubMed 與查閱日期。",
   "/references/",
 );
 export default function References() {
@@ -22,18 +23,7 @@ export default function References() {
             <h2>
               <Link href={`/articles/${a.slug}/`}>{a.title}</Link>
             </h2>
-            <ol>
-              {a.references.map((r) => (
-                <li key={r.id}>
-                  <a href={r.url} rel="noopener noreferrer" target="_blank">
-                    {r.title}
-                  </a>
-                  <span>
-                    {r.publisher}・查閱日期 {r.accessed}
-                  </span>
-                </li>
-              ))}
-            </ol>
+            <ReferenceList references={a.references} />
           </section>
         ))}
         <section className="reference-section">

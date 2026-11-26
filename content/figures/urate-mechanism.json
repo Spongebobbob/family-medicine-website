@@ -1,0 +1,75 @@
+{
+  "id": "urate-mechanism",
+  "type": "mechanism",
+  "title": "尿酸生成、排泄與結晶機轉",
+  "alt": "細胞更新與飲食普林經代謝生成尿酸，腎臟與腸道負責排泄。生成增加或排泄下降可能使尿酸偏高，結晶沉積可引發痛風；臨床疾病並非必然發生。",
+  "sources": [
+    "ref1",
+    "ref2",
+    "ref4"
+  ],
+  "note": "依提供文章及所引指引整理的概念示意，不表示個人的必然病程，也不代表各途徑的量化比例。",
+  "width": 720,
+  "height": 720,
+  "nodes": [
+    {
+      "id": "production",
+      "title": "細胞更新與飲食普林",
+      "lines": [
+        "黃嘌呤氧化酶參與尿酸生成"
+      ],
+      "x": 35,
+      "y": 20,
+      "width": 650,
+      "height": 110
+    },
+    {
+      "id": "balance",
+      "title": "血液中的尿酸",
+      "lines": [
+        "腎臟與腸道排泄；生成增加或排泄下降可使濃度升高"
+      ],
+      "x": 35,
+      "y": 190,
+      "width": 650,
+      "height": 110
+    },
+    {
+      "id": "crystals",
+      "title": "持續偏高與結晶",
+      "lines": [
+        "可能形成尿酸鈉鹽結晶；酸性尿液有利尿酸結石"
+      ],
+      "x": 35,
+      "y": 360,
+      "width": 650,
+      "height": 110
+    },
+    {
+      "id": "inflammation",
+      "title": "臨床表現不是必然",
+      "lines": [
+        "關節結晶可活化 NLRP3／IL-1β 發炎反應與痛風",
+        "也可能多年沒有臨床症狀"
+      ],
+      "x": 35,
+      "y": 530,
+      "width": 650,
+      "height": 134
+    }
+  ],
+  "edges": [
+    {
+      "from": "production",
+      "to": "balance"
+    },
+    {
+      "from": "balance",
+      "to": "crystals"
+    },
+    {
+      "from": "crystals",
+      "to": "inflammation"
+    }
+  ]
+}

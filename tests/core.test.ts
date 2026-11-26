@@ -91,7 +91,7 @@ test("body headings cannot collide with template section IDs", () => {
 });
 test("search matches body, multiple terms, whitespace and no-match states", () => {
   const articles = getArticles().map(toSearchArticle);
-  assert.equal(searchArticles(articles, "   ").length, 3);
+  assert.equal(searchArticles(articles, "   ").length, articles.length);
   assert.equal(
     searchArticles(articles, "血壓 袖帶")[0].slug,
     "home-blood-pressure",

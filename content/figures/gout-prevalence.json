@@ -1,0 +1,38 @@
+{
+  "id": "gout-prevalence",
+  "type": "bar",
+  "title": "台灣 2010 年痛風盛行率",
+  "alt": "2010 年台灣健保資料的痛風盛行率為整體 6.24%、男性 9.34%、女性 3.20%；不是抽血測得的高尿酸血症盛行率。",
+  "sources": [
+    "ref6"
+  ],
+  "unit": "%",
+  "population": "2010 年台灣全民健保納保人口，依研究診斷定義",
+  "note": "原始健保研究的粗盛行率；與國民營養健康調查的母群體及疾病定義不同，不與高尿酸血症連成同一趨勢。",
+  "series": [
+    {
+      "key": "prevalence",
+      "label": "痛風盛行率"
+    }
+  ],
+  "data": [
+    {
+      "label": "整體",
+      "values": {
+        "prevalence": 6.24
+      }
+    },
+    {
+      "label": "男性",
+      "values": {
+        "prevalence": 9.34
+      }
+    },
+    {
+      "label": "女性",
+      "values": {
+        "prevalence": 3.2
+      }
+    }
+  ]
+}

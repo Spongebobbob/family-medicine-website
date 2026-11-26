@@ -53,6 +53,8 @@ pnpm preview
 
 ## 新增文章：不需修改核心程式
 
+實證衛教文章、GFM 表格、Vancouver 引用、Recharts 統計圖及可縮放 SVG 的完整維護流程見 [文章系統維護指南](docs/article-authoring.md)。高尿酸血症為第一篇使用新系統的衛教稿，仍標示待醫師審閱。
+
 在 `content/articles/` 複製一篇 `.md`，用英文小寫與連字號命名，例如 `healthy-walking.md`，檔名就是網址 slug。內容為 YAML frontmatter 加 Markdown（MVP 選擇 Markdown，不執行 MDX/HTML）。日期務必加引號。
 
 ```yaml

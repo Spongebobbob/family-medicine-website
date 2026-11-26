@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@/components/layout";
 import { ArticleCard } from "@/components/cards";
 import { ArticleMarkdown } from "@/components/markdown";
 import { Icon } from "@/components/icon";
+import { ReferenceList } from "@/components/articles/reference-list";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return getArticles().map((a) => ({ slug: a.slug }));
@@ -47,6 +48,7 @@ export default async function ArticlePage({
   if (!a) notFound();
   const c = categoryBySlug(a.category)!;
   const headings = headingsFor(a.body);
+  const sectionTitles = { warnings: a.numberedSections ? "15. 就醫時機" : "警示症狀與就醫時機", faq: a.numberedSections ? "16. 常見問題 FAQ" : "常見問題", references: a.numberedSections ? "17. 參考文獻 References" : "參考文獻" };
   const related = getArticles()
     .filter((x) => x.slug !== slug)
     .sort(
@@ -134,6 +136,7 @@ export default async function ArticlePage({
                   發布 <time dateTime={a.published}>{a.published}</time>
                   　・　更新 <time dateTime={a.updated}>{a.updated}</time>
                   　・　約 {a.minutes} 分鐘閱讀
+                  {a.kind === "education" && a.status === "pending-review" && "　・　待醫師審閱"}
                 </small>
               </div>
             </div>
@@ -158,55 +161,45 @@ export default async function ArticlePage({
                 </li>
               ))}
               <li>
-                <a href="#warnings">警示症狀與就醫時機</a>
+                <a href="#warnings">{sectionTitles.warnings}</a>
               </li>
               <li>
-                <a href="#faq">常見問題</a>
+                <a href="#faq">{sectionTitles.faq}</a>
               </li>
               <li>
-                <a href="#references">參考文獻</a>
+                <a href="#references">{sectionTitles.references}</a>
               </li>
             </ul>
           </details>
           <div className="prose">
-            <ArticleMarkdown body={a.body} />
+            <ArticleMarkdown body={a.body} figures={a.figures} references={a.references} />
           </div>
           <section data-medical-notice className="warning-box" aria-labelledby="warnings">
             <h2 id="warnings">
               <Icon name="shield" />
-              警示症狀與就醫時機
+              {sectionTitles.warnings}
             </h2>
-            {a.status === "pending-review" && <p>示範文章・待醫師審閱，僅供健康教育參考。</p>}
+            {a.status === "pending-review" && <p>{a.kind === "education" ? "衛教文章" : "示範文章"}・待醫師審閱，僅供健康教育參考。</p>}
             <ul>
               {a.warnings.map((w) => (
-                <li key={w}>{w}</li>
+                <li key={w}><ArticleMarkdown body={w} references={a.references} /></li>
               ))}
             </ul>
             <p>若有緊急症狀，請立即就醫或撥打 119。</p>
+            <p>本文提供一般健康衛教，不能取代個別診斷、治療或處方；請勿自行開始、停用或調整藥物。</p>
           </section>
           <section className="faq-section" aria-labelledby="faq">
-            <h2 id="faq">常見問題</h2>
+            <h2 id="faq">{sectionTitles.faq}</h2>
             {a.faq.map((q) => (
               <details key={q.question}>
                 <summary>{q.question}</summary>
-                <p>{q.answer}</p>
+                <ArticleMarkdown body={q.answer} references={a.references} />
               </details>
             ))}
           </section>
           <section className="reference-section" aria-labelledby="references">
-            <h2 id="references">參考文獻</h2>
-            <ol>
-              {a.references.map((r) => (
-                <li id={`ref-${r.id}`} key={r.id}>
-                  <a href={r.url} target="_blank" rel="noopener noreferrer">
-                    {r.title}
-                  </a>
-                  <span>
-                    {r.publisher}・查閱日期：{r.accessed}
-                  </span>
-                </li>
-              ))}
-            </ol>
+            <h2 id="references">{sectionTitles.references}</h2>
+            <ReferenceList references={a.references} anchors />
           </section>
         </article>
         <aside className="desktop-toc">
@@ -222,9 +215,9 @@ export default async function ArticlePage({
                 {h.text}
               </a>
             ))}
-            <a href="#warnings">警示症狀與就醫時機</a>
-            <a href="#faq">常見問題</a>
-            <a href="#references">參考文獻</a>
+            <a href="#warnings">{sectionTitles.warnings}</a>
+            <a href="#faq">{sectionTitles.faq}</a>
+            <a href="#references">{sectionTitles.references}</a>
             <hr />
             <p>
               慢慢閱讀，

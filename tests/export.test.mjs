@@ -72,7 +72,7 @@ test("JSON-LD parses and every demo article exposes author, dates and citations"
       }
     }
   }
-  assert.equal(articles, 3);
+  assert.equal(articles, fs.readdirSync("content/articles").filter(name => name.endsWith(".md")).length);
   assert.ok(fs.existsSync(path.join(root, "404.html")));
   assert.ok(fs.existsSync(path.join(root, "robots.txt")));
   assert.ok(fs.existsSync(path.join(root, "sitemap.xml")));
