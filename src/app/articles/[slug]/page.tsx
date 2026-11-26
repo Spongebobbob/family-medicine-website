@@ -1,13 +1,15 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getArticles, getArticle, headingsFor } from "@/lib/content";
+import { getArticles, getArticle } from "@/lib/content";
 import { categoryBySlug, absolute, site } from "@/lib/site";
 import { jsonLd, pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/layout";
 import { ArticleCard } from "@/components/cards";
 import { ArticleMarkdown } from "@/components/markdown";
 import { Icon } from "@/components/icon";
-import { ReferenceList } from "@/components/articles/reference-list";
+import { KeyTakeaways, RedFlags, MedicalNotice, References } from "@/components/articles/reading-blocks";
+import { ArticleAnchorNavigation } from "@/components/articles/anchor-navigation";
+import { coreHeadingsFor } from "@/lib/article-reading";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return getArticles().map((a) => ({ slug: a.slug }));
@@ -47,7 +49,8 @@ export default async function ArticlePage({
   const a = getArticle(slug);
   if (!a) notFound();
   const c = categoryBySlug(a.category)!;
-  const headings = headingsFor(a.body);
+  const SafetyNotice = a.warnings.length ? RedFlags : MedicalNotice;
+  const headings = coreHeadingsFor(a.body);
   const sectionTitles = { warnings: a.numberedSections ? "15. 就醫時機" : "警示症狀與就醫時機", faq: a.numberedSections ? "16. 常見問題 FAQ" : "常見問題", references: a.numberedSections ? "17. 參考文獻 References" : "參考文獻" };
   const related = getArticles()
     .filter((x) => x.slug !== slug)
@@ -59,6 +62,7 @@ export default async function ArticlePage({
   const url = absolute(`/articles/${slug}/`);
   return (
     <div className="container page-space">
+      <ArticleAnchorNavigation />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -135,23 +139,16 @@ export default async function ArticlePage({
                 <small>
                   發布 <time dateTime={a.published}>{a.published}</time>
                   　・　更新 <time dateTime={a.updated}>{a.updated}</time>
-                  　・　約 {a.minutes} 分鐘閱讀
+                  　・　核心閱讀約 {a.reading.core} 分鐘
+                  {a.reading.hasDeepDive && `　・　含進階與 FAQ 約 ${a.reading.full} 分鐘（不含文獻）`}
                   {a.kind === "education" && a.status === "pending-review" && "　・　待醫師審閱"}
                 </small>
               </div>
             </div>
           </header>
-          <section className="summary-box" aria-labelledby="summary">
-            <h2 id="summary">
-              <Icon name="book" />
-              先看重點
-            </h2>
-            <ul>
-              {a.summary.map((s) => (
-                <li key={s}>{s}</li>
-              ))}
-            </ul>
-          </section>
+          {a.summary.length > 0 && <KeyTakeaways id="summary">
+            <ul>{a.summary.map(s => <li key={s}><ArticleMarkdown body={s} references={a.references} /></li>)}</ul>
+          </KeyTakeaways>}
           <details className="mobile-toc">
             <summary>這篇文章會談到什麼？</summary>
             <ul>
@@ -160,12 +157,12 @@ export default async function ArticlePage({
                   <a href={`#${h.id}`}>{h.text}</a>
                 </li>
               ))}
-              <li>
+              {a.warnings.length > 0 && <li>
                 <a href="#warnings">{sectionTitles.warnings}</a>
-              </li>
-              <li>
+              </li>}
+              {a.faq.length > 0 && <li>
                 <a href="#faq">{sectionTitles.faq}</a>
-              </li>
+              </li>}
               <li>
                 <a href="#references">{sectionTitles.references}</a>
               </li>
@@ -174,21 +171,17 @@ export default async function ArticlePage({
           <div className="prose">
             <ArticleMarkdown body={a.body} figures={a.figures} references={a.references} />
           </div>
-          <section data-medical-notice className="warning-box" aria-labelledby="warnings">
-            <h2 id="warnings">
-              <Icon name="shield" />
-              {sectionTitles.warnings}
-            </h2>
+          <SafetyNotice id="warnings" title={sectionTitles.warnings}>
             {a.status === "pending-review" && <p>{a.kind === "education" ? "衛教文章" : "示範文章"}・待醫師審閱，僅供健康教育參考。</p>}
             <ul>
               {a.warnings.map((w) => (
                 <li key={w}><ArticleMarkdown body={w} references={a.references} /></li>
               ))}
             </ul>
-            <p>若有緊急症狀，請立即就醫或撥打 119。</p>
+            {a.warnings.length > 0 && <p>若有緊急症狀，請立即就醫或撥打 119。</p>}
             <p>本文提供一般健康衛教，不能取代個別診斷、治療或處方；請勿自行開始、停用或調整藥物。</p>
-          </section>
-          <section className="faq-section" aria-labelledby="faq">
+          </SafetyNotice>
+          {a.faq.length > 0 && <section className="faq-section" aria-labelledby="faq">
             <h2 id="faq">{sectionTitles.faq}</h2>
             {a.faq.map((q) => (
               <details key={q.question}>
@@ -196,16 +189,13 @@ export default async function ArticlePage({
                 <ArticleMarkdown body={q.answer} references={a.references} />
               </details>
             ))}
-          </section>
-          <section className="reference-section" aria-labelledby="references">
-            <h2 id="references">{sectionTitles.references}</h2>
-            <ReferenceList references={a.references} anchors />
-          </section>
+          </section>}
+          <References references={a.references} title={sectionTitles.references} />
         </article>
         <aside className="desktop-toc">
           <div>
             <span className="eyebrow">本文目錄</span>
-            <a href="#summary">先看重點</a>
+            {a.summary.length > 0 && <a href="#summary">30 秒看懂重點</a>}
             {headings.map((h) => (
               <a
                 className={h.depth > 2 ? "toc-indent" : ""}
@@ -215,8 +205,8 @@ export default async function ArticlePage({
                 {h.text}
               </a>
             ))}
-            <a href="#warnings">{sectionTitles.warnings}</a>
-            <a href="#faq">{sectionTitles.faq}</a>
+            {a.warnings.length > 0 && <a href="#warnings">{sectionTitles.warnings}</a>}
+            {a.faq.length > 0 && <a href="#faq">{sectionTitles.faq}</a>}
             <a href="#references">{sectionTitles.references}</a>
             <hr />
             <p>

@@ -5,13 +5,47 @@
 ## 新增文章
 
 1. 新增 `content/articles/<slug>.md`，可從 `hyperuricemia.md` 複製結構。
-2. Frontmatter 必填：title、description、category、published、updated、status、author、keywords、summary、warnings、faq、references。日期必須是引號包住的 YYYY-MM-DD。
+2. Frontmatter 必填：title、description、category、published、updated、status、author、keywords、references。summary、warnings、faq 可省略或使用空陣列，省略時不生成內容。日期必須是引號包住的 YYYY-MM-DD。
 3. 正式衛教草稿設定 `kind: education`，臨床審閱尚未完成時維持 `status: pending-review`。`kind` 未提供時保留舊示範文章相容性。
 4. 高尿酸稿以 `numberedSections: true` 搭配正文 1–14 節，模板接續 15 就醫時機、16 FAQ、17 References。其他文章可不設此值，使用一般章節標題。
-5. 正文用 `##`／`###` 標題，自動產生桌面與手機目錄。GFM 表格可左右捲動；`>` 引言顯示為重點提示。
-6. `summary` 是純文字；正文、warnings 與 FAQ answer 可用 `[來源:stable-id]`。stable-id 必須存在於 references。畫面依文獻陣列次序產生 Vancouver 編號與錨點；**請依第一次引用順序排列 references**。
+5. 正文用 `##`／`###` 標題，自動產生錨點；核心目錄僅收錄進階區塊之外的 H2。GFM 比較表自動使用手機適應樣式；一般 `>` 引言仍顯示為重點提示。
+6. `summary`、正文、warnings 與 FAQ answer 可用 `[來源:stable-id]`。stable-id 必須存在於 references。畫面依文獻陣列次序產生 Vancouver 編號與錨點；**請依第一次引用順序排列 references**。
 
-## 參考文獻
+## 雙層閱讀格式
+
+原有 Markdown 無須改寫也能繼續使用。新增閱讀區塊使用 GFM 引言內的獨立標記行；標記、空白行及內容都須帶 `>`。標題必填，不支援任意 JSX、HTML 或腳本。範例文字僅示範格式，不是醫學內容：
+
+```md
+## 核心章節
+
+核心衛教內容只在這裡維護。
+
+> [!DEEPDIVE] 研究方法與限制
+>
+> ### 研究設計
+>
+> 已查證的進階內容及其原有引用。
+>
+> > [!EVIDENCE] 如何解讀這項研究
+> >
+> > 研究適用族群、結果與限制。
+
+> [!ACTION] 可以採取的健康行動
+>
+> - 已完成醫療審閱的行動建議。
+```
+
+可選標記對應共用元件：`DEEPDIVE` → DeepDive、`EVIDENCE` → EvidenceCard、`ACTION` → ClinicalAction、`RED-FLAGS` → RedFlags、`TAKEAWAYS` → KeyTakeaways。一般文章優先以 frontmatter `summary`、`warnings` 管理頁首重點與文末警訊，**同一內容不要再放入正文標記**。未提供的區塊不自動生成。醫療免責聲明仍由模板保留。
+
+DeepDive 使用原生 details／summary，預設收合，Enter／Space 可操作，不需 JavaScript 才能閱讀；所有內容隨靜態頁輸出。小型 client 元件僅處理舊錨點、站內連結與返回歷史時自動展開祖先 details。不要將急症處置、適用條件、重要禁忌或用藥安全資訊單獨藏在進階內容。
+
+目錄只列核心 H2；H3、進階 H2／H3 仍有穩定錨點。調整文章時保留既有標題文字及順序，以維持重複標題的編號。核心時間估算正文核心文字＋summary＋warnings；完整時間另加進階與 FAQ，不含文獻、實際閱讀圖表所花時間。均以每分鐘約 450 個非空白文字字元粗估，不是精準計時。
+
+兩欄 ComparisonTable 在手機上自動換行，三欄以上保留原生表格與可鍵盤操作的橫向捲動區。不要複製成另一份手機卡片資料。統計圖的精確資料表與文字替代版預設收合，來源和限制仍顯示。
+
+文獻的 `references` 陣列是顯示編號的唯一來源。既有文章改排版**不可重新排序或重新編號**；新增文章才依第一次引用順序安排。對完全相同的重複段落保留一處並使用 `[相關章節](#章節錨點)`；語意近似但適用條件不同者先列人工審閱，不自動合併。人工審閱位置見 [改版審閱清單](article-reading-review.md)。
+
+## 文獻格式
 
 新衛教文章的每筆 reference 必填 `id`、`title`、`publisher`、`url`（HTTPS）、`accessed` 與 `vancouver`（完整 Vancouver 書目字串）。`doi` 放 DOI 識別字、不加 URL；`pubmed` 使用引號包住的數字字串。沒有查證的欄位不填，不從題目猜測作者、頁碼、DOI 或發表日期。沒有 DOI 的官方指引可使用其正式 HTTPS 連結。
 

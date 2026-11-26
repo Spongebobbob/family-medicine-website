@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header, Footer } from "@/components/layout";
 import { site, indexEnabled } from "@/lib/site";
 import "./globals.css";
+import "@/components/articles/reading.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {

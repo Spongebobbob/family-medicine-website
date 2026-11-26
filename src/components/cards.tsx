@@ -51,7 +51,7 @@ export function ArticleCard({ article }: { article: Article }) {
           </time>
           <span>
             <Icon name="clock" />
-            {article.minutes} 分鐘閱讀
+            核心約 {article.reading.core} 分鐘
           </span>
         </div>
       </div>

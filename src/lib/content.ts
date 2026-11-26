@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
+import { headingsFor, readingTime } from "./article-reading";
+export { headingsFor, headingSlug } from "./article-reading";
 import { categoryBySlug, site } from "./site";
 import type { SearchArticle } from "./search";
 import { validateFigure, type ArticleFigure } from "./article-figures";
@@ -33,58 +33,11 @@ export type Article = {
   keywords: string[];
   body: string;
   minutes: number;
+  reading: ReturnType<typeof readingTime>;
   kind?: "education" | "demo";
   numberedSections?: boolean;
   figures: ArticleFigure[];
 };
-type Ast = { type: string; depth?: number; value?: string; children?: Ast[] };
-function textOf(node: Ast): string {
-  return node.value || node.children?.map(textOf).join("") || "";
-}
-export function headingSlug(text: string) {
-  return (
-    text
-      .trim()
-      .toLowerCase()
-      .replace(/[^\p{L}\p{N}\s-]/gu, "")
-      .replace(/\s+/g, "-") || "section"
-  );
-}
-export function headingsFor(markdown: string) {
-  const tree = unified().use(remarkParse).parse(markdown) as Ast;
-  const seen = new Set<string>(
-    [
-      "main",
-      "summary",
-      "warnings",
-      "faq",
-      "references",
-      ...[...markdown.matchAll(/\[來源:([a-z0-9-]+)\]/g)].map(
-        (m) => `ref-${m[1]}`,
-      ),
-      ...[...markdown.matchAll(/\/article-figures\/([a-z0-9-]+)/g)].map(m => `figure-${m[1]}`),
-    ],
-  );
-  const headings: { id: string; text: string; depth: number }[] = [];
-  function walk(node: Ast) {
-    if (node.type === "heading") {
-      const text = textOf(node);
-      const base = headingSlug(text);
-      let id = base;
-      let count = 1;
-      while (seen.has(id)) id = `${base}-${count++}`;
-      seen.add(id);
-      headings.push({
-        text,
-        id,
-        depth: node.depth || 2,
-      });
-    }
-    node.children?.forEach(walk);
-  }
-  walk(tree);
-  return headings;
-}
 const contentPath = path.join(process.cwd(), "content/articles");
 function strings(value: unknown): value is string[] {
   return (
@@ -123,11 +76,14 @@ export function parseArticle(source: string, slug: string): Article {
     (!site.physician.name || data.author !== site.physician.name)
   )
     fail("已審閱文章須填寫真實醫師作者");
-  for (const field of ["summary", "warnings", "keywords"])
-    if (!strings(data[field]) || !data[field].length) fail(field);
+  if (!strings(data.keywords) || !data.keywords.length) fail("keywords");
+  for (const field of ["summary", "warnings"]) {
+    data[field] ??= [];
+    if (!strings(data[field])) fail(field);
+  }
+  data.faq ??= [];
   if (
     !Array.isArray(data.faq) ||
-    !data.faq.length ||
     !data.faq.every(
       (q) =>
         typeof q.question === "string" &&
@@ -170,12 +126,14 @@ export function parseArticle(source: string, slug: string): Article {
     }
   }
   if (!content.trim() || !headingsFor(content).length) fail("正文與標題");
+  const reading = readingTime(content, [...data.summary, ...data.warnings], data.faq.map((q: {question: string; answer: string}) => q.question + q.answer));
   return {
     ...data,
     slug,
     body: content,
     figures,
-    minutes: Math.max(1, Math.ceil(content.length / 450)),
+    minutes: reading.full,
+    reading,
   } as Article;
 }
 export function getArticles(): Article[] {

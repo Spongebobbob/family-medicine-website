@@ -1,0 +1,55 @@
+/* Shared long-form reading layer; tools and the rest of the site keep their styles. */
+.article-layout { grid-template-columns: minmax(0, 740px) minmax(190px, 1fr); }
+.article-main { font-size: 1.0625rem; line-height: 1.85; overflow-wrap: anywhere; }
+.article-main .prose { font-size: 1.125rem; line-height: 1.85; }
+.article-main .prose p { margin-block: 0 1.3em; }
+.article-main .prose h2 { margin-block: 2.2em .8em; line-height: 1.5; }
+.article-main .prose h3 { margin-block: 1.7em .65em; line-height: 1.6; }
+.article-main :is(h2, h3, h4, [id^="ref-"], figure) { scroll-margin-top: 1.5rem; }
+.article-main .author-line small { font-size: .875rem; }
+.article-main .key-takeaways { padding: 24px; background: #f2f6f0; border-color: #e0e8dd; }
+.key-takeaways li p { margin: 0; }
+.key-takeaways h2 { font-size: 1.25rem; }
+.deep-dive { margin-block: 1.7rem; border-block: 1px solid var(--line); }
+.deep-dive > summary { cursor: pointer; min-height: 48px; padding: 16px 4px; color: var(--ink); font-size: 1.0625rem; line-height: 1.7; }
+.reading-label { font-size: .875rem; font-weight: 500; color: #526b5b; margin-inline-end: .7rem; }
+.deep-dive-content { padding: 8px 4px 16px; }
+.article-main .deep-dive-content > h2:first-child { margin-top: .6em; }
+.article-main .deep-dive-content > :last-child { margin-bottom: 0; }
+.article-main :is(summary, a, [tabindex="0"], button):focus-visible { outline: 2px solid #456e55; outline-offset: 4px; border-radius: 3px; }
+.evidence-card { border-left: 3px solid #9aafa1; padding: 4px 0 4px 20px; margin-block: 1.5rem; }
+.clinical-action { border-block: 1px solid var(--line); padding-block: 20px; margin-block: 1.5rem; }
+.article-main .reading-block-title { margin-bottom: .8rem; color: var(--ink); }
+.reading-block-title .reading-label { display: block; }
+.article-main :is(.evidence-card, .clinical-action) > :last-child { margin-bottom: 0; }
+.article-main .warning-box { background: #faf8f1; border-color: #e2d9c5; }
+.article-main .warning-box p { font-weight: 400; line-height: 1.85; }
+.article-main .comparison-table table { min-width: 0; table-layout: fixed; }
+.comparison-table th, .comparison-table td { overflow-wrap: anywhere; line-height: 1.8; }
+.comparison-table :is(th, td):first-child { width: 32%; }
+.comparison-table:has(tr > :nth-child(3)) table { min-width: 36rem; table-layout: auto; }
+.article-main .evidence-figure { border: 0; border-block: 1px solid var(--line); border-radius: 0; padding: 20px 0; }
+.article-main .figure-title { font-size: 1.0625rem; }
+.article-main .figure-note, .article-main .figure-sources { font-size: .9375rem; margin-block: .75rem 0; }
+.article-main .figure-sources { border: 0; padding-top: 0; }
+.article-main .figure-description { margin-block: .75rem; }
+.article-main .figure-text { margin-top: .5rem; }
+.article-main .reference-section { font-size: 1rem; line-height: 1.8; }
+.article-medical-note { border-top: 1px solid var(--line); margin-top: 2rem; padding-top: 1rem; font-size: 1rem; color: #5d6e61; }
+@media (max-width: 1000px) {
+  .article-layout { display: block; }
+  .article-main { max-width: 740px; }
+}
+@media (max-width: 600px) {
+  .article-main .prose { font-size: 1.0625rem; }
+  .article-main .prose h2 { font-size: 1.4rem; }
+  .article-main .prose h3 { font-size: 1.2rem; }
+  .article-main .key-takeaways, .article-main .warning-box { padding: 20px; }
+  .article-main .comparison-table :is(th, td) { padding: 10px; }
+  .deep-dive > summary .reading-label { display: block; margin-left: 1rem; }
+}
+@media print {
+  .deep-dive::details-content, .figure-text::details-content, .faq-section details::details-content { content-visibility: visible; }
+  .deep-dive > :not(summary), .figure-text > :not(summary), .faq-section details > :not(summary) { display: block !important; }
+  .deep-dive { break-inside: auto; }
+}
