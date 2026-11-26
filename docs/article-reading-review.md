@@ -2,6 +2,20 @@
 
 本次屬閱讀呈現調整，不是醫學內容更新或醫師審閱。文章發布／更新日期、作者、狀態、文獻陣列、數據與圖表 JSON 維持原值。未新增 FAQ 或臨床主張。
 
+## 修改檔案
+
+| 範圍 | 檔案 |
+|---|---|
+| 共用閱讀元件、錨點與排版 | `src/components/articles/reading-blocks.tsx`、`src/components/articles/anchor-navigation.tsx`、`src/components/articles/reading.css` |
+| Markdown、章節與閱讀時間 | `src/components/markdown.tsx`、`src/lib/article-reading.ts`、`src/lib/content.ts` |
+| 文章模板與樣式載入 | `src/app/articles/[slug]/page.tsx`、`src/app/layout.tsx` |
+| 圖表重複資訊與閱讀時間呈現 | `src/components/articles/article-figure.tsx`、`src/components/cards.tsx`、`src/components/search.tsx` |
+| 示範文章 | `content/articles/hyperuricemia.md` |
+| 格式與人工審閱文件 | `docs/article-authoring.md`、`docs/article-reading-review.md` |
+| 閱讀與醫學內容保護測試 | `tests/article-reading.test.ts`、`tests/fixtures/hyperuricemia-reading-contract.json` |
+
+新增七個主要共用元件：KeyTakeaways、DeepDive、EvidenceCard、ClinicalAction、RedFlags、ComparisonTable、References；另有 MedicalNotice 保留沒有警訊清單時的中性免責聲明。既有 ReferenceList 繼續負責單一文獻陣列的編號、書目及外部連結。
+
 ## 高尿酸示範的結構調整
 
 - 第 2 節流行病學與第 3 節機轉：完整移入 DeepDive，保留原 H2 與錨點；核心目錄省略進階標題。兩張歷史調查圖與機轉圖仍各出現一次。

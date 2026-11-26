@@ -132,7 +132,7 @@ export function parseArticle(source: string, slug: string): Article {
     slug,
     body: content,
     figures,
-    minutes: reading.full,
+    minutes: reading.core,
     reading,
   } as Article;
 }

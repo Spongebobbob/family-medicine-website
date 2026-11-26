@@ -49,6 +49,7 @@ test("core reading time excludes deep dives, includes health warnings and preser
   assert.ok(readingTime(base, ["警".repeat(900)]).core > timing.core);
   const article = getArticle("hyperuricemia")!;
   assert.ok(article.reading.hasDeepDive); assert.ok(article.reading.full > article.reading.core);
+  assert.equal(article.minutes, article.reading.core);
   assert.ok(article.body.includes("NLRP3"));
 });
 

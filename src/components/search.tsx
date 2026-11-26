@@ -54,7 +54,7 @@ export function Search({ articles, tools = [], initialQuery = "" }: { articles: 
             </h2>
             <p>{a.description}</p>
             <small>
-              {a.published}・約 {a.minutes} 分鐘閱讀
+              {a.published}・核心閱讀約 {a.minutes} 分鐘
             </small>
           </article>
         ))}
