@@ -17,6 +17,8 @@ import { fib4Visual, egfrVisual, questionnaireVisual, type ResultVisual, type Re
 import { ResultScale } from "./result-scale";
 import { SafetyNotice } from "./safety-notice";
 import { useClientReady } from "./use-client-ready";
+import { albuminCategories, assessKidneyRisk, kidneyCauses, type KidneyCause, type KidneyRisk } from "@/lib/kidney-risk";
+import { KidneyRiskMatrix } from "./kidney-risk-matrix";
 type Choice = { value: string; label: string };
 export type Field = {
   key: string;
@@ -67,9 +69,11 @@ const labFields: Record<"fib-4" | "egfr", Field[]> = {
       label: "血清肌酸酐",
       hint: "請依報告選擇單位；可輸入 0.1–30 mg/dL 或 8.84–2652 µmol/L。",
     },
+    { key: "uacr", label: "尿白蛋白／肌酸酐比值（UACR，選填）", unit: "mg/g", min: 0, max: 100000, optional: true, hint: "請填比值，不能用尿蛋白試紙或 mg/L 代替；未檢驗可留白。" },
+    { key: "cause", label: "腎病原因（C，醫師已確認才選填）", choices: [...kidneyCauses], optional: true },
   ],
 };
-export type AssessmentResult = { value: string; unit?: string; label: string; message: string; visual?: ResultVisual; rows?: { label: string; value: string; tone?: ResultTone }[] };
+export type AssessmentResult = { value: string; unit?: string; label: string; message: string; visual?: ResultVisual; kidney?: KidneyRisk; rows?: { label: string; value: string; tone?: ResultTone }[] };
 export function ResultPanel({ result }: { result: AssessmentResult | null }) {
   return (
     <section
@@ -86,6 +90,7 @@ export function ResultPanel({ result }: { result: AssessmentResult | null }) {
           <h4>{result.label}</h4>
           <p>{result.message}</p>
           {result.rows && <dl className="result-rows">{result.rows.map(row => <div key={row.label} data-tone={row.tone}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}</dl>}
+          {result.kidney && <KidneyRiskMatrix result={result.kidney} />}
         </>
       ) : (
         <p>完成欄位並按下計算後，結果會顯示在這裡。</p>
@@ -187,6 +192,7 @@ export function LabAssessment({ kind }: { kind: "fib-4" | "egfr" }) {
           for (const f of labFields[kind]) {
             const raw = values[f.key] ?? "";
             const n = Number(raw);
+            if (f.optional && !raw.trim()) continue;
             if (!raw.trim()) nextErrors[f.key] = "請填寫此欄位。";
             else if (f.choices && !f.choices.some((c) => c.value === raw))
               nextErrors[f.key] = "請選擇有效選項。";
@@ -245,14 +251,23 @@ export function LabAssessment({ kind }: { kind: "fib-4" | "egfr" }) {
               unit: values.unit as CreatinineUnit,
               stable,
             });
-            if (r)
+            if (r) {
+              const kidney = assessKidneyRisk({ egfr: r.value, uacr: values.uacr?.trim() ? Number(values.uacr) : null, cause: (values.cause || "unknown") as KidneyCause })!;
+              const low = kidney.riskIndex === 0;
               setResult({
                 value: r.value.toFixed(1),
                 unit: "mL/min/1.73 m²",
-                visual: egfrVisual(r.value),
-                label: `估算腎功能分類 ${r.category}`,
-                message: `這是一次檢驗的 G 分類，不是 CKD 診斷。${r.value >= 60 ? "G1、G2 沒有其他腎損傷證據時，不能稱為 CKD。" : "請讓醫師確認是否有急性變化、尿白蛋白及至少三個月的持續異常。"}${r.value < 30 ? "結果明顯降低，請儘速由醫師評估；有急性症狀時立即就醫。" : ""}`,
+                visual: kidney.risk ? { tone: kidney.risk.tone } : { ...egfrVisual(r.value), tone: "neutral" },
+                kidney,
+                label: `${kidney.g}${kidney.a ? `／${kidney.a}・${kidney.risk!.label}` : "・UACR 未填，G／A 風險未定"}`,
+                message: `本次分類不是 CKD 診斷，需由醫師確認持續至少 3 個月的異常及病因。${low ? "G1、G2／A1 若無其他腎損傷證據，不代表有 CKD。" : r.value < 30 ? "腎功能明顯降低，請儘速就醫評估。" : kidney.a === "A3" ? "尿白蛋白明顯增加，請安排腎臟科評估。" : "請攜報告和醫師討論複檢與追蹤。"}`,
+                rows: [
+                  { label: "病因 C（醫師確認）", value: kidney.cause },
+                  { label: "尿白蛋白 A 分類", value: kidney.a ? `${kidney.a}・${albuminCategories.find(a => a.category === kidney.a)!.label}` : "未填，不視為正常" },
+                  ...(kidney.uacr !== null ? [{ label: "本次 UACR", value: `${kidney.uacr} mg/g` }] : []),
+                ],
               });
+            }
           }
         }}
       >

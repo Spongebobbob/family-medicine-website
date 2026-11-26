@@ -233,6 +233,8 @@ test("assessment modules contain no transmission, browser persistence or analyti
     "src/components/bmi-calculator.tsx",
     "src/components/tools/tool-directory.tsx",
     "src/lib/assessments.ts",
+    "src/lib/kidney-risk.ts",
+    "src/components/tools/kidney-risk-matrix.tsx",
     "src/lib/ldl-target.ts",
     "src/components/tools/ldl-target-form.tsx",
     "src/lib/aging-sleep-assessments.ts",

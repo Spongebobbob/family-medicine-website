@@ -2207,6 +2207,22 @@ th {
   box-shadow: 0 8px 24px #24473508;
   min-width: 0;
 }
+.kidney-matrix { margin: 28px 0 0; min-width: 0; }
+.kidney-matrix figcaption { font-size: 1.2rem; font-weight: 700; color: #233e30; }
+.kidney-matrix table { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 5px; margin: 14px 0; }
+.kidney-matrix th { text-align: center; padding: 5px 0; font-size: 1rem; line-height: 1.5; color: #233e30; }
+.kidney-matrix th:first-child { width: 25%; }
+.kidney-matrix th > span { display: block; font-size: .8rem; font-weight: 400; white-space: nowrap; }
+.kidney-matrix td { height: 48px; border-radius: 6px; text-align: center; padding: 0; color: #203b2c; }
+.kidney-matrix [data-risk="0"] { background: #b8d4b6; }
+.kidney-matrix [data-risk="1"] { background: #f0dc96; }
+.kidney-matrix [data-risk="2"] { background: #e8b587; }
+.kidney-matrix [data-risk="3"] { background: #db9a96; }
+.kidney-matrix td.is-current { outline: 3px solid #233e30; outline-offset: -3px; }
+.kidney-current { display: flex; justify-content: center; align-items: center; gap: 3px; font-weight: 700; font-size: .9rem; }
+.kidney-legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; list-style: none; margin: 16px 0 0; padding: 0; }
+.kidney-legend li { display: flex; align-items: center; gap: 6px; font-size: .9rem; line-height: 1.5; }
+.kidney-legend i { display: inline-block; width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
 .assessment-result[data-tone="positive"] { --result-accent: #286d50; }
 .assessment-result[data-tone="caution"] { --result-accent: #8b621b; }
 .assessment-result[data-tone="danger"] { --result-accent: #a3423d; }
