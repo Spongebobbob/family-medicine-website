@@ -35,10 +35,16 @@ export function TravelPlanFields({onChange,kind="vaccines"}:{onChange:()=>void;k
     <h2>個人健康狀況</h2><div className="assessment-fields">
       {healthField({key:"age",label:"年齡",unit:"歲",min:0,max:120,hint:"未滿 1 歲可填小數，例如 6 個月為 0.5 歲。"})}
       {healthField({key:"weight",label:"體重（選填）",unit:"kg",min:.1,max:500,optional:true})}
-      {healthField({key:"pregnant",label:"目前懷孕或可能懷孕？",choices:travelChoices})}
-      {healthField({key:"immune",label:"免疫功能／免疫抑制治療",choices:[{value:"unknown",label:"尚未確認"},{value:"normal",label:"已確認無免疫抑制狀況"},{value:"suppressed",label:"有免疫抑制、化療、移植或相關治療"}]})}
+      {kind==="vaccines"&&healthField({key:"pregnant",label:"目前懷孕或可能懷孕？",choices:travelChoices})}
+      {kind==="vaccines"&&healthField({key:"immune",label:"免疫功能／免疫抑制治療",choices:[{value:"unknown",label:"尚未確認"},{value:"normal",label:"已確認無免疫抑制狀況"},{value:"suppressed",label:"有免疫抑制、化療、移植或相關治療"}]})}
     </div>
-    {kind==="malaria"&&<details className="travel-details" open><summary>瘧疾特殊族群</summary><div className="assessment-fields">{[{key:"spleen",label:"曾切除脾臟，或醫師說脾功能低下？"},{key:"complexConditions",label:"有多種或複雜慢性疾病，需要個別醫療評估？"},{key:"longTermVfr",label:"本次為長期探親訪友？"}].map(f=>healthField({...f,choices:travelChoices}))}</div><p className="field-hint">年齡、懷孕與免疫狀況會一起納入；低風險不等於特殊族群一律不需預防藥。</p></details>}
+    {kind==="malaria"&&<fieldset className="travel-health-checks"><legend>以下情況是否適用？（可複選）</legend><p className="field-hint">未勾選表示「否／不適用」。</p>{[
+      {key:"pregnant",label:"目前懷孕或可能懷孕"},
+      {key:"immune",label:"免疫抑制、化療、移植或相關治療"},
+      {key:"spleen",label:"曾切除脾臟或脾功能低下"},
+      {key:"complexConditions",label:"有多種或複雜慢性疾病，需要個別評估"},
+      {key:"longTermVfr",label:"本次為長期探親訪友"},
+    ].map(({key,label})=><label className="travel-health-check" key={key}><input type="checkbox" ref={node=>{if(node)node.indeterminate=health[key as "pregnant"]==="unknown";}} aria-checked={health[key as "pregnant"]==="unknown"?"mixed":key==="immune"?health.immune==="suppressed":health[key as "pregnant"]==="yes"} checked={key==="immune"?health.immune==="suppressed":health[key as "pregnant"]==="yes"} onChange={e=>{const checked=e.target.checked;setHealth(old=>({...old,[key]:key==="immune"?(checked?"suppressed":"normal"):(checked?"yes":"no")}));onChange();}}/><span>{label}{health[key as "pregnant"]==="unknown"?"（尚未確認）":""}</span></label>)}</fieldset>}
     <details className="travel-details"><summary>用藥與疫苗限制（不清楚者保留未知）</summary><div className="assessment-fields">
       {healthField({key:"renal",label:"醫師確認的腎功能／CrCl 狀況",choices:[{value:"unknown",label:"未確認"},{value:"normal",label:"已確認沒有 CrCl <30 的重度腎功能不全"},{value:"severe",label:"CrCl <30 mL/min 或重度腎功能不全"}]})}
       {healthField({key:"crcl",label:"醫師確認的 CrCl（選填）",unit:"mL/min",min:0,max:500,optional:true,hint:"不是 eGFR（mL/min/1.73m²），不會在此自動換算。"})}

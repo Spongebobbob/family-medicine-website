@@ -2327,3 +2327,8 @@ th {
 .country-picker-panel li { display: flex; justify-content: space-between; gap: .5rem; padding: .75rem; min-height: 3rem; border-radius: .25rem; cursor: pointer; overflow-wrap: anywhere; }
 .country-picker-panel li:hover, .country-picker-panel li[data-active="true"] { background: #eaf1e5; color: #243e30; }
 .country-picker-panel li[aria-selected="true"] { font-weight: 700; }
+
+.travel-health-checks { margin: 1.5rem 0; padding: 1.1rem; border: 1px solid var(--line); border-radius: .75rem; min-width: 0; }
+.travel-health-checks legend { padding: 0 .4rem; font-weight: 700; color: var(--ink); }
+.travel-health-check { display: flex; align-items: flex-start; gap: .8rem; padding: .75rem .35rem; min-height: 3rem; cursor: pointer; }
+.travel-health-check input[type="checkbox"] { flex: 0 0 1.4rem; width: 1.4rem; height: 1.4rem; min-height: 0; margin-top: .25rem; padding: 0; accent-color: #345c49; }

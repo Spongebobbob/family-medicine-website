@@ -4,10 +4,11 @@ import { emptyHealth, newTravelStop, type TravelHealth, type TravelPlan } from "
 import type { TravelRecords } from "@/lib/travel-vaccines";
 type TravelState={plan:TravelPlan;setPlan:Dispatch<SetStateAction<TravelPlan>>;health:TravelHealth;setHealth:Dispatch<SetStateAction<TravelHealth>>;records:TravelRecords;setRecords:Dispatch<SetStateAction<TravelRecords>>;clear:()=>void};
 const initialPlan=():TravelPlan=>({stops:[newTravelStop()],animalContact:"unknown",remoteCare:"unknown",frequentTravel:"unknown",outdoorNights:"unknown"});
+const initialHealth=():TravelHealth=>({...emptyHealth,pregnant:"no",immune:"normal",spleen:"no",complexConditions:"no",longTermVfr:"no"});
 const initialRecords=():TravelRecords=>({vaccines:{},yfDate:"",icvp:"unknown"});
 const Context=createContext<TravelState|null>(null);
 export function TravelPlanProvider({children}:{children:React.ReactNode}){
-  const [plan,setPlan]=useState<TravelPlan>(initialPlan),[health,setHealth]=useState<TravelHealth>({...emptyHealth}),[records,setRecords]=useState<TravelRecords>(initialRecords);
-  return <Context.Provider value={{plan,setPlan,health,setHealth,records,setRecords,clear:()=>{setPlan(initialPlan());setHealth({...emptyHealth});setRecords(initialRecords());}}}>{children}</Context.Provider>;
+  const [plan,setPlan]=useState<TravelPlan>(initialPlan),[health,setHealth]=useState<TravelHealth>(initialHealth),[records,setRecords]=useState<TravelRecords>(initialRecords);
+  return <Context.Provider value={{plan,setPlan,health,setHealth,records,setRecords,clear:()=>{setPlan(initialPlan());setHealth(initialHealth());setRecords(initialRecords());}}}>{children}</Context.Provider>;
 }
 export function useTravelPlan(){const state=useContext(Context);if(!state)throw new Error("TravelPlanProvider is required");return state;}
