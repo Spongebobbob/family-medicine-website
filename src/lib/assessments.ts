@@ -1,4 +1,4 @@
-/** 純計算函式；所有臨床解讀待醫師審閱。不要在此加入記錄或網路傳輸。 */
+/** 純計算函式；不要在此加入記錄或網路傳輸。 */
 function inRange(value: number, min: number, max: number) {
   return Number.isFinite(value) && value >= min && value <= max;
 }

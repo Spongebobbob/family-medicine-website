@@ -6,6 +6,7 @@ export const site = {
     process.env.NEXT_PUBLIC_SITE_URL ||
     "https://fmdoc.vercel.app"
   ).replace(/\/$/, ""),
+  articleEditor: "王柏霖醫師",
   physician: { name: "", biography: "", credentials: [] as string[] },
 };
 export const indexEnabled =

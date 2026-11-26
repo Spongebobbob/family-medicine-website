@@ -53,3 +53,12 @@
   .deep-dive > :not(summary), .figure-text > :not(summary), .faq-section details > :not(summary) { display: block !important; }
   .deep-dive { break-inside: auto; }
 }
+
+.article-red-flags { margin-top: 2.2em; }
+.article-main .article-red-flags h2 { margin-top: 0; }
+.article-red-flags ul { padding-left: 1.7em; }
+.reference-disclosure > summary { cursor: pointer; padding-block: .5rem; min-height: 44px; color: var(--ink); }
+.reference-disclosure > summary h2 { display: inline; margin: 0; }
+.reference-disclosure > summary span { font-size: .9375rem; color: #5d6e61; margin-inline-start: .5rem; }
+.reference-disclosure > ol { margin-top: 1.25rem; }
+@media print { .reference-disclosure::details-content { content-visibility: visible; } .reference-disclosure > :not(summary) { display: block !important; } }

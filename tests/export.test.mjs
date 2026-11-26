@@ -17,6 +17,7 @@ test("all exported pages have a single H1, canonical, Chinese language and noind
   for (const file of pages) {
     const html = fs.readFileSync(file, "utf8");
     assert.equal([...html.matchAll(/<h1(?:\s|>)/g)].length, 1, file);
+    assert.doesNotMatch(html, /待醫師審閱|待審閱/, file);
     assert.match(html, /<html[^>]+lang="zh-Hant-TW"/, file);
     assert.match(html, /<meta name="robots" content="noindex, follow"/, file);
     if (
@@ -29,6 +30,21 @@ test("all exported pages have a single H1, canonical, Chinese language and noind
     assert.match(html, /<link rel="canonical" href="https:\/\/[^"/]+\//, file);
     assert.match(html, /property="og:title"/, file);
   }
+});
+
+test("article header, key points, plain medical section and collapsed references follow the shared presentation", () => {
+  const html = fs.readFileSync(path.join(root, "articles/hyperuricemia/index.html"), "utf8");
+  const header = html.match(/<header class="article-header">([\s\S]*?)<\/header>/)?.[1];
+  assert.ok(header);
+  assert.match(header, /<h1>高尿酸血症<\/h1>/);
+  assert.match(header, /王柏霖醫師<!-- --> 編輯|王柏霖醫師 編輯/);
+  assert.match(header, /更新於/);
+  assert.doesNotMatch(header, /發布|article-lead|category-label/);
+  assert.match(html, /<details class="reference-disclosure"><summary>/);
+  assert.doesNotMatch(html, /<details class="reference-disclosure"[^>]*\bopen/);
+  assert.match(html, /class="article-red-flags prose"/);
+  assert.doesNotMatch(html, /class="warning-box"/);
+  assert.match(html, /<strong>尿酸約達/);
 });
 test("exported internal links and article section anchors resolve", () => {
   for (const file of pages) {
@@ -67,7 +83,8 @@ test("JSON-LD parses and every demo article exposes author, dates and citations"
           assert.ok(node.datePublished);
           assert.ok(node.dateModified);
           assert.ok(node.citation.length);
-          assert.equal(node.creativeWorkStatus, "待醫師審閱");
+          assert.equal(node.editor.name, "王柏霖醫師");
+          assert.equal(node.creativeWorkStatus, undefined);
         }
       }
     }
@@ -78,12 +95,12 @@ test("JSON-LD parses and every demo article exposes author, dates and citations"
   assert.ok(fs.existsSync(path.join(root, "sitemap.xml")));
   assert.ok(fs.existsSync(path.join(root, "og-card.png")));
 });
-test("public export includes usable forms and honest pending review labels for all twenty-four tools", () => {
+test("public export includes usable forms without review labels for all twenty-four tools", () => {
   for (const slug of ["bmi", "fib-4", "egfr", "isi", "stop-bang", "phq-9", "gad-7", "cardiovascular-risk", "metabolic-syndrome", "tdee", "waist-height-ratio", "taiwan-cancer-screening", "adult-health-check", "adult-vaccines", "sarc-f", "mna-sf", "frail", "ess", "sleep-diary", "sarcopenia", "ldl-target", "altitude-illness", "malaria-prevention", "travel-vaccines"]) {
     const html = fs.readFileSync(path.join(root, "tools", slug, "index.html"), "utf8");
     assert.ok(html.includes('data-tool-available="true"'), slug);
     assert.match(html, /<form[\s>]/, slug);
-    assert.ok(html.includes("待醫師審閱"), slug);
+    assert.ok(!html.includes("待醫師審閱"), slug);
     assert.ok(!html.includes("尚未開放評估"), slug);
     assert.ok(!html.includes("先把關，再開放評估"), slug);
     assert.ok(!html.includes("已完成醫師審閱"), slug);

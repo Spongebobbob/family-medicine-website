@@ -27,7 +27,7 @@ export default function Articles() {
         ))}
       </div>
       <div className="notice" data-medical-notice>
-        衛教文章仍待醫師審閱，內容不能取代個別診斷與處方；示範內容會另行標示。
+        衛教內容不能取代個別診斷與處方；示範內容會另行標示。
       </div>
       <div className="article-grid">
         {getArticles().map((a) => (

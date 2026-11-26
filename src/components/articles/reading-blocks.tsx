@@ -21,7 +21,7 @@ export function ClinicalAction({ title, children }: BlockProps) {
   return <section className="clinical-action" aria-label={title}><p className="reading-block-title"><span className="reading-label">健康行動</span><strong>{title}</strong></p>{children}</section>;
 }
 export function RedFlags({ title, children, id }: BlockProps) {
-  return <section data-medical-notice className="warning-box" aria-label={title}><h2 id={id}>{title}</h2>{children}</section>;
+  return <section data-medical-notice className="article-red-flags prose" aria-label={title}><h2 id={id}>{title}</h2>{children}</section>;
 }
 export function MedicalNotice({ children }: BlockProps) {
   return <aside data-medical-notice className="article-medical-note" aria-label="醫療免責聲明">{children}</aside>;
@@ -31,5 +31,5 @@ export function ComparisonTable({ children, label = "比較表格；可左右捲
 }
 export function References({ references, title = "參考文獻" }: { references: Reference[]; title?: string }) {
   if (!references.length) return null;
-  return <section className="reference-section" aria-labelledby="references"><h2 id="references">{title}</h2><ReferenceList references={references} anchors /></section>;
+  return <section className="reference-section" aria-labelledby="references"><details className="reference-disclosure"><summary><h2 id="references">{title}</h2><span>（{references.length} 筆）</span></summary><ReferenceList references={references} anchors /></details></section>;
 }

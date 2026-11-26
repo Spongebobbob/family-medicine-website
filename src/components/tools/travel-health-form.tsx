@@ -14,7 +14,7 @@ function VaccineResults({result:r}:{result:VaccineResult}){
     <h2>依暴露風險討論的疫苗</h2><div className="travel-result-cards">{r.items.filter(i=>i.group==="risk").map((item)=><article className="travel-result-card" key={item.id}><h3>{item.name}</h3><strong>{item.status}</strong><p>{item.reason}</p><p>{item.timing}</p><a className="text-link" href={item.source} target="_blank" rel="noopener noreferrer">臨床來源 ↗</a></article>)}</div>
     {r.items.every(i=>i.group!=="risk")&&<p>目前沒有足夠的已查核目的地資料可產生特定旅遊疫苗建議，請攜行程至門診。</p>}
     <details className="travel-details"><summary>例行補種疫苗（{r.items.filter(i=>i.group==="routine").length} 項紀錄核對）</summary><div className="travel-result-cards">{r.items.filter(i=>i.group==="routine").map(item=><article className="travel-result-card" key={item.id}><h3>{item.name}</h3><strong>{item.status}</strong><p>{item.reason}</p><p>{item.timing}</p></article>)}</div><p>{r.liveSpacing}</p></details>
-    <details className="travel-details"><summary>行前門診準備清單</summary><ul>{r.checklist.map(item=><li key={item}>{item}</li>)}</ul><p>本頁不涵蓋所有地區的流行性腦脊髓膜炎、小兒麻痺及其他即時入境規定，請同步查閱官方及航空公司最新資訊。</p><p>所有臨床規則仍待醫師審閱；資料查核 {TRAVEL_CHECKED}。</p></details>
+    <details className="travel-details"><summary>行前門診準備清單</summary><ul>{r.checklist.map(item=><li key={item}>{item}</li>)}</ul><p>本頁不涵蓋所有地區的流行性腦脊髓膜炎、小兒麻痺及其他即時入境規定，請同步查閱官方及航空公司最新資訊。</p><p>資料查核 {TRAVEL_CHECKED}。</p></details>
   </section>;
 }
 export function TravelHealthForm({kind}:{kind:"malaria"|"vaccines"}){

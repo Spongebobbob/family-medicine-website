@@ -53,7 +53,7 @@ export default async function ToolCategoryPage({
               group: t.group,
               description: t.description,
               icon: t.icon,
-              status: "待醫師審閱",
+              status: "衛教參考",
             }))}
           />
         </>

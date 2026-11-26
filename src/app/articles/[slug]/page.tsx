@@ -30,13 +30,13 @@ export async function generateMetadata({
   );
   return {
     ...meta,
-    authors: [{ name: a.author, url: absolute("/about/") }],
+    authors: [{ name: site.articleEditor, url: absolute("/about/") }],
     openGraph: {
       ...meta.openGraph,
       type: "article",
       publishedTime: a.published,
       modifiedTime: a.updated,
-      authors: [a.author],
+      authors: [site.articleEditor],
     },
   };
 }
@@ -79,14 +79,13 @@ export default async function ArticlePage({
                 inLanguage: "zh-Hant-TW",
                 mainEntityOfPage: url,
                 author: {
-                  "@type": a.status === "reviewed" ? "Person" : "Organization",
-                  name: a.author,
+                  "@type": "Organization",
+                  name: site.name,
                   url: absolute("/about/"),
                 },
                 publisher: { "@type": "Organization", name: site.name },
                 citation: a.references.map((r) => r.url),
-                creativeWorkStatus:
-                  a.status === "pending-review" ? "待醫師審閱" : "已審閱",
+                editor: { "@type": "Person", name: site.articleEditor, url: absolute("/about/") },
               },
               {
                 "@type": "BreadcrumbList",
@@ -125,29 +124,23 @@ export default async function ArticlePage({
       <div className="article-layout">
         <article className="article-main">
           <header className="article-header">
-            <Link className="category-label" href={`/categories/${c.slug}/`}>
-              {c.name}
-            </Link>
-            <h1>{a.title}</h1>
-            <p className="article-lead">{a.description}</p>
+            <h1>{a.title.split("：")[0]}</h1>
             <div className="author-line">
               <span className="author-avatar">
                 <Icon name="leaf" />
               </span>
               <div>
-                <Link href="/about/">{a.author}</Link>
+                <span>{site.articleEditor} 編輯</span>
                 <small>
-                  發布 <time dateTime={a.published}>{a.published}</time>
-                  　・　更新 <time dateTime={a.updated}>{a.updated}</time>
+                  更新於 <time dateTime={a.updated}>{a.updated}</time>
                   　・　核心閱讀約 {a.reading.core} 分鐘
                   {a.reading.hasDeepDive && `　・　含進階與 FAQ 約 ${a.reading.full} 分鐘（不含文獻）`}
-                  {a.kind === "education" && a.status === "pending-review" && "　・　待醫師審閱"}
                 </small>
               </div>
             </div>
           </header>
           {a.summary.length > 0 && <KeyTakeaways id="summary">
-            <ul>{a.summary.map(s => <li key={s}><ArticleMarkdown body={s} references={a.references} /></li>)}</ul>
+            <ul>{a.summary.map(s => <li key={s}><ArticleMarkdown body={`**${s}**`} references={a.references} /></li>)}</ul>
           </KeyTakeaways>}
           <details className="mobile-toc">
             <summary>這篇文章會談到什麼？</summary>
@@ -172,7 +165,6 @@ export default async function ArticlePage({
             <ArticleMarkdown body={a.body} figures={a.figures} references={a.references} />
           </div>
           <SafetyNotice id="warnings" title={sectionTitles.warnings}>
-            {a.status === "pending-review" && <p>{a.kind === "education" ? "衛教文章" : "示範文章"}・待醫師審閱，僅供健康教育參考。</p>}
             <ul>
               {a.warnings.map((w) => (
                 <li key={w}><ArticleMarkdown body={w} references={a.references} /></li>

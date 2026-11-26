@@ -29,7 +29,7 @@ test("advanced content is server rendered once, closed by default, with stable n
 test("all optional reading blocks support Markdown and semantic comparison tables", () => {
   const body = ["TAKEAWAYS", "ACTION", "RED-FLAGS", "EVIDENCE"].map(kind => `> [!${kind}] 自訂標題\n>\n> **重點**`).join("\n\n") + "\n\n| 項目 | 比較 |\n|---|---|\n| A | B |";
   const html = renderToStaticMarkup(createElement(ArticleMarkdown, { body }));
-  for (const cls of ["key-takeaways", "clinical-action", "warning-box", "evidence-card", "comparison-table"]) assert.ok(html.includes(cls));
+  for (const cls of ["key-takeaways", "clinical-action", "article-red-flags", "evidence-card", "comparison-table"]) assert.ok(html.includes(cls));
   assert.match(html, /<strong>重點<\/strong>/);
   assert.match(html, /tabindex="0" role="region"/);
   assert.match(html, /<table>/);

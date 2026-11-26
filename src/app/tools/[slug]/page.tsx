@@ -32,7 +32,7 @@ export async function generateMetadata({
   return tool
     ? pageMetadata(
         tool.name,
-        `${tool.description} 衛教試用，待醫師審閱。`,
+        `${tool.description} 衛教參考。`,
         `/tools/${slug}/`,
         true,
       )

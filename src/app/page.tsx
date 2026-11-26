@@ -70,7 +70,7 @@ export default function Home() {
       <section className="home-section home-reading" aria-labelledby="home-reading-title">
         <div className="section-heading"><h2 id="home-reading-title">日常健康筆記</h2><Link href="/articles/" className="text-link">查看全部文章</Link></div>
         <div className="article-grid">{articles.slice(0, 3).map(article => <ArticleCard key={article.slug} article={article} />)}</div>
-        <p className="sample-note">衛教文章仍待醫師審閱；標示為示範內容的文章僅供網站功能展示。</p>
+        <p className="sample-note">標示為示範內容的文章僅供網站功能展示。</p>
       </section>
     </div>
   </div>;

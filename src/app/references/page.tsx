@@ -14,7 +14,7 @@ export default function References() {
       <Breadcrumbs items={[{ label: "參考文獻" }]} />
       <PageIntro eyebrow="每一份知識，都有出處" title="參考文獻與資料來源">
         <p>
-          優先採用政府、醫學組織與可信賴醫療機構的公開資料。示範內容仍待醫師審閱。
+          優先採用政府、醫學組織與可信賴醫療機構的公開資料。示範內容會另行標示。
         </p>
       </PageIntro>
       <div className="reading-width">

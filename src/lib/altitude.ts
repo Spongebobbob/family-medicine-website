@@ -2,7 +2,7 @@ export const altitudeEvidence = {
   checked: "2026-11-26", version: "CDC Yellow Book 2026 Table 3.5.1；WMS 2024；LLS 2018",
   scope: "行程分層採 CDC 表：出發海拔 <1200m、尚未充分適應的成人；不將 WMS 2800/3500m 的分界混入 CDC 2750/3400m。",
   sources: ["https://www.cdc.gov/yellow-book/hcp/environmental-hazards-risks/high-altitude-travel-and-altitude-illness.html", "https://wms.org/magazine/1463/2024-Altitude-Summary", "https://doi.org/10.1016/j.wem.2023.05.013", "https://doi.org/10.1089/ham.2017.0164"],
-  rights: "網站持有人於 2026-11-26 確認已有 LLS 2018 繁中網頁重製授權；本站介面仍待醫師審閱，不冒稱本站中文電子版已驗證。",
+  rights: "網站持有人於 2026-11-26 確認已有 LLS 2018 繁中網頁重製授權；本站介面不冒稱本站中文電子版已驗證。",
 } as const;
 export type TravelAnswer = "yes" | "no" | "unknown";
 export type AltitudeHistory = "none-mild" | "moderate-severe" | "hape-hace" | "unknown";
