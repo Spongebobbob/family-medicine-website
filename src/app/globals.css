@@ -2332,3 +2332,41 @@ th {
 .travel-health-checks legend { padding: 0 .4rem; font-weight: 700; color: var(--ink); }
 .travel-health-check { display: flex; align-items: flex-start; gap: .8rem; padding: .75rem .35rem; min-height: 3rem; cursor: pointer; }
 .travel-health-check input[type="checkbox"] { flex: 0 0 1.4rem; width: 1.4rem; height: 1.4rem; min-height: 0; margin-top: .25rem; padding: 0; accent-color: #345c49; }
+
+/* Two-stage malaria planner: reuse the site's sage and forest palette. */
+.malaria-stop { border: 0; margin: 0 0 1.5rem; padding: 0; min-width: 0; }
+.malaria-stop legend { font-weight: 700; margin-bottom: 1rem; }
+.malaria-step { font-size: 1.45rem; margin: 1.75rem 0 1.25rem; }
+.malaria-basic-age { margin-top: 1.5rem; }
+.malaria-map-link { margin: .75rem 0; }
+.malaria-decision { margin: 2rem 0; padding: 1.5rem; border-radius: 1rem; background: #edf3e7; border: 1px solid #cedbc8; }
+.malaria-decision h2 { font-size: clamp(1.5rem,4.5vw,2rem); line-height: 1.45; color: #2f5944; }
+.malaria-decision[data-need="recommended"],.malaria-decision[data-need="individual"] { background: #faf2de; border-color: #e1cf9c; }
+.malaria-decision[data-need="recommended"] h2,.malaria-decision[data-need="individual"] h2 { color: #785815; }
+.malaria-decision[data-need="unknown"] { background: #f2f3f1; }
+.malaria-kicker { display:block; font-size:.95rem; font-weight:700; color:#53704c; margin-bottom:.5rem; }
+.malaria-screening { border-block:1px solid var(--line); padding: .5rem 0 1.5rem; margin: 1.5rem 0; }
+.malaria-answer { border:0; padding:0; margin:1.25rem 0; min-width:0; }
+.malaria-answer legend { font-weight:600; margin-bottom:.7rem; }
+.malaria-answer > div { display:flex; flex-wrap:wrap; gap:.55rem; }
+.malaria-answer label { display:flex; align-items:center; gap:.5rem; border:1px solid #b6c3af; border-radius:.5rem; min-height:3rem; padding:.65rem .8rem; cursor:pointer; }
+.malaria-answer label:has(input:checked) { background:#eaf1e4; border-color:#54724a; }
+.malaria-answer input { width:1.15rem; height:1.15rem; min-height:0; margin:0; accent-color:#345c49; }
+.malaria-candidate-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin:1.25rem 0; }
+.malaria-candidate { display:flex; flex-direction:column; gap:.65rem; text-align:left; background:#fff; border:1px solid #b9c7b2; padding:1.25rem; border-radius:.85rem; font:inherit; color:var(--ink); cursor:pointer; overflow-wrap:anywhere; }
+.malaria-candidate strong { font-size:1.35rem; }
+.malaria-candidate[aria-pressed="true"] { border:2px solid #42664e; background:#f0f5ec; }
+.malaria-medication-plan { margin:1.5rem 0; padding:1.5rem; background:#f4f7ef; border:1px solid #cbd7c1; border-radius:1rem; }
+.malaria-medication-plan > h2 { font-size:1.55rem; overflow-wrap:anywhere; }
+.malaria-quantity { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.5rem 0; }
+.malaria-quantity > div { display:flex; flex-direction:column; border-radius:.75rem; padding:1rem; background:#e4eddc; }
+.malaria-quantity strong { font-size:2.5rem; color:#345c49; }
+.malaria-course { margin:1.5rem 0; }
+.malaria-course ol { list-style:none; padding:0 0 0 1.1rem; border-left:3px solid #a6bd97; }
+.malaria-course li { display:flex; flex-direction:column; margin:0 0 1.25rem; padding-left:.5rem; }
+.malaria-review { background:#f8f4e9; border-radius:.75rem; padding:1.25rem; }
+.malaria-professional article { border-bottom:1px solid var(--line); padding-bottom:1rem; margin-bottom:1rem; }
+@media (max-width:600px) { .malaria-candidate-list { grid-template-columns:1fr; } .malaria-medication-plan,.malaria-decision { padding:1.1rem; } }
+
+.malaria-allergy-list { margin-top: .75rem; }
+.malaria-decision,.malaria-screening,.malaria-options { scroll-margin-top: 1.5rem; }
