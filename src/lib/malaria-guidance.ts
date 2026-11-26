@@ -27,7 +27,7 @@ export function assessUkMalariaStop(stop:TravelStop,health:TravelHealth,plan:Tra
   const country=malariaCountryById(stop.country),region=country?.regions.find(r=>r.id===stop.region);
   let status:MalariaRisk=region?.risk??"unknown",prophylaxis:Prophylaxis=region?.prophylaxis??"unknown";
   let reason=region?.note??(region?"依 NaTHNaC 國別文字的明列地區評估。":"未取得可套用的明確地區規則；請查閱官方國別頁，不推定無風險。");
-  const special=malariaSpecialGroups(health,plan);let unresolved=!region;
+  const special=malariaSpecialGroups(health,plan);let unresolved=!region||prophylaxis==="unknown";
   const stopDecision=(message:string)=>{unresolved=true;status="unknown";prophylaxis="unknown";reason=message;};
   const ageOfData=country&&dateValue(asOf)!-dateValue(country.checked)!;
   if(!country||ageOfData===undefined||ageOfData<0||ageOfData>90*86400000)stopDecision("地區資料缺漏或已超過 90 天查核期限，需重新確認。");

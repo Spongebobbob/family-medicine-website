@@ -23,6 +23,37 @@ test("first stage returns all five distinct clinical decisions without asking dr
   const high=need();assert.equal(high.need,"recommended");assert.equal(high.label,"建議服用瘧疾預防藥物");assert.equal(high.canScreen,true);
   assert.equal(need(plan([stop("OTHER","unverified")])).need,"unknown");
 });
+
+test("South Africa screenshot itinerary reaches drug screening and medication calendars",()=>{
+  const p=plan([stop("south-africa","kruger",{start:"2026-12-24",end:"2026-12-31"})]);
+  const decision=need(p);
+  assert.equal(decision.need,"recommended");assert.equal(decision.unresolved,false);assert.equal(decision.canScreen,true);
+  assert.deepEqual(decision.allowed,["ap","doxy","meflo"]);
+  // The national text recommends drugs without assigning a high/low risk label.
+  assert.equal(decision.segments[0].status,"unknown");
+  assert.deepEqual(malariaExposureWindows(p,healthy,today),[{start:"2026-12-24",end:"2026-12-31"}]);
+  assert.equal(evaluate(p,healthy,emptyMalariaSafety()).ready.length,0);
+  const ap=evaluate(p).ready.find(c=>c.id==="ap")!.schedule!;
+  assert.ok(!("error"in ap));assert.equal(ap.courses[0].lastDose,"2027-01-07");
+});
+
+test("South Africa separates seasons, mapped zones and genuinely unresolved locations",()=>{
+  const p=(region:string,start:string,end=start)=>plan([stop("south-africa",region,{start,end})]);
+  for(const date of ["2027-05-31","2027-09-01","2027-12-31"])assert.equal(need(p("kruger",date)).need,"recommended");
+  for(const date of ["2027-06-01","2027-08-31"])assert.equal(need(p("kruger",date)).need,"bite");
+  const cross=p("kruger","2027-08-31","2027-09-02");
+  assert.equal(need(cross).need,"recommended");
+  assert.deepEqual(malariaExposureWindows(cross,healthy,today),[{start:"2027-09-01",end:"2027-09-02"}]);
+  assert.equal(need(p("seasonal-low","2026-12-24")).need,"bite");
+  assert.equal(need(p("seasonal-low","2026-12-24"),{...healthy,pregnant:"yes"}).need,"individual");
+  assert.equal(need(p("seasonal-low","2026-12-24"),{...healthy,spleen:"yes"}).need,"recommended");
+  assert.equal(need(p("seasonal-very-low","2026-12-24")).need,"bite");
+  assert.equal(need(p("no-risk","2026-12-24")).need,"none");
+  for(const region of ["seasonal-low","seasonal-very-low"])assert.equal(need(p(region,"2027-06-01")).need,"unknown");
+  for(const region of ["other","unverified"]){const d=need(p(region,"2026-12-24"));assert.equal(d.need,"unknown");assert.equal(d.unresolved,true);assert.equal(d.canScreen,false);assert.equal(evaluate(p(region,"2026-12-24")).ready.length,0);}
+  const mixed=plan([stop("south-africa","kruger"),stop("south-africa","other",{start:"2027-01-13",end:"2027-01-14"})]);
+  assert.equal(need(mixed).need,"unknown");assert.equal(need(mixed).recommended,true);assert.equal(need(mixed).canScreen,false);
+});
 test("unknown itinerary or health never yields a whole-trip reassuring result",()=>{
   const p=plan([stop(),stop("OTHER","unverified",{start:"2027-01-13",end:"2027-01-14"})]);assert.equal(need(p).need,"unknown");assert.equal(need(p).recommended,true);assert.equal(need(p).canScreen,false);
   assert.equal(need(plan([stop("KH","other-low")]),{...healthy,spleen:"unknown"}).need,"individual");

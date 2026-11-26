@@ -4,7 +4,7 @@
 
 - 官方目錄 262 個去重前入口，重新導向合併後為 235 個國別／地區頁面；這是 NaTHNaC 目錄的覆蓋率，不等於所有世界行政區均有獨立頁面。
 - 已逐頁搜尋 Risk areas，未取得此段落者再搜尋明確無風險文字：91 頁有 Risk areas，19 頁有明確無風險文字。
-- 110/235（46.8%）頁已建 176 條次國家／全境規則；部分規則仍因最新事件、邊界或資料不確定而停止判斷。
+- 110/235（46.8%）頁已建 179 條次國家／全境規則；部分規則仍因最新事件、邊界或資料不確定而停止判斷。
 - 125 頁沒有足夠明確的可套用文字，保留 unknown。沒有 Malaria 段落、未列於 UKMEAG 表格，都不等於零風險。
 - 89 個頁面已保存官方原圖網址。未取得原圖網址者使用官方國別 Malaria 入口，不猜測圖片路徑。
 - 所有原圖重製／嵌入權限均未確認；本站沒有嵌入或另行託管官方地圖。mapVersion=null 表示尚未核對版本，不從檔名日期推定版本。
@@ -224,7 +224,7 @@ CDC 既有六國資料僅供獨立比較；新版地區與舊 CDC 區域未對�
 | [斯洛維尼亞](https://travelhealthpro.org.uk/countries/slovenia) | no_explicit_risk_statement | 0 | 0 | not_checked |
 | [索羅門群島](https://travelhealthpro.org.uk/countries/solomon-islands) | risk_areas_found | 1 | 1 | not_checked |
 | [索馬利亞](https://travelhealthpro.org.uk/countries/somalia) | risk_areas_found | 1 | 1 | not_checked |
-| [南非](https://travelhealthpro.org.uk/countries/south-africa) | risk_areas_found | 2 | 1 | not_checked |
+| [南非](https://travelhealthpro.org.uk/countries/south-africa) | risk_areas_found | 5 | 1 | not_checked |
 | [南蘇丹](https://travelhealthpro.org.uk/countries/south-sudan) | risk_areas_found | 1 | 1 | not_checked |
 | [聖克里斯多福及尼維斯](https://travelhealthpro.org.uk/countries/st-kitts-and-nevis) | no_explicit_risk_statement | 0 | 0 | not_checked |
 | [聖露西亞](https://travelhealthpro.org.uk/countries/st-lucia) | no_explicit_risk_statement | 0 | 0 | not_checked |
