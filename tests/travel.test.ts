@@ -142,5 +142,5 @@ test("travel validation rejects invalid, contradictory and unsorted data without
 });
 test("new public tools hydrate with disabled input fieldsets and render full Chinese LLS 2018",()=>{
   const altitude=renderToStaticMarkup(createElement(AltitudeForm));assert.match(altitude,/disabled=""/);assert.match(altitude,/腸胃不適/);assert.match(altitude,/抵達目前海拔是否已至少 6 小時/);assert.match(altitude,/不含睡眠題/);
-  for(const kind of ["malaria","vaccines"] as const){const html=renderToStaticMarkup(createElement(TravelPlanProvider,null,createElement(TravelHealthForm,{kind})));assert.match(html,/<fieldset class="ready-fieldset" disabled=""/);assert.match(html,/type="date"/);assert.match(html,/不清楚／尚未確認/);assert.match(html,/href="\/tools\/travel-vaccines\/?"/);assert.doesNotMatch(html,/localStorage|sessionStorage/);}
+  for(const kind of ["malaria","vaccines"] as const){const html=renderToStaticMarkup(createElement(TravelPlanProvider,null,createElement(TravelHealthForm,{kind})));assert.match(html,/<fieldset class="ready-fieldset" disabled=""/);assert.match(html,/type="date"/);assert.match(html,/不清楚／尚未確認/);assert.doesNotMatch(html,/localStorage|sessionStorage/);}
 });

@@ -1,7 +1,6 @@
 "use client";
-import Link from "next/link";
 import { useId, useState } from "react";
-import { assessMalaria, malariaFeverAlert } from "@/lib/travel-malaria";
+import { assessMalaria } from "@/lib/travel-malaria";
 import { assessTravelVaccines, vaccineNames, type VaccineId, type VaccineRecord } from "@/lib/travel-vaccines";
 import { TRAVEL_CHECKED, travelEvidence } from "@/lib/travel-data";
 import { FormField, ResultPanel } from "./assessment-form";
@@ -38,12 +37,8 @@ function VaccineResults({result:r}:{result:VaccineResult}){
 export function TravelHealthForm({kind}:{kind:"malaria"|"vaccines"}){
   const ready=useClientReady(),id=useId();const {plan,health,records,setRecords,clear}=useTravelPlan();
   const [malaria,setMalaria]=useState<MalariaResult|null>(null),[vaccines,setVaccines]=useState<VaccineResult|null>(null),[error,setError]=useState("");
-  const [fever,setFever]=useState<"yes"|"no"|"unknown"|"">("");
   const changed=()=>{setMalaria(null);setVaccines(null);setError("");};
   return <>
-    <nav className="travel-tool-tabs" aria-label="共用行程工具"><Link href="/tools/malaria-prevention/" aria-current={kind==="malaria"?"page":undefined}>瘧疾預防</Link><Link href="/tools/travel-vaccines/" aria-current={kind==="vaccines"?"page":undefined}>旅遊疫苗</Link></nav>
-    <p className="field-hint">切換上方工具會沿用這個分頁的行程；重新整理後清除。</p>
-    {kind==="malaria"&&<section className="travel-symptoms"><FormField prefix={id} field={{key:"fever",label:"旅途中或返國後，目前是否發燒或畏寒？",choices:travelChoices,optional:true}} value={fever} onChange={value=>setFever(value as typeof fever)}/>{malariaFeverAlert(fever)&&<div className="medical-notice travel-emergency" role="alert"><strong>請立即就醫並告知完整旅遊史</strong><p>若曾到瘧疾地區，須緊急排除瘧疾；即使有吃預防藥、已返國數月或尚未填完此表，也不能等待計算結果。請攜帶用藥及到訪日期紀錄。</p></div>}</section>}
     <form autoComplete="off" onSubmit={e=>{e.preventDefault();changed();const asOf=new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Taipei"});if(kind==="malaria"){const r=assessMalaria(plan,health,asOf);if("error"in r)setError(r.error??"請核對資料");else setMalaria(r);}else{const r=assessTravelVaccines(plan,health,records,asOf);if("error"in r)setError(r.error??"請核對資料");else setVaccines(r);}}}>
       <fieldset className="ready-fieldset" disabled={!ready} aria-label={kind==="malaria"?"瘧疾預防行程輸入":"旅遊疫苗行程輸入"}>
         <TravelPlanFields onChange={changed}/>
@@ -51,7 +46,7 @@ export function TravelHealthForm({kind}:{kind:"malaria"|"vaccines"}){
           <div className="assessment-fields"><div className="assessment-field"><label htmlFor={`${id}-yf-date`}>黃熱病接種日期（依黃皮書，選填）</label><input id={`${id}-yf-date`} type="date" value={records.yfDate} onChange={e=>{setRecords(old=>({...old,yfDate:e.target.value}));changed();}}/></div><FormField prefix={id} field={{key:"icvp",label:"持有有效國際預防接種證明書（黃皮書）？",choices:travelChoices}} value={records.icvp} onChange={value=>{setRecords(old=>({...old,icvp:value as typeof old.icvp}));changed();}}/></div>
         </details>}
         {error&&<p className="form-error" role="alert">{error}</p>}
-        <div className="calculator-actions"><button type="submit" className="button">{kind==="malaria"?"評估瘧疾預防與時程":"建立旅遊疫苗清單"}</button><button type="button" className="text-link" onClick={()=>{clear();changed();setFever("");}}>清除共用行程與健康輸入</button></div>
+        <div className="calculator-actions"><button type="submit" className="button">{kind==="malaria"?"評估瘧疾預防與時程":"建立旅遊疫苗清單"}</button><button type="button" className="text-link" onClick={()=>{clear();changed();}}>清除共用行程與健康輸入</button></div>
       </fieldset>
     </form>
     {malaria&&<MalariaResults result={malaria}/>} {vaccines&&<VaccineResults result={vaccines}/>}
