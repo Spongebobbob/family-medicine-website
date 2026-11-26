@@ -1,4 +1,5 @@
 import { travelTools } from "./travel-tool-catalog";
+import { fraxTool } from "./frax-tool";
 export const toolGroups = [
   {
     slug: "cardiovascular",
@@ -46,7 +47,7 @@ export const toolGroups = [
     slug: "older-adults",
     name: "高齡健康",
     icon: "person",
-    description: "SARC-F・MNA-SF・FRAIL・肌少症量測",
+    description: "FRAX・SARC-F・MNA-SF・FRAIL・肌少症量測",
     tone: "sand",
   },
   {
@@ -106,6 +107,7 @@ const phqRights: ToolSource = {
     "開發者手冊公開鏡像；原版無須另行取得重製、翻譯、展示、散布許可。仍須確認實際使用的繁體中文版。",
 };
 export const healthTools: HealthTool[] = [
+  fraxTool,
   ...travelTools,
   {
     slug: "bmi",

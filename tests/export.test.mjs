@@ -95,8 +95,8 @@ test("JSON-LD parses and every demo article exposes author, dates and citations"
   assert.ok(fs.existsSync(path.join(root, "sitemap.xml")));
   assert.ok(fs.existsSync(path.join(root, "og-card.png")));
 });
-test("public export includes usable forms without review labels for all twenty-four tools", () => {
-  for (const slug of ["bmi", "fib-4", "egfr", "isi", "stop-bang", "phq-9", "gad-7", "cardiovascular-risk", "metabolic-syndrome", "tdee", "waist-height-ratio", "taiwan-cancer-screening", "adult-health-check", "adult-vaccines", "sarc-f", "mna-sf", "frail", "ess", "sleep-diary", "sarcopenia", "ldl-target", "altitude-illness", "malaria-prevention", "travel-vaccines"]) {
+test("public export includes usable forms without review labels for all twenty-five tools", () => {
+  for (const slug of ["frax", "bmi", "fib-4", "egfr", "isi", "stop-bang", "phq-9", "gad-7", "cardiovascular-risk", "metabolic-syndrome", "tdee", "waist-height-ratio", "taiwan-cancer-screening", "adult-health-check", "adult-vaccines", "sarc-f", "mna-sf", "frail", "ess", "sleep-diary", "sarcopenia", "ldl-target", "altitude-illness", "malaria-prevention", "travel-vaccines"]) {
     const html = fs.readFileSync(path.join(root, "tools", slug, "index.html"), "utf8");
     assert.ok(html.includes('data-tool-available="true"'), slug);
     assert.match(html, /<form[\s>]/, slug);

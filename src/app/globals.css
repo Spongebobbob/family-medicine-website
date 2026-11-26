@@ -1,4 +1,17 @@
 @import "tailwindcss";
+.frax-workspace { max-width: 780px; margin-inline: auto; overflow-wrap: anywhere; }
+.frax-workspace h2 { font-size: 1.35rem; margin-block: 1.5rem 1rem; }
+.frax-workspace p { margin-bottom: 1rem; line-height: 1.85; }
+.frax-workspace .button { white-space: normal; text-align: center; }
+.frax-summary { font: inherit; white-space: pre-wrap; overflow-wrap: anywhere; padding: 1rem; border: 1px solid var(--line); border-radius: 8px; background: #f5f8f3; margin-block: 1rem; }
+.frax-confirmation { margin-block: 1rem; }
+.frax-confirmation label { display: flex; align-items: flex-start; gap: .75rem; line-height: 1.85; }
+.frax-confirmation input { flex: 0 0 auto; margin-top: .5rem; }
+.frax-result { border-top: 1px solid var(--line); margin-top: 2rem; padding-top: 1.5rem; }
+.frax-result dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-block: 1.25rem; }
+.frax-result dl > div { border-left: 3px solid #8ca692; padding-left: 1rem; }
+.frax-result dd { font-size: 1.8rem; font-weight: 600; color: var(--ink); }
+@media (max-width: 480px) { .frax-result dl { grid-template-columns: 1fr; } }
 .forest-chart { min-height: 240px; }
 .forest-tooltip { background: #fff; border: 1px solid #b8c9b8; border-radius: 8px; padding: 10px 14px; color: var(--ink); font-size: .95rem; }
 

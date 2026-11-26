@@ -214,9 +214,9 @@ test("STOP-BANG handles both total score and alternative STOP combination", () =
   assert.equal(scoreStopBang([1, 1, 0, 0, 0, 1, 0, 0])?.level, "intermediate");
   assert.equal(scoreStopBang(Array(8).fill(1))?.score, 8);
 });
-test("twenty-four unique tools have independent URLs, verified source URLs and related destinations", () => {
-  assert.equal(healthTools.length, 24);
-  assert.equal(new Set(healthTools.map((t) => t.slug)).size, 24);
+test("twenty-five unique tools have independent URLs, verified source URLs and related destinations", () => {
+  assert.equal(healthTools.length, 25);
+  assert.equal(new Set(healthTools.map((t) => t.slug)).size, 25);
   assert.equal(toolGroups.length, 8);
   for (const t of healthTools) {
     assert.ok(toolGroups.some((g) => g.slug === t.group));
