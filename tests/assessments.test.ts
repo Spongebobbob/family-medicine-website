@@ -244,6 +244,8 @@ test("assessment modules contain no transmission, browser persistence or analyti
     "src/components/tools/altitude-form.tsx",
     "src/components/tools/travel-plan-provider.tsx",
     "src/components/tools/travel-plan-fields.tsx",
+    "src/components/tools/country-picker.tsx",
+    "src/lib/country-search.ts",
     "src/components/tools/travel-health-form.tsx",
     "src/lib/kidney-risk.ts",
     "src/components/tools/kidney-risk-matrix.tsx",

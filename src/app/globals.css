@@ -2316,3 +2316,14 @@ th {
 .malaria-risk[data-risk="low"] { background: #fbefce; color: #74551b; }
 .malaria-risk[data-risk="very_low"] { background: #edf1e4; color: #4d663c; }
 .malaria-risk[data-risk="none"] { background: #e4efe8; color: #2f5a46; }
+
+.country-picker { position: relative; min-width: 0; }
+.country-picker-trigger { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; min-height: 3.5rem; padding: .85rem 1rem; border: 1px solid #a4ad9f; border-radius: .35rem; background: white; color: var(--ink); text-align: left; font: inherit; cursor: pointer; }
+.country-picker-trigger span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.country-picker-panel { position: absolute; top: 100%; left: 0; right: 0; z-index: 30; margin-top: .35rem; padding: .65rem; border: 1px solid #b8c4b6; border-radius: .5rem; background: #fff; box-shadow: 0 8px 24px #203c2e20; }
+.country-picker-panel input { width: 100%; min-width: 0; font-size: 1rem; }
+.country-picker-count { margin: .4rem .25rem; font-size: .875rem; color: #536757; }
+.country-picker-panel ul { list-style: none; margin: 0; padding: 0; max-height: min(18rem, 35dvh); overflow-y: auto; overscroll-behavior: contain; }
+.country-picker-panel li { display: flex; justify-content: space-between; gap: .5rem; padding: .75rem; min-height: 3rem; border-radius: .25rem; cursor: pointer; overflow-wrap: anywhere; }
+.country-picker-panel li:hover, .country-picker-panel li[data-active="true"] { background: #eaf1e5; color: #243e30; }
+.country-picker-panel li[aria-selected="true"] { font-weight: 700; }

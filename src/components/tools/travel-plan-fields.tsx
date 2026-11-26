@@ -3,6 +3,7 @@ import { useId } from "react";
 import { destinations, destinationById, transitCountries, type TravelSetting } from "@/lib/travel-data";
 import { malariaCountries, malariaCountryById } from "@/lib/malaria-guidance";
 import { newTravelStop, type TravelHealth, type TravelStop } from "@/lib/travel-plan";
+import { CountryPicker } from "./country-picker";
 import { FormField, type Field } from "./assessment-form";
 import { useTravelPlan } from "./travel-plan-provider";
 export const travelChoices=[{value:"unknown",label:"不清楚／尚未確認"},{value:"yes",label:"是"},{value:"no",label:"否／不適用"}];
@@ -13,7 +14,7 @@ export function TravelPlanFields({onChange,kind="vaccines"}:{onChange:()=>void;k
   return <>
     <h2>我的旅遊行程</h2>
     {plan.stops.map((s,i)=>{const country=kind==="malaria"?malariaCountryById(s.country):destinationById(s.country);return <fieldset className="travel-stop" key={i}><legend>第 {i+1} 段行程</legend><div className="assessment-fields">
-      <FormField prefix={`${id}-${i}`} field={{key:"country",label:"目的地國家",choices:[...(kind==="malaria"?malariaCountries:destinations).map(d=>({value:d.id,label:d.name})),...(kind==="vaccines"&&!destinationById(s.country)&&malariaCountryById(s.country)?[{value:s.country,label:malariaCountryById(s.country)!.name+"（疫苗資料待核對）"}]:[]),{value:"OTHER",label:"其他／尚未查核國家"}]}} value={s.country} onChange={value=>updateStop(i,{country:value,region:""})}/>
+      <CountryPicker choices={[...(kind==="malaria"?malariaCountries:destinations).map(d=>({value:d.id,label:d.name,searchText:malariaCountryById(d.id)?.slug.replaceAll("-"," ")??d.id})),...(kind==="vaccines"&&!destinationById(s.country)&&malariaCountryById(s.country)?[{value:s.country,label:malariaCountryById(s.country)!.name+"（疫苗資料待核對）",searchText:malariaCountryById(s.country)!.slug.replaceAll("-"," ")}]:[]),{value:"OTHER",label:"其他／尚未查核國家",searchText:"other unknown"}]} value={s.country} onChange={value=>updateStop(i,{country:value,region:""})}/>
       <FormField prefix={`${id}-${i}`} field={{key:"region",label:"實際到訪地區",choices:[...(country?.regions.map(r=>({value:r.id,label:r.name}))??[]),...(s.region&&s.region!=="unverified"&&!country?.regions.some(r=>r.id===s.region)?[{value:s.region,label:"原行程地區（本工具規則尚未核對）"}]:[]),{value:"unverified",label:"跨區／不確定／未完成地區規則核對"}]}} value={s.region} onChange={value=>updateStop(i,{region:value})}/>
       <div className="assessment-field"><label htmlFor={`${id}-start-${i}`}>抵達本段地區日期</label><input id={`${id}-start-${i}`} type="date" required value={s.start} onChange={e=>updateStop(i,{start:e.target.value})}/></div>
       <div className="assessment-field"><label htmlFor={`${id}-end-${i}`}>離開本段地區日期</label><input id={`${id}-end-${i}`} type="date" required value={s.end} onChange={e=>updateStop(i,{end:e.target.value})}/></div>
