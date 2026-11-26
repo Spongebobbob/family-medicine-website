@@ -51,18 +51,8 @@
 .home-content { max-width: 1060px; }
 .home-hero { background: #eaf2ec; padding: 64px 0 48px; }
 .home-eyebrow { color: #607f70; font-size: .95rem; letter-spacing: .035em; margin-bottom: 18px; }
-.home-hero h1 { font-size: clamp(2rem, 3.5vw, 3rem); font-family: inherit; letter-spacing: .025em; line-height: 1.5; max-width: 24ch; margin: 0 0 18px; }
-.home-intro { max-width: 42rem; color: #617668; font-size: 1.15rem; line-height: 1.8; margin-bottom: 22px; }
-.home-search { display: flex; align-items: center; gap: 12px; width: min(100%, 680px); background: #fff; border: 1px solid transparent; border-radius: 14px; padding: 4px 8px 4px 18px; color: #6b8876; margin-bottom: 16px; }
-.home-search:focus-within { border-color: #557e68; }
-.home-search input { width: 100%; min-width: 0; padding: 12px 0; border: 0; outline: none; background: transparent; color: var(--ink); font-size: 1rem; }
-.home-search input::placeholder { color: #7c9082; }
-.home-search button { display: grid; place-items: center; min-width: 44px; min-height: 44px; border: 0; border-radius: 8px; color: #416a55; background: #f1f6f1; }
-.home-search button:hover { background: #e2ece3; }
-.home-actions { display: flex; gap: 14px; max-width: 680px; }
-.home-actions .button { flex: 1; text-align: center; justify-content: center; padding: 13px 16px; font-size: 1.05rem; border-radius: 9px; border: 1px solid #456e58; background: #426e58; color: #fff; }
-.home-actions .home-button-outline { background: transparent; color: #426e58; }
-.home-actions .home-button-outline:hover { background: #dfeae1; }
+.home-hero h1 { font-size: clamp(1rem, 5.5vw, 3rem); font-family: inherit; letter-spacing: .015em; line-height: 1.5; white-space: nowrap; margin: 0; }
+
 .home-section { padding: 30px 0; }
 .home-section + .home-section { border-top: 1px solid #dce4dc; }
 .home-section h2 { font-size: 1.6rem; margin: 0 0 20px; }
@@ -100,19 +90,14 @@
   .site-header .mobile-menu nav { position: absolute; z-index: 20; top: calc(100% - 4px); right: 0; width: min(280px, 90vw); display: flex; flex-direction: column; gap: 0; margin: 0; padding: 8px 18px; border: 1px solid #dce4dc; border-radius: 12px; background: #fff; box-shadow: 0 12px 28px #243f3414; }
   .site-header .mobile-menu nav a { display: block; padding: 12px 8px; font-size: 1rem; }
   .home-hero { padding: 30px 0; }
-  .home-hero h1 { font-size: 2rem; max-width: 14em; }
+
   .home-tools-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
   .home-category { min-height: 124px; gap: 16px; font-size: 1rem; }
 }
 @media (max-width: 600px) {
   .home-page .home-content { width: calc(100% - 40px); }
   .home-eyebrow { font-size: .875rem; letter-spacing: 0; margin-bottom: 14px; }
-  .home-hero h1 { font-size: clamp(1.75rem, 7vw, 2.1rem); margin-bottom: 14px; }
-  .home-intro { font-size: 1rem; margin-bottom: 16px; }
-  .home-search { gap: 8px; padding-left: 13px; }
-  .home-search > svg { width: 21px; }
-  .home-actions { gap: 10px; }
-  .home-actions .button { font-size: 1rem; padding: 12px 8px; }
+
   .home-section { padding: 25px 0; }
   .home-section h2 { font-size: 1.4rem; margin-bottom: 16px; }
   .home-tool { min-height: 98px; gap: 10px; font-size: .95rem; }

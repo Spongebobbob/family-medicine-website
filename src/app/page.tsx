@@ -5,7 +5,7 @@ import { getArticles } from "@/lib/content";
 import { categories, site, absolute } from "@/lib/site";
 import { pageMetadata, jsonLd } from "@/lib/seo";
 
-export const metadata = pageMetadata("讓健康成為日常", site.description, "/");
+export const metadata = pageMetadata("實證家庭醫學 ｜ 王柏霖醫師", site.description, "/");
 
 const quickTools = [
   { slug: "ldl-target", name: "LDL 目標", icon: "heart" },
@@ -32,18 +32,7 @@ export default function Home() {
     <section className="home-hero" aria-labelledby="home-title">
       <div className="container home-content">
         <p className="home-eyebrow">EVIDENCE-BASED FAMILY MEDICINE</p>
-        <h1 id="home-title">把健康知識，放回日常生活。</h1>
-        <p className="home-intro">從健檢報告、疾病知識到健康自我評估，陪你了解自己與家人的健康。</p>
-        <form className="home-search" role="search" action="/search/" method="get">
-          <label className="sr-only" htmlFor="home-search">搜尋健康知識與工具</label>
-          <Icon name="search" />
-          <input id="home-search" name="q" type="search" placeholder="搜尋失眠、LDL、脂肪肝…" />
-          <button type="submit" aria-label="搜尋"><Icon name="search" /></button>
-        </form>
-        <div className="home-actions">
-          <Link href="/articles/" className="button">探索健康衛教</Link>
-          <Link href="/tools/" className="button home-button-outline">健康自我評估</Link>
-        </div>
+        <h1 id="home-title">實證家庭醫學 ｜ 王柏霖醫師</h1>
       </div>
     </section>
     <div className="container home-content home-sections">
