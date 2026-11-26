@@ -77,8 +77,8 @@ test("JSON-LD parses and every demo article exposes author, dates and citations"
   assert.ok(fs.existsSync(path.join(root, "sitemap.xml")));
   assert.ok(fs.existsSync(path.join(root, "og-card.png")));
 });
-test("public export includes usable forms and honest pending review labels for all twenty-one tools", () => {
-  for (const slug of ["bmi", "fib-4", "egfr", "isi", "stop-bang", "phq-9", "gad-7", "cardiovascular-risk", "metabolic-syndrome", "tdee", "waist-height-ratio", "taiwan-cancer-screening", "adult-health-check", "adult-vaccines", "sarc-f", "mna-sf", "frail", "ess", "sleep-diary", "sarcopenia", "ldl-target"]) {
+test("public export includes usable forms and honest pending review labels for all twenty-four tools", () => {
+  for (const slug of ["bmi", "fib-4", "egfr", "isi", "stop-bang", "phq-9", "gad-7", "cardiovascular-risk", "metabolic-syndrome", "tdee", "waist-height-ratio", "taiwan-cancer-screening", "adult-health-check", "adult-vaccines", "sarc-f", "mna-sf", "frail", "ess", "sleep-diary", "sarcopenia", "ldl-target", "altitude-illness", "malaria-prevention", "travel-vaccines"]) {
     const html = fs.readFileSync(path.join(root, "tools", slug, "index.html"), "utf8");
     assert.ok(html.includes('data-tool-available="true"'), slug);
     assert.match(html, /<form[\s>]/, slug);
@@ -111,7 +111,7 @@ test("every exported page has at most one medical warning block", () => {
 
 
 test("tool pages omit the removed introductions, general warning, adult checkbox and privacy paragraph", () => {
-  for (const slug of ["bmi", "fib-4", "egfr", "isi", "stop-bang", "phq-9", "gad-7", "cardiovascular-risk", "metabolic-syndrome", "tdee", "waist-height-ratio", "taiwan-cancer-screening", "adult-health-check", "adult-vaccines", "sarc-f", "mna-sf", "frail", "ess", "sleep-diary", "sarcopenia", "ldl-target"]) {
+  for (const slug of ["bmi", "fib-4", "egfr", "isi", "stop-bang", "phq-9", "gad-7", "cardiovascular-risk", "metabolic-syndrome", "tdee", "waist-height-ratio", "taiwan-cancer-screening", "adult-health-check", "adult-vaccines", "sarc-f", "mna-sf", "frail", "ess", "sleep-diary", "sarcopenia", "ldl-target", "altitude-illness", "malaria-prevention", "travel-vaccines"]) {
     const html = fs.readFileSync(path.join(root, "tools", slug, "index.html"), "utf8");
     assert.ok(!html.includes('class="privacy-note"'), slug);
     assert.ok(!html.includes('class="review-notice"'), slug);

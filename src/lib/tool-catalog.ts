@@ -1,3 +1,4 @@
+import { travelTools } from "./travel-tool-catalog";
 export const toolGroups = [
   {
     slug: "cardiovascular",
@@ -52,7 +53,7 @@ export const toolGroups = [
     slug: "travel",
     name: "旅遊健康",
     icon: "plane",
-    description: "旅遊準備與健康照護",
+    description: "高山症・瘧疾預防・旅遊疫苗",
     tone: "blue",
   },
 ] as const;
@@ -105,6 +106,7 @@ const phqRights: ToolSource = {
     "開發者手冊公開鏡像；原版無須另行取得重製、翻譯、展示、散布許可。仍須確認實際使用的繁體中文版。",
 };
 export const healthTools: HealthTool[] = [
+  ...travelTools,
   {
     slug: "bmi",
     kind: "calculator",

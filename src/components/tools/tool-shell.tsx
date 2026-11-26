@@ -28,7 +28,7 @@ export function ToolShell({
           <section className="tool-panel">
             {children}
           </section>
-          <details className="reading-width prose tool-explanation" open={tool.kind === "calculator" && !["cardiovascular-risk", "metabolic-syndrome", "tdee", "waist-height-ratio", "sarcopenia", "ldl-target", "egfr"].includes(tool.slug)}>
+          <details className="reading-width prose tool-explanation" open={tool.kind === "calculator" && !["cardiovascular-risk", "metabolic-syndrome", "tdee", "waist-height-ratio", "sarcopenia", "ldl-target", "egfr", "altitude-illness"].includes(tool.slug)}>
             <summary>結果解讀與適用限制</summary>
             {tool.formula && (
               <>

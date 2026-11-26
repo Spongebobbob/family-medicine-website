@@ -214,9 +214,9 @@ test("STOP-BANG handles both total score and alternative STOP combination", () =
   assert.equal(scoreStopBang([1, 1, 0, 0, 0, 1, 0, 0])?.level, "intermediate");
   assert.equal(scoreStopBang(Array(8).fill(1))?.score, 8);
 });
-test("twenty-one unique tools have independent URLs, verified source URLs and related destinations", () => {
-  assert.equal(healthTools.length, 21);
-  assert.equal(new Set(healthTools.map((t) => t.slug)).size, 21);
+test("twenty-four unique tools have independent URLs, verified source URLs and related destinations", () => {
+  assert.equal(healthTools.length, 24);
+  assert.equal(new Set(healthTools.map((t) => t.slug)).size, 24);
   assert.equal(toolGroups.length, 8);
   for (const t of healthTools) {
     assert.ok(toolGroups.some((g) => g.slug === t.group));
@@ -233,6 +233,15 @@ test("assessment modules contain no transmission, browser persistence or analyti
     "src/components/bmi-calculator.tsx",
     "src/components/tools/tool-directory.tsx",
     "src/lib/assessments.ts",
+    "src/lib/altitude.ts",
+    "src/lib/travel-data.ts",
+    "src/lib/travel-plan.ts",
+    "src/lib/travel-malaria.ts",
+    "src/lib/travel-vaccines.ts",
+    "src/components/tools/altitude-form.tsx",
+    "src/components/tools/travel-plan-provider.tsx",
+    "src/components/tools/travel-plan-fields.tsx",
+    "src/components/tools/travel-health-form.tsx",
     "src/lib/kidney-risk.ts",
     "src/components/tools/kidney-risk-matrix.tsx",
     "src/lib/ldl-target.ts",

@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import { AltitudeForm } from "@/components/tools/altitude-form";
+import { TravelHealthForm } from "@/components/tools/travel-health-form";
 import { LdlTargetForm } from "@/components/tools/ldl-target-form";
 import { BmiCalculator } from "@/components/bmi-calculator";
 import {
@@ -46,7 +48,7 @@ export default async function HealthToolPage({
   if (!tool) notFound();
   return (
     <ToolShell tool={tool}>
-      {tool.slug === "ldl-target" ? (
+      {tool.slug === "altitude-illness" ? <AltitudeForm /> : tool.slug === "malaria-prevention" || tool.slug === "travel-vaccines" ? <TravelHealthForm kind={tool.slug === "malaria-prevention" ? "malaria" : "vaccines"} /> : tool.slug === "ldl-target" ? (
           <LdlTargetForm />
         ) : tool.slug === "bmi" ? (
           <BmiCalculator />
