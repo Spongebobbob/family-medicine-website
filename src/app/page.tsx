@@ -17,7 +17,7 @@ const quickTools = [
 ];
 const categoryNames = ["睡眠身心", "三高慢性病", "健檢解讀", "體重管理", "肌骨疼痛", "旅遊醫學", "預防醫學", "高齡健康", "用藥知識"];
 const labLinks = [
-  { label: "LDL", href: "/tools/ldl-target/" },
+  { label: "LDL", href: "/articles/ldl-cholesterol/" },
   { label: "ALT", href: "/tools/fib-4/" },
   { label: "eGFR", href: "/tools/egfr/" },
   { label: "尿酸", href: "/articles/hyperuricemia/" },

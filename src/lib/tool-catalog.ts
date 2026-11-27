@@ -1143,6 +1143,7 @@ export const healthTools: HealthTool[] = [
     "reviewedAt": ""
   },
   "related": [
+    { "href": "/articles/ldl-cholesterol/", "label": "LDL 膽固醇過高，一定要吃藥嗎？" },
     {
       "href": "/tools/metabolic-syndrome/",
       "label": "代謝症候群五項自評"

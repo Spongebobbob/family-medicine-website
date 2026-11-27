@@ -1,0 +1,141 @@
+{
+  "sourceSha256": "34a53a6b5c04a03a2aba9e97a93c714754d607ab1048b4959d9a8ded7df07732",
+  "blocks": [
+    "76d6a49d0a8312abeaf8e965e47f6aefc9121a9d89eba71812cb797f0a8adc35",
+    "fc6875f6a442a1909cd846a1f1a099fa75b3f978a239fd2191b6f5b7b5867b62",
+    "8db7bb11ca20644251ff42006353cc1045e26262a8401bb4e57115e1ad62ab90",
+    "d07143757226ebb03f797b3fab282f0052c79e8ae8fa370a733a058df944b264",
+    "fa15f527f380190430eb72d389dd112758f3eafbac95856820b13c2389f852d5",
+    "2e4f90b1557225d4c12c9f488a818acf0cc4f5e5f0e301f7b748406bfff43433",
+    "b3bd2cfb26d339d15efee8bba4db83202e5c9c591604a2668fd870ed29f1e485",
+    "4a7112488782822ea83f52931268174340b37b85e88c272255f54ab7329f9da0",
+    "d7f1ee3e6d014ca5f62ed77281942a8d161c00cff1242dec0bf2332a63dee88f",
+    "f42ee452e31ee36149e74f819c786e070eed90ec78f995164e46272eaa103ed5",
+    "183aaf48caf4fb53fcd4964ed3ca2906f7453f1348e59d2ac7db3fdb0389320e",
+    "2281b5eb9ffac049e2dfe7cdac49506f1ee33126072a3fa4e66a1feca800f02b",
+    "09cecf346edf4c3885b28704b7d7119a75631370eab18eff01d9c239c759122e",
+    "c283b2bbdc55b9937792201c38b99626f1f16c07f642eef07b2f3b80bd5eb6a9",
+    "b3016276610f3c3129502df4861ca4c3fc1082c6988d27219158dc02765ec69a",
+    "0f69ff2acb011a2c62b880eaa16594a65693431c7b3ac0cdcb8ceb3691e42705",
+    "981e312e8520882d1ff68f2c43a162b11e03dc55289f03fefa234c343eca73a5",
+    "c75545e9a81c4abdf4012cd3cb82b7731aeef89aa6eafcbddadadb1412be1e6b",
+    "207c3f4a3532d345b60f0199d43916fcee3decc1ba4183eabb8f3bcaeb1c4e86",
+    "bc257a2e47baca27d2b7966ca8c9d33204bbbed1f62169b74a9a2cddc275e958",
+    "7eccf52bf685902503fb6df7f9d9a1d08e2a602a9bd73df63d74dd18bc2b4779",
+    "4a95510e9cab8957b616dba8d3cd0b3deb8844ea013f88f52012e264967259dd",
+    "e89bad7902b4045e755b50fd56c050d95346c25a1df0c1d7cd00f6addfd039eb",
+    "f95533ce0d87cb7d71dd1c08da3bb8285c171b841e4dab1146465a4cb4b01d53",
+    "5e6383c1a3057e663b1180f1a7c9184fc4f445af548cc5868c1f3316a4193d62",
+    "d62a5099a88caf688551567cfd3ecb1c532db8a336d11a63b3c0f664d2f0270f",
+    "fd231bff4308fcc1cb73557f1a538f404f4ae1c82d2c02c8439ae6983a6ac293",
+    "0a25179071cae0ec6802e3b2a9d74a5b76ff539418fca6498d9517e0d3904852",
+    "3d83de2ad988dd86f98b40feca34cdbb2445e830fd6f00984011536f8e6bcfbc",
+    "b027f3ed699403cdacef575ddae5160d444382849d2002de938187b29c079fe3",
+    "3bb328ce12c98d2ce90812aeb6a4bc82645ed77d565dd31849a0c42302d4e65e",
+    "879270c958e1e1dcdcfd1e6a6ba4acab64d2d036643892041bd75ab80f7b5017",
+    "2406316373a2af592a7d7644a89a3f5b648aa5e6c25e21b52b2f0d9bf0b303f7",
+    "6c54667ef648f643f4d6515a0fe374ee83dd02e866fc968b4d154c2bc7417a63",
+    "4dbfdbd629d3bc17a68621ab61d5af31a8baefecc22c93bf5ac5895e2bcc535d",
+    "403c44831ab36672c56f90d02e694912809fca8b5d2d45fedbd4269f333a5743",
+    "aa9039574b28f4d3bfb2c340a6344a3d3934e1548af070f1620a559af537c2ff",
+    "02d41f7dc95f5627e58e845851e489eca4c05ba0e3ab88040d0dcecbdf12d79d",
+    "1b210db8abda5ce731ceb0404550dde8a5ae767d66d09c3f79ea2714cb1f1db6",
+    "2c4ccfeb554635212e63083c3dc5e1155f283ab92f70d9d27c025f1936ecc352",
+    "5fc59084b75f4ded7898588ca3526affb3d1a2c3c1070f081062e19636a46804",
+    "ffd00897b86a67b6ea768b80b0729ff19b95f8411400adc7ec0fc0a703caa2a4",
+    "979f390450f48d2f460d34e35bd95fe69014ae1841bf9ac29e6a4a4ff894f30b",
+    "46c4f797601239d9f32acaad14d747abaa0ccf878bc4181927bee45c67950b94",
+    "fc981c51e8e5933b08cb8c7f96c3d04acfac9f8d1d6ef732f0f6c72f95c73818",
+    "6c49f470c8648bc7cba3133a5b899cf6b31cd949a967141e00acf7fd30f60719",
+    "13c1223fae12a1367ec25aac7fb78fd2b6cbc724a17ce60ce0a64c02c4a60153",
+    "aacfed645e549cbb7d61786b7019441b4406df363b01fa47a011a6cf6803830e",
+    "8555c3a7b9c13f2c240f288c10fefe9975ed1a83a4f0a6415268ef84cd70b9a4",
+    "9e19253eedaccf60a0b91770f534d4635b23e38d2323ae57c0b17e556cb54862",
+    "d1bed8a56e4ca3770dc258eaed6a17359010582b6a56e0dc460284a0bbcf6e49",
+    "f756938e0eb9e7758ed80372b47e4539bcd799858963fde1efaba6fda3967097"
+  ],
+  "references": [
+    {
+      "id": "ldl-ref2",
+      "url": "https://doi.org/10.1161/CIR.0000000000001423",
+      "doi": "10.1161/CIR.0000000000001423"
+    },
+    {
+      "id": "ldl-ref3",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22607822/",
+      "pubmed": "22607822"
+    },
+    {
+      "id": "ldl-ref7",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK305897/"
+    },
+    {
+      "id": "ldl-ref1",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11923786/",
+      "doi": "10.6515/ACS.202503_41(2).20250215A"
+    },
+    {
+      "id": "ldl-ref8",
+      "url": "https://www.nhi.gov.tw/ch/dl-55676-3f0c34a22fda48cb95db47b4807637ab-1.pdf"
+    },
+    {
+      "id": "ldl-ref9",
+      "url": "https://www.nhi.gov.tw/ch/dl-103688-cb3cda4e3dad4851a3c186dfa11bf113-1.pdf"
+    },
+    {
+      "id": "ldl-ref10",
+      "url": "https://www.nhi.gov.tw/ch/dl-104000-c3a0ad1e72c6482fa62f7d751e436d63-1.pdf"
+    },
+    {
+      "id": "ldl-ref4",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36049498/",
+      "pubmed": "36049498"
+    },
+    {
+      "id": "ldl-ref5",
+      "url": "https://doi.org/10.1016/S2213-8587(24)00040-8",
+      "doi": "10.1016/S2213-8587(24)00040-8"
+    },
+    {
+      "id": "ldl-ref6",
+      "url": "https://doi.org/10.1093/eurheartj/ehaf190",
+      "doi": "10.1093/eurheartj/ehaf190"
+    }
+  ],
+  "faqQuestions": [
+    "HDL 很高，可以抵銷 LDL 過高嗎？",
+    "吃藥降到正常後，可以停藥嗎？",
+    "紅麴、魚油可以取代降血脂藥嗎？",
+    "有脂肪肝就不能吃 statin 嗎？"
+  ],
+  "summaryHashes": [
+    "58f65081470506e23e5b4953bca7162ac999dd3e79ac09aba02b2ae7fe26aa65",
+    "8b889e4cd2c85a04537524ad4df22f74f4a89e52b95f7663c46a173d39477eee",
+    "95f35fc8cc9a9c93c191ff437a8fdbc4259b6563ed522f13dbfe4483f7b21627",
+    "5f18a7a1658ce31b870a829d17ffe77c36edc407869c477994c6638c056385a9"
+  ],
+  "vancouverHashes": [
+    "7cac4faf60fee2ded4c5954d781bfa775e7241da51fa03eac7f8be355482c11d",
+    "7d23b68f1cbed60d9e8023608a9253b72e8ae3bc1d55c64adeb2b521e6cf724b",
+    "9d6259941de91da1ef40225bd7783f063503d5e8ba49b1ccfe93d6fa64763442",
+    "1cc0449038c00205b6c97bd23f4368a95589fc54dafa0c4979792170890fbefe",
+    "df46b6d459607879354edc26040688aa5c90cba273de164a3816a93be6380be0",
+    "da8b65f2bcdebaed89b60031a05bfdc0f667dbae2f385edc33dfe5d794dbf36b",
+    "dcc016c8cce89f13a9ef92018f3690e495fd2865d5b51fc0c4e2b75946901fcb",
+    "52f76a2e78ea14130f9ccec5281c9ec08fc220b7487410ddfed3dabf437b1066",
+    "3236c4607c1703fabf2f073b4324f5a6ae7690aee8194e115b7b5ff9135aadf8",
+    "fb693f2b6cae858e4d951eea30c4be32a18edb32060865b1571ec5473e6c37c4"
+  ],
+  "citationCounts": {
+    "ldl-ref2": 23,
+    "ldl-ref3": 5,
+    "ldl-ref7": 1,
+    "ldl-ref1": 8,
+    "ldl-ref8": 5,
+    "ldl-ref9": 2,
+    "ldl-ref10": 2,
+    "ldl-ref4": 2,
+    "ldl-ref5": 2,
+    "ldl-ref6": 4
+  }
+}
