@@ -1,0 +1,83 @@
+{
+  "sourceSha256": "de4b122b4e0f8d1489733f51d7aa665816b7d9d0fa9180285eba832c69fb2469",
+  "blocks": [
+    "eba4f86eedea7438633b634dbca7f8facb497d0da67844f44b7dda270848639f",
+    "6cc451610f99b950cf99dbdabb343b91234fec0ef741b310692067b1ff70e79f",
+    "de3057935faeeb481f41958adde3df21d44c953382d872f5104378e50bada9f2",
+    "0339012581ca3082f8c4a6f826b0247be6eab715e9358b077e67bda41a92dab0",
+    "a82a201379d9905ce1fcfe316ef96f06199e153e89130a5b5892f2fc3ab8a01d",
+    "961b7c656f9de66f5293b8942464044a342041e9bbcbdc8f0f66da7850232592",
+    "9ea7b336b1ae34e2ba9e0bbde6905dc7512e298c0290620535aa82cad81992c6",
+    "a670ec8f6e274915e682b3e3a59ceae0095705f63676b713659daab09fa7a2e6",
+    "05d4d9319ecff8d56abce5d03b06f21ef2f7cc998d75caed09ac37dd0d30ef19",
+    "254ee55712f362b1242afe7b4b22e98a5929e40723c112ca9b08c2a0e14bd87f",
+    "b708a92a14494b873693364ddd56cfdbe000f05d0d179153dc4d588c66aabc3b",
+    "dbff27b492b33253b7b3c739ef338330a3469b556786d62d350c632ef50078da",
+    "858c96a17db00f6cc804d2c7a1edf9660d2aa21aa10d10523fc5f17bb3c6770d",
+    "224bbea99b3dbe19e34ff0d06ee3deb7116e9dff4ada664d139f88f962fba454",
+    "12bf49aa66f6138ec15ba08eb6c0849fa6ff2617d7bfbd993bbe98b1e0a64fed",
+    "6aab953bd8a1f6de1f5112220ae3a7a066d5bb270684b717c6a54ce5034e2544",
+    "6cad93a6a76365de38a72288ab3ef63c5c131c2f1942324dfc2b00b5d2cd03e4",
+    "4776490d1b13350ca7283462f7a2a87abc76bca3c329819fe09ab6fed9c0b2a8",
+    "9555354e407a20feebf5bf12513721bdaf9561c22f78522851350030a67952c7",
+    "76c35c541d235f63c459dd3c1ccdb4b637f36838ec9b86cfc73fcac93a31a879",
+    "cef190f945f84b53a6c4e4823893965326ed9f17f286c878760e04fb2db82f7b",
+    "528b76901cfaad872235d7786bc33ca58666ebc27e3dd660b094ebed812169c4",
+    "10bbb102b7efa1cff6699a4bb1eba0689783ce18f822f4b5e3c445727092373b",
+    "d987dd107fcc35c2551bf2117664603bca675dedb6a00b834cabcfa607848c97",
+    "70269543828f9b87a4122a7c87ced47df8665c3f59968cb77b9f83d68c11dd3f",
+    "10425a4f36367bd13731365fb5dd4fb555ff073e1397cd2bcfafb864eede560a",
+    "5140dfe6c20df9e7c363cb884add7ad3c93a09232b0c3cce29a6a18d1f183b02",
+    "4b89241a6cf34a284e381fe23561f35d8b02b8da7f6616313c2b300d738f1aa4",
+    "28c94a5b7faf0b547da746a59f42ddc39e6ec86286841fcd10a0d4d9389e5e59",
+    "a433f7f355c9f65ee6b5000fe0442542a44eb6b89255f0dabf39001de50d6f16",
+    "f435d49e55f08af8fcee57f4c15668463f5ecfed4c0785a607eb7b1b186aae47",
+    "2ab39c3ad0a2240126539bd084788b261f63ea6ff6166237342a2a5ddbc42ab9",
+    "48c9e5c95ec7ac741c081ba95d424a1ad0520cb798dce9cdde33218ccef63de6",
+    "9520e5b6f70ad5d37a4d6b251d9170e2c5b695263d1bb2de019e52ebfbd236fc",
+    "0a4c8d5c26f51d3d9d72b0ae18d9caa8ffd0232897e59e5466eefdefb6dca0d8",
+    "aabb73d128de195c5c5cfde0a1027a68fddecbc63945bea4399ab4693fea8c4f"
+  ],
+  "summaryHashes": [
+    "0e7f3e3174bfe02f698e839b7b0b0f2629c761ea967c92e639ad2d8c14b9d42f",
+    "cf79f07aa9870fbc60d7b8c25fb4e7919fbb676ed2f6eee981b2fe582015a0a2",
+    "bc79821a139b36cf39db6dd8bf0bb14c635daf32a9dcdffab2e192005dff7965",
+    "e463304f81b489da85ec42f859e52400091a1cc6e79158ac41f51fa6b509202d",
+    "f56cf5f4aaf514f79c0bcd1d30ff2859a137e7ed06d07d84c9204bbfe4ce500c"
+  ],
+  "faqQuestions": [
+    "複檢前需要空腹嗎？",
+    "eGFR 59 和 61 有很大差別嗎？"
+  ],
+  "citationCounts": {
+    "egfr-ckd-ref1": 21,
+    "egfr-ckd-ref2": 7,
+    "egfr-ckd-ref3": 7,
+    "egfr-ckd-ref4": 2
+  },
+  "references": [
+    {
+      "id": "egfr-ckd-ref1",
+      "url": "https://kdigo.org/wp-content/uploads/2024/03/KDIGO-2024-CKD-Guideline.pdf"
+    },
+    {
+      "id": "egfr-ckd-ref2",
+      "url": "https://www.nice.org.uk/guidance/ng203/chapter/recommendations"
+    },
+    {
+      "id": "egfr-ckd-ref3",
+      "url": "https://www.tsn.org.tw/guide.html"
+    },
+    {
+      "id": "egfr-ckd-ref4",
+      "url": "https://doi.org/10.1001/jamainternmed.2021.4813",
+      "doi": "10.1001/jamainternmed.2021.4813"
+    }
+  ],
+  "vancouverHashes": [
+    "ba3ad83f19ade981dc2b709d17cce4e88a366987f72b3cd37a7215069f7556e4",
+    "e4dc127d605133830638f10866a37b54da266c3c23f2b251c7ead44cd601aeae",
+    "1046f0ab44de30aea4d59f455d747ce76f169e756a431c626d1cde6102ff2506",
+    "9a8a3cd16277143d26f5abd4dc24fc5bbe616beaf364a98a9d9c87916f9abc59"
+  ]
+}

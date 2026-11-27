@@ -19,7 +19,7 @@ const categoryNames = ["睡眠身心", "三高慢性病", "健檢解讀", "體�
 const labLinks = [
   { label: "LDL", href: "/articles/ldl-cholesterol/" },
   { label: "ALT", href: "/tools/fib-4/" },
-  { label: "eGFR", href: "/tools/egfr/" },
+  { label: "eGFR", href: "/articles/egfr-ckd/" },
   { label: "尿酸", href: "/articles/hyperuricemia/" },
   { label: "HbA1c", href: "/search/?q=HbA1c" },
   { label: "TSH", href: "/articles/tsh/" },

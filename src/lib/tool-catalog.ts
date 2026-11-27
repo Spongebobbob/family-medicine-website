@@ -228,7 +228,7 @@ export const healthTools: HealthTool[] = [
     validation: "非翻譯量表；使用 2021 CKD-EPI 肌酸酐公式。",
     rightsConfirmed: true,
     review: pending,
-    related: labRelated,
+    related: [{ href: "/articles/egfr-ckd/", label: "eGFR 低於 60，就是慢性腎臟病嗎？" }, ...labRelated],
   },
   {
     slug: "isi",
