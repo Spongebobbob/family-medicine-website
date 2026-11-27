@@ -187,6 +187,7 @@ eGFR 下降可能來自真正的腎功能變差，也可能是估算值受到其
 
 ## 延伸閱讀與工具
 
+- [尿液潛血陽性，需要做哪些檢查？](/articles/urine-occult-blood/)
 - [eGFR 與 KDIGO 腎臟風險評估](/tools/egfr/)
 - [LDL 膽固醇與降血脂藥物](/articles/ldl-cholesterol/)
 - [高尿酸血症](/articles/hyperuricemia/)

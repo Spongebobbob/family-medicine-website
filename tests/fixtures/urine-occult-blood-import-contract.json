@@ -1,0 +1,85 @@
+{
+  "sourceSha256": "ce178248a59ec7571e9cdf4885531faccbb1a502807a0ec3e88e2b59b1f87ac1",
+  "blocks": [
+    "39e9e8bf50ba18509d32df7d1fe64c020050f559d1d65c3c7ee46e2fa74d3d0f",
+    "8342361225b2e4d8f6f9224955a129189836af72382f546416a36a29f8e7e063",
+    "5274159be03957052b5c00478d94933945f453e1e715976f335ec0733a02b0e0",
+    "ee5ade3c2d7d62e31f7ea7070fe169285951be77fb0708387a879133f35d7e80",
+    "3a3060df1de6ec74a883bb16e1df99fb2eb22e36d65ce3988c946517428f665e",
+    "de7cc96c6b2d9328cf6df7a917a738db3d86c700f01c62d7b553974a8f73cfb8",
+    "3dafe317097f7da81f068e5507cfaef39d2d2e60f110eba469e350fecd2cb464",
+    "68e94b3fc9941c69e686da0757e581cfefa413438ee18b8cf581e9f7538ecceb",
+    "20967e774ed99961339f2dc730cd4277e4e703c4f1d7cd7340fe2942d22c6d71",
+    "7aeaa583e6ff1a9b7f082bbfd43a560876e5ff9c379a62f0d32af1ee23997f6b",
+    "015512cfbe09d9b49b8c44ef09df2c4bdc9f6057916f02c0203881c9324cacc8",
+    "3ae9a0613ff0054205f4de0108f9ca30d6657faf57aed161b0b0755ae5c809e1",
+    "dcd75f8703fb3ab7f75301ba5ad20086c628c244b54b410760dedd0ce267a943",
+    "bba09816c853084aab4dfc2b8fd0ce4f4146a3800cfdb991cb3ed520b5c0712c",
+    "62f02fa1e1dc47f4275bffcf200436359a07a47d55235060f8753b57c0bc3e7f",
+    "d81ae722d49d6114b5c1f71188344642d9e0f654c704df8f2038ce4ee86effaf",
+    "92e68b5502e23e7e4653f2a50672c776934704134adea30ec211f868b9c9de24",
+    "d363015824697a54d78911ac8acc29c06d1ef7cac0c2131d4273c66a3e54f9b3",
+    "3f60f83bf6ce8f7808b97dac64b87f385d487cf2d0f0fb74152c0eb6a71b0521",
+    "79414bfbfdd93a8bdeb19e48de66674457a0a02f61dee6188fe68ce328f250e7",
+    "89b4019dad297925b75ca61d684fc0441c1fdb076d317e4b19005b43e6b5a48e",
+    "f79b7ead1beb473b64715afe8b50d3346bd67b50623c9696f3dca076c0458449",
+    "35859e8857153851d60dc94a74fc283ff10d3e24befe5bba87ca103807aa29a5",
+    "58f23a2f35a5661322a4ef1e75ce0bb0bd6c1eab4ad5085ade8acf139786f9c3",
+    "048d750177d3ab04d1faaf65f5e4f94e9d92cbd0c8064513d30d2d08b50cc3d8",
+    "fe1a7223e57cba92178ea778edd032f37fbd955a82247bf5764f60fc268bd327",
+    "ac9d47a1e353d88f27569b8e326316a3269ce1d0b494854e3a75126cbfbc537e",
+    "9abd9f7cd8b408f9fb1fc9000cf7891690129c0b4a8a9e570b45b37477e1b7e1",
+    "4b2f12fa86c13bca5061e28d7a40a9ca00fd7933e4adfc323a06302e56efc18f",
+    "104c98c028ac473af024a01f3d1ba77342a04fe00fc5155f5c1c2ccf34547eb6",
+    "6137ea80910e2b099da4dd192f7d5c436854e8dbcee0c8e29bd627a4c37bfd6e",
+    "28eb76216911844607d4ab74dcb070dcba8898d3f4a767ea69de30024c0b1c9b",
+    "3162d53885c75609732eee66a647d0bc7867f52025f64f53d7200923f59f4178",
+    "651df6779518469f6d24a13c6d84200735430aecaac29dba37c6309b2957b384"
+  ],
+  "summaryHashes": [
+    "fc3c80850e1c9071471efa311a4b860fa408c8e51316fa5d1f94e8d179c8045d",
+    "f9b5e25de8c064933e5077c05ae3373bfb931992f1b90600b6d6b64b1e882e98",
+    "a10f82ea5cb2e06ce76428ea7c7790f202e9030c664a4133c65a82e964feef89",
+    "0f2616662586c302f26b9e36fff0d6d0dea31219e6d3ba9129288a8732487785",
+    "1991729d24ebc38b523ba522aa63f4051a1043cb7fa59626dc227b9d8bbe34eb"
+  ],
+  "faqQuestions": [
+    "我有吃阿斯匹靈或抗凝血藥，血尿可以歸因於藥物嗎？",
+    "尿液紅血球是 0–2，但潛血 2+，為什麼？"
+  ],
+  "citationCounts": {
+    "urine-ob-ref1": 12,
+    "urine-ob-ref2": 4,
+    "urine-ob-ref3": 6,
+    "urine-ob-ref4": 1
+  },
+  "references": [
+    {
+      "id": "urine-ob-ref1",
+      "url": "https://www.auanet.org/documents/Guidelines/PDF/2025%20Guidelines/MH%20Unabridged%2002.2025FINAL4.pdf"
+    },
+    {
+      "id": "urine-ob-ref2",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40013563/",
+      "doi": "10.1097/JU.0000000000004490",
+      "pubmed": "40013563"
+    },
+    {
+      "id": "urine-ob-ref3",
+      "url": "https://www.aafp.org/afp/2026/0800/practice-guidelines-microhematuria"
+    },
+    {
+      "id": "urine-ob-ref4",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33970257/",
+      "doi": "10.1001/jamanetworkopen.2021.8409",
+      "pubmed": "33970257"
+    }
+  ],
+  "vancouverHashes": [
+    "94f570ce8b24ab4cf27dcc3e5eb7ebb3a25d0041b430671cf261d6be1e1b318f",
+    "4c8829c6e89fae194480ccac6a6804abe0aedf35e028aac1d39697c02725e522",
+    "57dade6bb2d264fbdeb6b2c1cf40b8d8c27a952d3e2843230b0fef9825248301",
+    "98981fc0f689c1cce6146847183ba40ef0e51f25a9826931154df758c6fea412"
+  ],
+  "algorithmUrl": "https://www.auanet.org/documents/Guidelines/PDF/2025%20Guidelines/MH%20Diagnostic%20Algorithm%20updated%203.12.25.pdf"
+}
