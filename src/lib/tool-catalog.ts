@@ -179,7 +179,7 @@ export const healthTools: HealthTool[] = [
     validation: "非翻譯量表；分層採 AASLD 2023 的成人脂肪肝照護情境。",
     rightsConfirmed: true,
     review: pending,
-    related: labRelated,
+    related: [{ href: "/articles/masld/", label: "健檢發現脂肪肝，會變成肝硬化嗎？" }, ...labRelated],
   },
   {
     slug: "egfr",

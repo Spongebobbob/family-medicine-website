@@ -1,0 +1,106 @@
+{
+  "sourceSha256": "c01da7d5e4dd42e9a1481d24d7f262c5a5bb0941133c0beec6f836e2a55c41d0",
+  "blocks": [
+    "75e48cca8621b9b57dd154e8cb36a58ebe7bcf33c3f308a93cd461e99d690d4f",
+    "6cc2e6123cb8364ee855d4db4af5ae80999738780021b51a6600222305d11e5e",
+    "30e05e5c65002a9688a7b06fe14b1b459136d8ed2a29423e3b48238ad02dd98f",
+    "0776798778d30d627fd0f0e900ca3dea7dc7f748cd60c4255dfcd1ec2755918b",
+    "1329c634dda49587d0ce5cab2d0ba42da705505727487360543824d7133f9414",
+    "b66e482063ce848e4ea98b51428ed1d0169db07f54fec10c05486f0c3a425c70",
+    "3ca7b12bdc2fa85232b953e1e4a7dd86f550a0755786673306f7e2c5a6c4ce82",
+    "d74e0c39e468f048e04ee27a11f5a7852cb73b0149e86fd86ba14fed3dd8f197",
+    "252fa35aff3fd34b23559deb459b643b656b0c4f27e949d03164518b6244f8ad",
+    "bba34a1cb9482e80326f572a59f7f9454e89cc2ed8184665f8111ead25d049bb",
+    "b7b7f547439ff0b056a441989f5f4171aff4d84afbf74726d82f4c75a590bda6",
+    "f7a055ab239b506e8c0a06bc946333e2dd55ddd26ae5b22aacbd51a3abee41b8",
+    "a4785f3785b7ac76ffaa00abfe7c541d5e74b2b2b1c49ed35f07d63cca1396a2",
+    "aa0ea0954c489c32a760955bd7736f251e48d0736a13d0856f9d7228f31f7c3e",
+    "bf008af9ba6c171338fdcd26e561fc1ad5263f03d82f2133a8adc98e02b2e990",
+    "f3219f40c7fdd378fed29029de1f794ba1a826e48677648aecc4134c08aafdf0",
+    "72beb86f650760b34a4f6f5cd906843d4c65991c9835ddb8f7aa65b370acd610",
+    "d25e4ec95b7e21415829b6a03903eb0ac07f5488797e73035f24b472150b4413",
+    "cdbd4f1c17c44e66fed3fa5bd6d26be727e9ecb01445c9e5c69d938636419113",
+    "bfad29d3e2549e34f7c4a73445abf46b026bd3e9992681df2f2c7447466fd263",
+    "af2bf92a649eaafb12cf6884868398224cd46c88e41fbb3a9fd722030766bdb4",
+    "8d079e25bf5580342f9a4de33515a33efc50e4e55e94b099ef150f0fc4d39c57",
+    "4d099a46778773283b4029b0c55276459b1c4e6eb4bf8650baa86ecbe88d1c6b",
+    "51df4be283260e35ebd97b13539e1e103403b4fb5873eb3ef5e206d6311fa5a7",
+    "ffdbf03f66a8a715875d7cefd868e1650b7d501f07061e764809fc14c818c31e",
+    "0631e274dc13dd75f4e57845471b231d0e7147d9e54921f9ce61f8051d45d735",
+    "a1cc4001e64d962553fd2e1915caf2214e272e0d36f44a59bf2998b97cb5e448",
+    "9c0ccff5ce861f53e762c534e1aeafa1d9c1c27cfbc17efc22f573574340a42b",
+    "597de3d117e717f8fc52fbcfe14a73a910dd19e6bec952439f2b8338476b7924",
+    "9161fe6cc0cbf10b6cb2a406129d4a4b7ab1f3c4bfb44160c59d18e2225c223e",
+    "744a5d4d2f8671a71c89a12ff1223093e880a39273f1fc9d851df3d63ee2c1fd",
+    "b9078540513ce3c08e298fb4bd730b3259a152baa24eb176e42f906fc1db1245",
+    "808571ea21ff06f37692f023fe4d59483b0b9983d12535aee07bcaa6297fde82",
+    "236256133fd03661b63482635ae6d07581dd273bd4d39c8fbd17f3bb59cc068e",
+    "8114be1ba0e1b7e01ae89e40a142f7a29fd0901f68c0778db8de17063edd56f1",
+    "8c69133ef21d0e5727e109c912331a46cbbc3ad07a3d6557d2a65c2f4f73e712"
+  ],
+  "summaryHashes": [
+    "74328da26b43553e23e119742052480eb88268c89c733ba3b70de25cce55cf4d",
+    "3f1565ff4e276dfb6e9324d0a6f885938a8dc7a4178c7f8538122e44f7212f8e",
+    "341790ddb891fad64ebe4ea5fde43b7db640ff78f05a037c9ebd1065f93df92a",
+    "1f6615550e9fac90f22c0ed6b3c7f9fba9d95e8c0ca4f5d4fbfb5f0ef808ff96"
+  ],
+  "faqQuestions": [
+    "有脂肪肝，可以繼續吃降膽固醇藥嗎？",
+    "有脂肪肝就要每半年驗 AFP、做肝癌篩檢嗎？"
+  ],
+  "citationCounts": {
+    "masld-ref1": 12,
+    "masld-ref2": 3,
+    "masld-ref3": 12,
+    "masld-ref7": 1,
+    "masld-ref4": 2,
+    "masld-ref5": 2,
+    "masld-ref6": 1
+  },
+  "references": [
+    {
+      "id": "masld-ref1",
+      "url": "https://doi.org/10.1016/j.jhep.2024.04.031",
+      "doi": "10.1016/j.jhep.2024.04.031"
+    },
+    {
+      "id": "masld-ref2",
+      "url": "https://doi.org/10.1111/liv.70926",
+      "doi": "10.1111/liv.70926"
+    },
+    {
+      "id": "masld-ref3",
+      "url": "https://doi.org/10.1097/HEP.0000000000000323",
+      "doi": "10.1097/HEP.0000000000000323"
+    },
+    {
+      "id": "masld-ref7",
+      "url": "https://webdept.fjuh.fju.edu.tw/FjuhDep/rdwe/2025/03/04/masld/"
+    },
+    {
+      "id": "masld-ref4",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42805503/",
+      "doi": "10.1016/j.jhep.2026.08.028",
+      "pubmed": "42805503"
+    },
+    {
+      "id": "masld-ref5",
+      "url": "https://doi.org/10.1056/NEJMoa2413258",
+      "doi": "10.1056/NEJMoa2413258"
+    },
+    {
+      "id": "masld-ref6",
+      "url": "https://www.dldjournalonline.com/article/S1590-8658%2826%2900292-6/fulltext",
+      "doi": "10.1016/j.dld.2026.02.014"
+    }
+  ],
+  "vancouverHashes": [
+    "9e23c3b682c1fa24767eeff3e0a12d1c391b1a1f4023c95808ab1b0cf84c9127",
+    "48ed014b0c4773f65ef5db47b0a6fe98e1ba5ea52f9472b3652a15d2f3b950a4",
+    "9a348467423106276f8019fbc77afe31abfb4a05c99360a2d22820befda147ea",
+    "1b753ebccd434b99ac16c90de4ea058d6a01ddc75686700f7fcd5d4dc795cc72",
+    "ba8c50f67c15a17c2e6da56f530db1edfd4939e21a8da45a7f4ec8abdf2c6a97",
+    "77e9a12e5d160fc81201b9e12492404e2e74d4e6364b2915d58d2ed720aeb194",
+    "702db7ab9de02ae93ff4c35e6c82285eb1e0c67dbc3939b100aa94089d0d2390"
+  ]
+}
