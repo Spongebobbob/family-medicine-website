@@ -1,0 +1,88 @@
+{
+  "sourceSha256": "d813832105629ff782199a8d3d0229470b5b2da7d0d2d559820da55c9516e8a0",
+  "blocks": [
+    "43198ccbf9471c7905b1de9177696d3dfa78b05138520672063f94e64281d2b2",
+    "e2ac6efea4f7ce1bf1e37f4b0f9ee6fbf0c894b99f1dcf7877eb6375ac84e6c3",
+    "1bc9bf0c9e4e7acec8e966b9b45d11125c15e168589a6567145692aed9bdbfc7",
+    "b0343019b65a507df7f7a9f9a7cf8f9e2a15c8dd644aaa1116af4ff958f2174c",
+    "8d6a759317b44d1b8f3a070da9c82a906c3d9afbc38b777a69e366fecbf3aecd",
+    "a531b687d7218e52673c9129aa4193378aa37300c4774bb22a17a1013d79121a",
+    "8bcb9a6ed747bcf5c5938cceb7f2a28b6af2d06806620479ce3352d9e1258474",
+    "77933a542d1f17ab6ef6d900c8ea5867a159f958fe66041bfca1104fc9c0eed5",
+    "8af9c9fcb231cf9ffbf07b09ea81daa21708698e532d2ceb605e5933c3d87a96",
+    "5587ed7e70a9ade4d7c6337ebb3b4e774e6bcaaa8fef6804622dea876b878d7b",
+    "0a30522a6a24eacd7037c7be409a27e5b667381abae93a16a5c5179c081fcff7",
+    "221245971ce9c23c5882d0eb76a90aafa379da6428812b713df08a385a1b9e3d",
+    "39a949d6176da9dd824445a2327ee60219691d78627a23490c413091f09f2aed",
+    "4f34cdff627782e4c1d59b1b82b3ba0589d4b3f4da3c70407682936981dd491b",
+    "9200a9de38136c7a9115fac2bbdb451e21a431f7c440be46d89a92ef7cab26c6",
+    "74f3fb81635f153f83379c479a90adbd192b0d528e95d39827a21a5c48518b46",
+    "cfc47fc582c2ab6a39bb03bc22ea4015fd08923066972c67f13a08d68c3b7025",
+    "9f16e7dea823d5208732dea1a0eb4edc362492415294dc7acbda9b540ab0107e",
+    "bdcb71faea044adbea1be1585d0fa62b4ac4365f616ddb9dba411ab102d358e9",
+    "1499d6b2a2d78227e1ab692ebc86ba55b615f1717424761650d21414e65fb8b9",
+    "d17b3ce1d4435f31278fe5118194f2c77c7ce9b213b5346875b8ccbe6852c9e5",
+    "f00139268a3b99889ee7edf0a87ae9c8ad925416de6be7647ea3c6f6215d3003",
+    "0a68b5e2c1778231fa3ae24b21831ebc884be6e90f24436ff10f5185b5c66574",
+    "e9a839ac54f9973f3021cf830721d110f6dbde626713ed1ff36a4efef587ef7d",
+    "c637a128a75c782cae203d24d89f1349e84db35f434a86bc029c197cdbeae0d4",
+    "418d5e893fba0e59c20199eb44872dd6625a43d47a7e1ffe2fa1aeac682c4aaa",
+    "81b47e6c202c938530c54e5eaaca197831edd1037382c8ef9de0ee55bb342d8c",
+    "0c9bc01cced289281c301108305e99abcb0a53d011e2ae37834649db8ecbfda8",
+    "b0b940a6ffa0d8fc9ca3bc39adeb90ff0a3f040dc458fa92e5c48080fdcbf3c7",
+    "1e113df17f36a9f314f7b9b4ed46d8e1188de5613f850618e3d6874836e52981",
+    "730230566ac76024be2c1d1af04db8b3c6e41c245fabad47de4fdcc0fdb33839",
+    "69c1653c1dc9cca9d4cbc9992579681393763b49f55a162dddc5c18e6387d877",
+    "ccde3391f64f4783cce544433e5f2e15b68563ae563e8ccdea9d8f5f8c160125",
+    "a6d7bdcccabd1ee54f4e3293ac5ac8eea54ba8d901c7e3859b1f2b7a123643d1"
+  ],
+  "summaryHashes": [
+    "81115f205c63ea6885ddec42277d1a388da758e7d13c9e224a32b1494517992c",
+    "7dd806601e7472235d65c3ee9b907a6e8d8e217987412c9bc0f4ea02f4281f0f",
+    "c37082634ebe3f149c51ed81ef003eac9d41b3693341adcbed0593eff7650eec",
+    "716126596db389f455e085a9394f71bbe050150bc6075c1be1a6379fe2d66eb7",
+    "66b46bd2b141ad7adc0adb6abeb78a24b10504285adbe9446d533de7c11a342c"
+  ],
+  "faqQuestions": [
+    "抽 GOT、GPT 一定要空腹嗎？",
+    "只有 GOT 高、GPT 正常，還要檢查肝臟嗎？"
+  ],
+  "citationCounts": {
+    "alt-ast-ref1": 13,
+    "alt-ast-ref2": 8,
+    "alt-ast-ref3": 6,
+    "alt-ast-ref4": 6,
+    "alt-ast-ref5": 2
+  },
+  "references": [
+    {
+      "id": "alt-ast-ref1",
+      "url": "https://gi.org/guideline/evaluation-of-abnormal-liver-chemistries/"
+    },
+    {
+      "id": "alt-ast-ref2",
+      "url": "https://www.aasld.org/liver-fellow-network/core-series/back-basics/how-approach-elevated-liver-enzymes"
+    },
+    {
+      "id": "alt-ast-ref3",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38851997/",
+      "pubmed": "38851997"
+    },
+    {
+      "id": "alt-ast-ref4",
+      "url": "https://www.bsg.org.uk/clinical-resource/bsg-guidelines-on-suspected-liver-disease"
+    },
+    {
+      "id": "alt-ast-ref5",
+      "url": "https://www.hpa.gov.tw/Pages/Detail.aspx?nodeid=5020&pid=20518"
+    }
+  ],
+  "vancouverHashes": [
+    "5bc9fcb3d4de61b45383ef2e137ceb7f62f7ac6c2c282337ab0238d7e65f34df",
+    "19e0a0969c98dc25267addc03fecfb75af324809b017d1476e741af8d86d2b7f",
+    "9e23c3b682c1fa24767eeff3e0a12d1c391b1a1f4023c95808ab1b0cf84c9127",
+    "077cb9b0ab6a7291adb8d3af288781297a0eeb68bd14bd67eeb26fc1815a5c8d",
+    "2947f5ef22656cf3b2997289a0f07d3547da649ed1291d91b65ab5178d929b89"
+  ],
+  "fulltextUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11299976/"
+}

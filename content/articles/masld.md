@@ -203,6 +203,7 @@ references:
 
 ## 延伸閱讀與工具
 
+- [GOT、GPT 過高與肝指數異常檢查](/articles/alt-ast/)
 - [FIB-4 肝纖維化風險評估](/tools/fib-4/)
 - [LDL 膽固醇與降血脂藥物](/articles/ldl-cholesterol/)
 - [BMI 體位評估](/tools/bmi/)

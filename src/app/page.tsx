@@ -18,7 +18,7 @@ const quickTools = [
 const categoryNames = ["睡眠身心", "三高慢性病", "健檢解讀", "體重管理", "肌骨疼痛", "旅遊醫學", "預防醫學", "高齡健康", "用藥知識"];
 const labLinks = [
   { label: "LDL", href: "/articles/ldl-cholesterol/" },
-  { label: "ALT", href: "/tools/fib-4/" },
+  { label: "ALT", href: "/articles/alt-ast/" },
   { label: "eGFR", href: "/articles/egfr-ckd/" },
   { label: "尿酸", href: "/articles/hyperuricemia/" },
   { label: "HbA1c", href: "/search/?q=HbA1c" },
